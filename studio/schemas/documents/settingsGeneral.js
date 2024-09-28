@@ -16,7 +16,13 @@ export default defineType({
 					type: 'reference',
 					title: 'Internal link',
 					name: 'internalLink',
-					to: PAGE_REFERENCES,
+					to: [
+						{ type: 'aboutPage' },
+						{ type: 'projectsPage' },
+						{ type: 'projectsArchivePage' },
+						{ type: 'furniturePage' },
+						{ type: 'pressPage' },
+					],
 					/*
 					preview: {
 						select: {
@@ -72,7 +78,7 @@ export default defineType({
 			type: 'array',
 			title: 'Footer',
 			name: 'footerContent',
-			validation: Rule => Rule.max(3),
+			validation: Rule => Rule.max(2),
 			of: [
 				defineArrayMember({
 					type: 'object',

@@ -2,13 +2,14 @@ import { defineType, defineField } from 'sanity'
 
 export default defineType({
 	type: "document",
-	title: "Page",
-	name: "pageA",
+	title: "Press",
+	name: "pressPage",
 	fields: [
 		defineField({
 			type: 'string',
 			title: 'Title',
 			name: 'title',
+			validation: Rule => Rule.required()
 		}),
 		defineField({
 			type: 'slug',
@@ -17,14 +18,10 @@ export default defineType({
 			options: {
 				source: 'title'
 			},
+			validation: Rule => Rule.required()
 		}),
 		defineField({
-			type: 'pageBuilderB',
-			title: 'Content',
-			name: 'pageBuilder',
-		}),
-		defineField({
-			title: 'SEO / Share Settings',
+			title: 'SEO',
 			name: 'seo',
 			type: 'seo'
 		}),

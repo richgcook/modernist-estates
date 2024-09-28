@@ -3,17 +3,22 @@ import settingsGeneral from './documents/settingsGeneral'
 
 import projectsPage from './documents/projectsPage'
 import project from './documents/project'
-import projectCategory from './documents/projectCategory'
+import projectsArchivePage from './documents/projectsArchivePage'
 
-import pageA from './documents/pageA'
+import furniturePage from './documents/furniturePage'
+import furniture from './documents/furniture'
+
+import pressPage from './documents/pressPage'
+import press from './documents/press'
+
+import aboutPage from './documents/aboutPage'
 
 import richText from './objects/richText'
 import altTag from './objects/altTag'
 import seo from './objects/seo'
 import pageBuilderA from './objects/pageBuilderA'
 import pageBuilderB from './objects/pageBuilderB'
-import assetTreatment from './objects/assetTreatment'
-import assetTreatmentB from './objects/assetTreatmentB'
+import themeMode from './objects/themeMode'
 
 export const schemaTypes = [
 	// Documents
@@ -22,9 +27,15 @@ export const schemaTypes = [
 
 	projectsPage,
 	project,
-	projectCategory,
+	projectsArchivePage,
 
-	pageA,
+	furniturePage,
+	furniture,
+
+	pressPage,
+	press,
+
+	aboutPage,
 
 	// Objects
 	richText,
@@ -32,7 +43,5 @@ export const schemaTypes = [
 	seo,
 	pageBuilderA,
 	pageBuilderB,
-	assetTreatment,
-	assetTreatmentB,
-
+	themeMode,
 ]

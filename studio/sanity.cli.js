@@ -4,5 +4,6 @@ export default defineCliConfig({
 	api: {
     	projectId: '5o2jcnv9',
     	dataset: 'production'
-  	}
+  	},
+	//studioHost: '',
 })

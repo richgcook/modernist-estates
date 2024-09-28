@@ -1,6 +1,8 @@
-import { House, Files } from '@phosphor-icons/react'
+import { House, Info } from '@phosphor-icons/react'
 
 import { projectsStructure } from './projects'
+import { furnitureStructure } from './furniture'
+import { pressStructure } from './press'
 import { settingsStructure } from './settingsGeneral'
 
 const hiddenDocTypes = listItem => 
@@ -9,8 +11,12 @@ const hiddenDocTypes = listItem =>
 		'settingsGeneral',
 		'projectsPage',
 		'project',
-		'projectCategory',
-		'pageA',
+		'projectsArchivePage',
+		'furniturePage',
+		'furniture',
+		'pressPage',
+		'press',
+		'aboutPage',
 	]
 .includes(listItem.getId())
 
@@ -32,7 +38,19 @@ export const deskStructure = (S, context) =>
 
 		projectsStructure(S, context),
 
-		S.documentTypeListItem('pageA').title('Pages').icon(Files),
+		furnitureStructure(S, context),
+
+		pressStructure(S, context),
+
+		S.listItem()
+		.title('Studio')
+		.icon(Info)
+		.child(
+			S.document()
+			.id('aboutPage')
+			.schemaType('aboutPage')
+			.documentId('aboutPage')
+		),
 
 		settingsStructure(S, context),
 

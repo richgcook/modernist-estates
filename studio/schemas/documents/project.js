@@ -22,52 +22,137 @@ export default defineType({
 			validation: Rule => Rule.required()
 		}),
 		defineField({
+			type: 'string',
+			title: 'Title (abbreviated, for phone)',
+			name: 'titleAbbreviated',
+			description: 'This title will be used for the project when viewed on a phone. If not set, the full title will be used.',
+			
+		}),
+		defineField({
 			type: 'array',
-			title: 'Categories',
-			name: 'categories',
+			title: 'Media',
+			name: 'content',
+			options: {
+				insertMenu: {
+					showIcons: false,
+				},
+			},
 			of: [
 				defineArrayMember({
-					type: 'reference',
-					to: [{ type: 'projectCategory' }]
-				}),
-			],
-		}),
-		defineField({
-			type: 'object',
-			title: 'Featured media',
-			name: 'featuredMedia',
-			fields: [
-				defineField({
-					type: 'image',
+					type: 'object',
 					title: 'Image',
-					name: 'image',
+					name: 'imageBlock',
 					fields: [
 						defineField({
-							type: 'alt',
-							name: 'alt',
+							type: 'image',
+							title: 'Image',
+							name: 'image',
+							fields: [
+								{
+									type: 'alt',
+									name: 'alt'
+								}
+							],
+							validation: Rule => Rule.required()
+						}),
+						defineField({
+							type: 'object',
+							title: 'Settings',
+							name: 'settings',
+							fields: [
+								defineField({
+									type: 'string',
+									title: 'Image size',
+									name: 'imageSize',
+									description: 'The default image size has generous margins. If you want to change the size, select one of the options below.',
+									options: {
+										list: [
+											{ title: 'Fullbleed', value: 'fullbleed' },
+										],
+									},
+								}),
+								defineField({
+									type: 'boolean',
+									title: 'Enable caption',
+									name: 'enableCaption',
+									description: 'By default for fullbleed images, the caption is disabled',
+									hidden: ({ parent }) => parent?.imageSize !== 'fullbleed',
+								}),
+								defineField({
+									type: 'themeMode',
+									title: 'Theme mode',
+									name: 'themeMode',
+								}),
+							],
 						}),
 					],
-				}),
-				defineField({
-					type: 'file',
-					title: 'Video',
-					name: 'video',
-					options: {
-						accept: 'video/*'
+					preview: {
+						select: {
+							image: 'image'
+						},
+						prepare(selection) {
+							const { image } = selection
+							return {
+								title: 'Image',
+								media: image
+							}
+						},
 					},
-					description: 'If used this will override the image'
-				}),
-				defineField({
-					type: 'assetTreatment',
-					title: 'Treatment',
-					name: 'assetTreatment',
 				}),
 			],
 		}),
 		defineField({
-			type: 'pageBuilderB',
-			title: 'Content',
-			name: 'pageBuilder',
+			type: 'richText',
+			title: 'Description',
+			name: 'description',
+		}),
+		defineField({
+			type: 'array',
+			title: 'Details',
+			name: 'details',
+			of: [
+				defineArrayMember({
+					type: 'object',
+					title: 'Text',
+					name: 'textBlock',
+					fields: [
+						defineField({
+							type: 'string',
+							title: 'Title',
+							name: 'title'
+						}),
+						defineField({
+							type: 'richText',
+							title: 'Text',
+							name: 'text',
+							validation: Rule => Rule.required(),
+						}),
+					],
+					preview: {
+						select: {
+							title: 'title',
+							text: 'text'
+						},
+						prepare(selection) {
+							const { title, text } = selection
+							return {
+								title: title ? title : text ? text[0].children[0].text.substring(0, 50) + '...' : '',
+								subtitle: title ? text ? text[0].children[0].text.substring(0, 50) + '...' : '' : '',
+							}
+						},
+					},
+				}),
+			]
+		}),
+		defineField({
+			type: 'array',
+			title: 'Related projects',
+			name: 'relatedProjects',
+			of: [{
+				type: 'reference',
+				to: [{ type: 'project' }]
+			}],
+			validation: Rule => Rule.max(4),
 		}),
 		defineField({
 			title: 'SEO',

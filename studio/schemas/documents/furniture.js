@@ -1,11 +1,10 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { orderRankField } from '@sanity/orderable-document-list'
-import { Video } from '@phosphor-icons/react'
 
 export default defineType({
 	type: "document",
-	title: "Category",
-	name: "projectCategory",
+	title: "Furniture",
+	name: "furniture",
 	fields: [
 		defineField({
 			type: 'string',
@@ -28,22 +27,7 @@ export default defineType({
 			type: 'seo'
 		}),
 		orderRankField(
-			{ type: 'projectCategory' }
+			{ type: 'furniture' }
 		)
-	],
-	preview: {
-		select: {
-			title: 'title',
-			description: 'description',
-			image: 'featuredMedia.image',
-			video: 'featuredMedia.video'
-		},
-		prepare(selection) {
-			const { title, description, image, video } = selection
-			return {
-				title: title,
-				media: video ? Video : image
-			}
-		}
-	}
+	]
 })
