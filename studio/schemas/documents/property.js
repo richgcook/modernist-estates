@@ -1,9 +1,10 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField, defineArrayMember } from 'sanity'
+import { orderRankField } from '@sanity/orderable-document-list'
 
 export default defineType({
 	type: "document",
-	title: "Press",
-	name: "pressPage",
+	title: "Property",
+	name: "property",
 	fields: [
 		defineField({
 			type: 'string',
@@ -25,5 +26,8 @@ export default defineType({
 			name: 'seo',
 			type: 'seo'
 		}),
+		orderRankField(
+			{ type: 'property' }
+		)
 	]
 })

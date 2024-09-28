@@ -17,11 +17,7 @@ export default defineType({
 					title: 'Internal link',
 					name: 'internalLink',
 					to: [
-						{ type: 'aboutPage' },
-						{ type: 'projectsPage' },
-						{ type: 'projectsArchivePage' },
-						{ type: 'furniturePage' },
-						{ type: 'pressPage' },
+						{ type: 'homesPage' },
 					],
 					/*
 					preview: {

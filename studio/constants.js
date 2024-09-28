@@ -1,5 +1,4 @@
 // References to include in 'internal' links
 export const PAGE_REFERENCES = [
-	{ type: 'project' },
-	{ type: 'projectsPage' },
+	{ type: 'homesPage' },
 ]

@@ -1,18 +1,23 @@
+// Documents
 import homePage from './documents/homePage'
+import aboutPage from './documents/aboutPage'
 import settingsGeneral from './documents/settingsGeneral'
 
-import projectsPage from './documents/projectsPage'
-import project from './documents/project'
-import projectsArchivePage from './documents/projectsArchivePage'
+import homesPage from './documents/homesPage'
+import propertiesForSalePage from './documents/propertiesForSalePage'
+import propertiesForRentPage from './documents/propertiesForRentPage'
+import propertiesForHolidayPage from './documents/propertiesForHolidayPage'
+import property from './documents/property'
 
-import furniturePage from './documents/furniturePage'
-import furniture from './documents/furniture'
+import lettingPage from './documents/lettingPage'
+import sellingPage from './documents/sellingPage'
 
-import pressPage from './documents/pressPage'
-import press from './documents/press'
+import journalPage from './documents/journalPage'
+import journalArticle from './documents/journalArticle'
 
-import aboutPage from './documents/aboutPage'
+import pageA from './documents/pageA'
 
+// Objects
 import richText from './objects/richText'
 import altTag from './objects/altTag'
 import seo from './objects/seo'
@@ -23,19 +28,22 @@ import themeMode from './objects/themeMode'
 export const schemaTypes = [
 	// Documents
 	homePage,
+	aboutPage,
 	settingsGeneral,
 
-	projectsPage,
-	project,
-	projectsArchivePage,
+	homesPage,
+	propertiesForSalePage,
+	propertiesForRentPage,
+	propertiesForHolidayPage,
+	property,
 
-	furniturePage,
-	furniture,
+	lettingPage,
+	sellingPage,
 
-	pressPage,
-	press,
+	journalPage,
+	journalArticle,
 
-	aboutPage,
+	pageA,
 
 	// Objects
 	richText,

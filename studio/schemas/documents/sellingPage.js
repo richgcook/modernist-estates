@@ -1,9 +1,9 @@
-import { defineType, defineField, defineArrayMember } from 'sanity'
+import { defineType, defineField } from 'sanity'
 
 export default defineType({
 	type: "document",
-	title: "About",
-	name: "aboutPage",
+	title: "Selling",
+	name: "sellingPage",
 	fields: [
 		defineField({
 			type: 'string',
@@ -25,5 +25,5 @@ export default defineType({
 			name: 'seo',
 			type: 'seo'
 		}),
-	],
-})  
+	]
+})

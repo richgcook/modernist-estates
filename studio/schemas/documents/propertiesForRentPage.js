@@ -1,9 +1,9 @@
-import { defineType, defineField, defineArrayMember } from 'sanity'
+import { defineType, defineField } from 'sanity'
 
 export default defineType({
 	type: "document",
-	title: "Archive",
-	name: "projectsArchivePage",
+	title: "For Rent",
+	name: "propertiesForRentPage",
 	fields: [
 		defineField({
 			type: 'string',
@@ -21,19 +21,9 @@ export default defineType({
 			validation: Rule => Rule.required()
 		}),
 		defineField({
-			type: 'array',
-			title: 'Projects',
-			name: 'projects',
-			of: [{
-				type: 'reference',
-				to: [{ type: 'project' }]
-			}],
-			validation: Rule => Rule.required(),
-		}),
-		defineField({
 			title: 'SEO',
 			name: 'seo',
 			type: 'seo'
 		}),
-	],
-})  
+	]
+})

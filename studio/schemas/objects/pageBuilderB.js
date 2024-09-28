@@ -193,6 +193,7 @@ export default defineType({
 						}),
 					],
 				}),
+				/*
 				defineField({
 					type: 'array',
 					title: 'Related projects',
@@ -205,6 +206,7 @@ export default defineType({
 						}),
 					],
 				}),
+				*/
 			],
 			preview: {
 				select: {

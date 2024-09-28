@@ -1,9 +1,11 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
+import { orderRankField } from '@sanity/orderable-document-list'
+import { Link } from '@phosphor-icons/react'
 
 export default defineType({
 	type: "document",
-	title: "About",
-	name: "aboutPage",
+	title: "Article",
+	name: "journalArticle",
 	fields: [
 		defineField({
 			type: 'string',
@@ -26,4 +28,4 @@ export default defineType({
 			type: 'seo'
 		}),
 	],
-})  
+})
