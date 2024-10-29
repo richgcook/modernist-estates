@@ -1,4 +1,4 @@
-import { HouseSimple, House, File, Buildings } from '@phosphor-icons/react'
+import { HouseSimple, House, File, Buildings, CurrencyGbp, NavigationArrow, Resize, CheckSquare, SlidersHorizontal } from '@phosphor-icons/react'
 import { DocumentIcon, DocumentsIcon } from '@sanity/icons'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 
@@ -44,7 +44,26 @@ S.listItem()
 					.schemaType('propertiesForHolidayPage')
 				),
 
+				S.divider(),
+
 				S.documentTypeListItem('property').title('All properties').icon(Buildings),
+
+				S.divider(),
+
+				S.listItem()
+				.title('Filters')
+				.icon(SlidersHorizontal)
+				.child(
+					S.list()
+					.title('Filters')
+					.items([
+						S.documentTypeListItem('propertyFilterLocation').title('Locations').icon(NavigationArrow),
+						S.documentTypeListItem('propertyFilterPrice').title('Price ranges').icon(CurrencyGbp),
+						S.documentTypeListItem('propertyFilterBedrooms').title('Bedrooms').icon(Resize),
+						S.documentTypeListItem('propertyFilterStatus').title('Statuses').icon(CheckSquare),
+					]),
+				),
+
 
 				/*
 				S.divider(),

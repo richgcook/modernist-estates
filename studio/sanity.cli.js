@@ -5,5 +5,5 @@ export default defineCliConfig({
     	projectId: '5o2jcnv9',
     	dataset: 'production'
   	},
-	//studioHost: '',
+	studioHost: 'modernist-estates',
 })

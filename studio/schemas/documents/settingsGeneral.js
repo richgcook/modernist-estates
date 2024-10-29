@@ -8,99 +8,82 @@ export default defineType({
 	name: 'settingsGeneral',
 	fields: [
 		defineField({
-			type: 'array',
-			title: 'Menu',
-			name: 'menu',
-			of: [
-				defineArrayMember({
-					type: 'reference',
-					title: 'Internal link',
-					name: 'internalLink',
-					to: [
-						{ type: 'homesPage' },
-					],
-					/*
-					preview: {
-						select: {
-							title: 'internalLink.title',
-						},
-						prepare(selection) {
-							const { title } = selection
-							return {
-								title: title,
-								media: ArrowSquareIn
+			type: 'object',
+			title: 'Footer',
+			name: 'footer',
+			fields: [
+				defineField({
+					type: 'array',
+					title: 'Menu',
+					name: 'menu',
+					of: [
+						defineArrayMember({
+							type: 'object',
+							title: 'Internal link',
+							name: 'internalLink',
+							fields: [
+								defineField({
+									type: 'reference',
+									title: 'Page',
+									name: 'page',
+									to: PAGE_REFERENCES,
+									validation: Rule => Rule.required()
+								}),
+							],
+							preview: {
+								select: {
+									title: 'page.title',
+								},
+								prepare(selection) {
+									const { title } = selection
+									return {
+										title: title,
+										media: ArrowSquareIn
+									}
+								}
 							}
-						}
-					}
-					*/
-				}),
-				defineArrayMember({
-					type: 'object',
-					title: 'External link',
-					name: 'externalLink',
-					fields: [
-						defineField({
-							type: 'string',
-							title: 'Label',
-							name: 'label',
-							validation: Rule => Rule.required()
 						}),
-						defineField({
-							type: 'url',
-							title: 'URL',
-							name: 'url',
-							validation: Rule => Rule.uri({scheme: ['tel', 'mailto', 'http', 'https']}).required()
+						defineArrayMember({
+							type: 'object',
+							title: 'External link',
+							name: 'externalLink',
+							fields: [
+								defineField({
+									type: 'string',
+									title: 'Label',
+									name: 'label',
+									validation: Rule => Rule.required()
+								}),
+								defineField({
+									type: 'url',
+									title: 'URL',
+									name: 'url',
+									validation: Rule => Rule.uri({scheme: ['tel', 'mailto', 'http', 'https']}).required()
+								})
+							],
+							preview: {
+								select: {
+									label: 'label',
+									url: 'url'
+								},
+								prepare(selection) {
+									const { label, url } = selection
+									return {
+										title: label,
+										subtitle: url,
+										media: ArrowSquareOut
+									}
+								}
+							}
 						})
 					],
-					preview: {
-						select: {
-							label: 'label',
-							url: 'url'
-						},
-						prepare(selection) {
-							const { label, url } = selection
-							return {
-								title: label,
-								subtitle: url,
-								media: ArrowSquareOut
-							}
-						}
-					}
-				})
-			],
-			validation: Rule => Rule.unique()
-		}),
-		defineField({
-			type: 'array',
-			title: 'Footer',
-			name: 'footerContent',
-			validation: Rule => Rule.max(2),
-			of: [
-				defineArrayMember({
-					type: 'object',
-					title: 'Column',
-					name: 'column',
-					fields: [
-						defineField({
-							type: 'richText',
-							title: 'Text',
-							name: 'text',
-							validation: Rule => Rule.required()
-						}),
-					],
-					preview: {
-						select: {
-							text: 'text'
-						},
-						prepare(selection) {
-							const { text } = selection
-							return {
-								title: 'Text',
-								subtitle: text ? text[0].children[0].text.substring(0, 50) + '...' : '',
-								media: TextAlignLeft
-							}
-						}
-					},
+					validation: Rule => Rule.unique()
+				}),
+				defineField({
+					type: 'richText',
+					title: 'Contact',
+					name: 'contact',
+					validation: Rule => Rule.required()
 				}),
 			],
 		}),

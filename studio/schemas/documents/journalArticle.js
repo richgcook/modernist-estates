@@ -23,6 +23,35 @@ export default defineType({
 			validation: Rule => Rule.required()
 		}),
 		defineField({
+			type: 'text',
+			title: 'Title (formatted)',
+			name: 'titleFormatted',
+			rows: 2,
+			validation: Rule => Rule.required()
+		}),
+		defineField({
+			type: 'string',
+			title: 'Subtitle',
+			name: 'subtitle',
+			validation: Rule => Rule.required()
+		}),
+		defineField({
+			type: 'image',
+			title: 'Featured image',
+			name: 'featuredImage',
+			fields: [
+				{
+					type: 'alt',
+					name: 'alt'
+				}
+			],
+		}),
+		defineField({
+			type: 'pageBuilderB',
+			title: 'Content',
+			name: 'pageBuilder',
+		}),
+		defineField({
 			title: 'SEO',
 			name: 'seo',
 			type: 'seo'

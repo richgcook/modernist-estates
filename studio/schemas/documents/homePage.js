@@ -1,4 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
+import { Quotes } from '@phosphor-icons/react'
+import { PAGE_REFERENCES } from '../../constants'
 
 export default defineType({
 	type: "document",
@@ -37,6 +39,44 @@ export default defineType({
 		}),
 		defineField({
 			type: 'array',
+			title: 'Featured Links (grid)',
+			name: 'featuredLinks',
+			of: [
+				defineArrayMember({
+					type: 'object',
+					title: 'Block',
+					name: 'linkBlock',
+					fields: [
+						defineField({
+							type: 'image',
+							title: 'Image',
+							name: 'image',
+							fields: [
+								defineField({
+									type: 'alt',
+									name: 'alt'
+								}),
+							],
+							validation: Rule => Rule.required(),
+						}),
+						defineField({
+							type: 'string',
+							title: 'Title',
+							name: 'title',
+							validation: Rule => Rule.required(),
+						}),
+						defineArrayMember({
+							type: 'reference',
+							title: 'Internal link',
+							name: 'internalLink',
+							to: PAGE_REFERENCES,
+						}),
+					],
+				}),
+			],
+		}),
+		defineField({
+			type: 'array',
 			title: 'Testimonials',
 			name: 'testimonials',
 			of: [
@@ -45,6 +85,13 @@ export default defineType({
 					title: 'Testimonial',
 					name: 'testimonialBlock',
 					fields: [
+						defineField({
+							type: 'text',
+							title: 'Quote',
+							name: 'quote',
+							rows: 2,
+							validation: Rule => Rule.required()
+						}),
 						defineField({
 							type: 'image',
 							title: 'Image',
@@ -62,6 +109,17 @@ export default defineType({
 							validation: Rule => Rule.required(),
 						}),
 					],
+					preview: {
+						select: {
+							quote: 'quote',
+						},
+						prepare({ quote }) {
+							return {
+								title: `“${quote}”`,
+								media: Quotes
+							}
+						}
+					}
 				}),
 			],
 		}),

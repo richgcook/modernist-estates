@@ -9,6 +9,11 @@ import propertiesForRentPage from './documents/propertiesForRentPage'
 import propertiesForHolidayPage from './documents/propertiesForHolidayPage'
 import property from './documents/property'
 
+import propertyFilterLocation from './documents/propertyFilterLocation'
+import propertyFilterPrice from './documents/propertyFilterPrice'
+import propertyFilterBedrooms from './documents/propertyFilterBedrooms'
+import propertyFilterStatus from './documents/propertyFilterStatus'
+
 import lettingPage from './documents/lettingPage'
 import sellingPage from './documents/sellingPage'
 
@@ -23,6 +28,7 @@ import altTag from './objects/altTag'
 import seo from './objects/seo'
 import pageBuilderA from './objects/pageBuilderA'
 import pageBuilderB from './objects/pageBuilderB'
+import pageBuilderC from './objects/pageBuilderC'
 import themeMode from './objects/themeMode'
 
 export const schemaTypes = [
@@ -36,6 +42,11 @@ export const schemaTypes = [
 	propertiesForRentPage,
 	propertiesForHolidayPage,
 	property,
+	
+	propertyFilterLocation,
+	propertyFilterPrice,
+	propertyFilterBedrooms,
+	propertyFilterStatus,
 
 	lettingPage,
 	sellingPage,
@@ -51,5 +62,6 @@ export const schemaTypes = [
 	seo,
 	pageBuilderA,
 	pageBuilderB,
+	pageBuilderC,
 	themeMode,
 ]

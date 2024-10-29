@@ -14,6 +14,10 @@ const hiddenDocTypes = listItem =>
 		'propertiesForRentPage',
 		'propertiesForHolidayPage',
 		'property',
+		'propertyFilterLocation',
+		'propertyFilterPrice',
+		'propertyFilterBedrooms',
+		'propertyFilterStatus',
 		'lettingPage',
 		'sellingPage',
 		'journalPage',
@@ -71,44 +75,24 @@ export const deskStructure = (S, context) =>
 			])
 		),
 
-		// Selling
 		S.listItem()
 		.title('Selling')
-		.icon(DocumentsIcon)
+		.icon(DocumentIcon)
 		.child(
-			S.list()
-			.title('Selling')
-			.items([
-				S.listItem()
-				.title('Overview')
-				.icon(DocumentIcon)
-				.child(
-					S.document()
-					.id('sellingPage')
-					.schemaType('sellingPage')
-					.documentId('sellingPage')
-				),
-			])
+			S.document()
+			.id('sellingPage')
+			.schemaType('sellingPage')
+			.documentId('sellingPage')
 		),
 
-		// Letting
 		S.listItem()
 		.title('Letting')
-		.icon(DocumentsIcon)
+		.icon(DocumentIcon)
 		.child(
-			S.list()
-			.title('Letting')
-			.items([
-				S.listItem()
-				.title('Overview')
-				.icon(DocumentIcon)
-				.child(
-					S.document()
-					.id('lettingPage')
-					.schemaType('lettingPage')
-					.documentId('lettingPage')
-				),
-			])
+			S.document()
+			.id('lettingPage')
+			.schemaType('lettingPage')
+			.documentId('lettingPage')
 		),
 
 		S.documentTypeListItem('pageA').title('Pages').icon(Files),
