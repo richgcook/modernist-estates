@@ -90,6 +90,7 @@ export default defineType({
 							title: 'Quote',
 							name: 'quote',
 							rows: 2,
+							description: 'Please include the quotation marks “ ”',
 							validation: Rule => Rule.required()
 						}),
 						defineField({
@@ -115,7 +116,7 @@ export default defineType({
 						},
 						prepare({ quote }) {
 							return {
-								title: `“${quote}”`,
+								title: quote,
 								media: Quotes
 							}
 						}
@@ -165,7 +166,8 @@ export default defineType({
 					type: 'reference',
 					to: [{ type: 'journalArticle' }]
 				}),
-			]
+			],
+			validation: Rule => Rule.max(3),
 		}),
 		defineField({
 			title: 'SEO',

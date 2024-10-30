@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'ABC Ginto';
+    src: url('../fonts/ABCGinto-Regular.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'ABC Ginto';
+    src: url('../fonts/ABCGinto-RegularItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'ABC Ginto';
+    src: url('../fonts/ABCGinto-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'GT Sectra';
+    src: url('../fonts/GT-Sectra-Book.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'GT Sectra';
+    src: url('../fonts/GT-Sectra-Book-Italic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 400;
+}
+
+:root {
+	--font-size-base: 32px;
+
+	--font-size-title-lg: 53px;
+	--font-size-title-md: 40px;
+	--font-size-title-sm: 27px;
+	--font-size-title-xs: 20px;
+
+	--padding-base: 40px;
+
+	--color-primary: #e8e7df;
+
+	--color-secondary: #d0b0a8;
+	--color-secondary-tint: #e0d1cc; // 60% tint of secondary
+
+	--color-secondary-c: #dae1dd;
+
+	--color-blue: #5f9db4;
+
+	--color-highlight: #ea4a55;
+
+	--color-bg: #e8e7df;
+
+
+
+	--logo-height: 21px;
+
+	--font-sans: 'ABC Ginto', sans-serif;
+	--font-serif: 'GT Sectra', serif;
+
+	--font-primary: var(--font-serif);
+
+}
+@include media('tablet-landscape') {
+	:root { 
+		
+	}
+}
+@include media('tablet-portrait') {
+	:root { 
+		
+	}
+}
+@include media('phone') {
+	:root { 
+		--padding-base: 20px;
+	}
+}
+
+.title-h1 {
+	font-size: var(--font-size-title-lg);
+	letter-spacing: 0.02em;
+}
+.title-h2 {
+	font-size: var(--font-size-title-md);
+	letter-spacing: 0.02em;
+}
+.title-h3 {
+	font-size: var(--font-size-title-sm);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+}
+.title-h4 {
+	font-size: var(--font-size-title-sm);
+	letter-spacing: 0.06em;
+}
+.title-h5 {
+	font-size: var(--font-size-title-xs);
+	letter-spacing: 0.1em;
+}
+.title-h6 {
+	font-size: var(--font-size-title-xs);
+	letter-spacing: 0.06em;
+}
+
+* {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+body {
+	font-family: var(--font-primary);
+	font-size: var(--font-size-base);
+	font-weight: 400;
+	letter-spacing: 0.01em;
+	background-color: var(--color-bg);
+	color: black;
+	line-height: 1.2;
+}
+a {
+	&:active, &:focus, &:hover {
+		color: currentColor;
+		outline: none;
+		text-decoration: none;
+	}
+}
+[data-ratio] {
+	display: block;
+	position: relative;
+	width: 100%;
+	background-color: transparent;
+	> img {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+@include globalSelect {
+	color: white;
+	background-color: black;
+}
+[v-cloak] { 
+	display: none !important; 
+}

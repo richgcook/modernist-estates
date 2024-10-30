@@ -1,0 +1,97 @@
+@mixin media($size) {
+	@if $size == 'desktop' {
+		@media screen and (min-width: 1441px) and (max-width: 1700px) {
+			@content;
+		}
+	} @else if $size == 'laptop' {
+		@media screen and (min-width: 1201px) and (max-width: 1440px) {
+			@content;
+		}
+	} @else if $size == 'tablet' {
+		@media screen and (min-width: 768px) and (max-width: 1200px) {
+			@content;
+		}
+	} @else if $size == 'tablet-landscape' {
+		@media screen and (min-width: 1024px) and (max-width: 1200px) {
+			@content;
+		}
+	} @else if $size == 'tablet-portrait' {
+		@media screen and (min-width: 768px) and (max-width: 1023px) {
+			@content;
+		}
+	} @else if $size == 'tablet-portrait-and-phone' {
+		@media screen and (max-width: 1023px) {
+			@content;
+		}
+	} @else if $size == 'phone' {
+		@media screen and (max-width: 767px) {
+			@content;
+		}
+	} @else if $size == 'except-phone' {
+		@media screen and (min-width: 768px) {
+		  @content;
+		}
+	} @else if $size == 'print' {
+		@media print {
+			@content;
+		}
+	}
+}
+@mixin root($element-selector) {
+	@at-root #{$element-selector} #{&} {
+		@content;
+	}
+}
+@mixin isTouch() {
+	@media (hover: none) {
+		@content;
+	}
+}
+@mixin isNotTouch() {
+	@media (hover: hover) {
+		@content;
+	}
+}
+@mixin placeholder {
+	&::-webkit-input-placeholder {
+		@content;
+	}
+	&::-moz-placeholder {
+		@content;
+	}
+	&::-ms-input-placeholder {
+		@content;
+	}
+}
+@mixin globalSelect {
+	::-moz-selection { @content; }
+	::selection { @content; }
+}
+@mixin textDecorationStyle {
+	text-decoration-color: currentColor;
+    text-decoration-style: solid;
+    text-decoration-thickness: 1px;
+    text-decoration-line: underline;
+    text-underline-offset: 2px;
+}
+@mixin max-width-grid-columns($total-columns, $max-columns, $gap-size, $attr: 'max-width', $increase-decrease: '0px') {
+	#{$attr}: calc(
+		(
+			(
+				100% - (#{$total-columns - 1} * #{$gap-size})
+			) / #{$total-columns}
+		) * #{$max-columns}
+		+ ((#{$max-columns - 1}) * #{$gap-size}) + #{$increase-decrease}
+	);
+}
+
+@mixin fixed-max-width-grid-columns($container-width, $total-columns, $max-columns, $gap-size, $attr: 'max-width') {
+	#{$attr}: calc(
+		(
+			(
+        		#{$container-width} - (#{$total-columns - 1} * #{$gap-size})
+    		) / #{$total-columns}
+    	) * #{$max-columns}
+		+ ((#{$max-columns - 1}) * #{$gap-size})
+  	)
+}
