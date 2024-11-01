@@ -17,6 +17,12 @@
     font-weight: 700;
 }
 @font-face {
+    font-family: 'ABC Ginto';
+    src: url('../fonts/ABCGinto-Black.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 900;
+}
+@font-face {
     font-family: 'GT Sectra';
     src: url('../fonts/GT-Sectra-Book.woff2') format('woff2');
     font-style: normal;
@@ -33,7 +39,9 @@
 	--font-size-base: 32px;
 
 	--font-size-title-lg: 53px;
-	--font-size-title-md: 40px;
+
+	--font-size-lg: 40px;
+	--font-size-md: 30px;
 	--font-size-title-sm: 27px;
 	--font-size-title-xs: 20px;
 
@@ -41,10 +49,10 @@
 
 	--color-primary: #e8e7df;
 
-	--color-secondary: #d0b0a8;
+	--color-holidays: #d0b0a8;
 	--color-secondary-tint: #e0d1cc; // 60% tint of secondary
 
-	--color-secondary-c: #dae1dd;
+	--color-lettings: #dae1dd;
 
 	--color-blue: #5f9db4;
 
@@ -54,7 +62,7 @@
 
 
 
-	--logo-height: 21px;
+	--logo-height: 18px;
 
 	--font-sans: 'ABC Ginto', sans-serif;
 	--font-serif: 'GT Sectra', serif;
@@ -78,28 +86,28 @@
 	}
 }
 
-.title-h1 {
+.fs-lg {
 	font-size: var(--font-size-title-lg);
 	letter-spacing: 0.02em;
 }
-.title-h2 {
+.fs-md {
 	font-size: var(--font-size-title-md);
 	letter-spacing: 0.02em;
 }
-.title-h3 {
+.fs-sm {
 	font-size: var(--font-size-title-sm);
 	font-weight: 700;
 	letter-spacing: 0.06em;
 }
-.title-h4 {
+.fs-sm {
 	font-size: var(--font-size-title-sm);
 	letter-spacing: 0.06em;
 }
-.title-h5 {
+.fs-xs {
 	font-size: var(--font-size-title-xs);
 	letter-spacing: 0.1em;
 }
-.title-h6 {
+.fs-xs {
 	font-size: var(--font-size-title-xs);
 	letter-spacing: 0.06em;
 }

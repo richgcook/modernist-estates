@@ -111,6 +111,10 @@ header {
 	a.logo {
 		display: inline-flex;
 		height: var(--logo-height);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		svg {
 			height: auto;
 			max-height: 100%;
@@ -123,9 +127,9 @@ header {
 	ul.menu {
 		display: flex;
 		flex-flow: row nowrap;
-
+		column-gap: 30px;
 		li {
-			font-size: var(--font-size-title-md);
+			font-size: var(--font-size-md);
 		}
 	}
 }

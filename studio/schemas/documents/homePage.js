@@ -8,32 +8,46 @@ export default defineType({
 	name: "homePage",
 	fields: [
 		defineField({
-			type: 'array',
-			title: 'Landing media',
-			name: 'landingMedia',
-			of: [
-				defineArrayMember({
-					type: 'object',
+			type: 'object',
+			title: 'Landing',
+			name: 'landing',
+			fields: [
+				defineField({
+					type: 'image',
 					title: 'Image',
-					name: 'imageBlock',
+					name: 'image',
 					fields: [
-						defineField({
-							type: 'image',
-							title: 'Image',
-							name: 'image',
-							options: {
-								collapsible: true,
-								collapsed: false
-							},
-							fields: [
-								defineField({
-									type: 'alt',
-									name: 'alt'
-								})
-							],
-							validation: Rule => Rule.required(),
-						}),
+						{
+							type: 'alt',
+							name: 'alt'
+						}
 					],
+					validation: Rule => Rule.required()
+				}),
+				defineField({
+					type: 'richText',
+					title: 'Text',
+					name: 'text',
+					validation: Rule => Rule.required(),
+				}),
+			],
+		}),
+		defineField({
+			type: 'object',
+			title: 'Hero',
+			name: 'hero',
+			fields: [
+				defineField({
+					type: 'image',
+					title: 'Image',
+					name: 'image',
+					fields: [
+						{
+							type: 'alt',
+							name: 'alt'
+						}
+					],
+					validation: Rule => Rule.required()
 				}),
 			],
 		}),
@@ -127,33 +141,51 @@ export default defineType({
 		defineField({
 			type: 'array',
 			title: 'Featured Sales',
-			name: 'featuresSales',
+			name: 'featuredSales',
 			of: [
 				defineArrayMember({
 					type: 'reference',
-					to: [{ type: 'property' }]
+					to: [{ type: 'property' }],
+					options: {
+						filter: 'propertyGroup._ref == $propertyGroup',
+						filterParams: {
+							propertyGroup: 'propertiesForSalePage',
+						},
+					},
 				}),
-			]
+			],
 		}),
 		defineField({
 			type: 'array',
 			title: 'Featured Holidays',
-			name: 'featuresHolidays',
+			name: 'featuredHolidays',
 			of: [
 				defineArrayMember({
 					type: 'reference',
-					to: [{ type: 'property' }]
+					to: [{ type: 'property' }],
+					options: {
+						filter: 'propertyGroup._ref == $propertyGroup',
+						filterParams: {
+							propertyGroup: 'propertiesForHolidayPage',
+						},
+					},
 				}),
 			]
 		}),
 		defineField({
 			type: 'array',
 			title: 'Featured Lets',
-			name: 'featuresLets',
+			name: 'featuredLets',
 			of: [
 				defineArrayMember({
 					type: 'reference',
-					to: [{ type: 'property' }]
+					to: [{ type: 'property' }],
+					options: {
+						filter: 'propertyGroup._ref == $propertyGroup',
+						filterParams: {
+							propertyGroup: 'propertiesForRentPage',
+						},
+					},
 				}),
 			]
 		}),

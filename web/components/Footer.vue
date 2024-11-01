@@ -63,6 +63,7 @@ footer {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		gap: var(--padding-base);
+		align-items: flex-end;
 		div.logo {
 			grid-column: 1 / -1;
 			margin-bottom: var(--padding-base);
@@ -85,11 +86,43 @@ footer {
 			row-gap: 3px;
 			li {
 				font-family: var(--font-sans);
+				font-size: 20px;
 				text-transform: uppercase;
+				letter-spacing: 0.1em;
 			}
 		}
 		div.contact {
-
+			font-size: var(--font-size-md);
+			letter-spacing: 0.02em;
+			h5 {
+				font-family: var(--font-sans);
+				font-size: 15px;
+				font-weight: 900;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+			}
+		}
+		div.newsletter {
+			display: grid;
+			row-gap: calc(var(--padding-base) / 2);
+			font-size: var(--font-size-md);
+			letter-spacing: 0.02em;
+			form {
+				input[type="email"] {
+					all: unset;
+					font-size: var(--font-size-md);
+					letter-spacing: 0.02em;
+					border-bottom: 1px dashed black;
+					width: 100%;
+					@include placeholder {
+						font-style: italic;
+						color: black;
+					}
+				}
+				button {
+					display: none;
+				}
+			}
 		}
 	}
 }

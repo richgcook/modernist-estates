@@ -15,8 +15,8 @@
 			</div>
 		</div>
 		<div class="caption">
-			<h3 class="title-h3">Testimonials</h3>
-			<h2 class="title-h1">{{ slides[selectedScrollSnap].quote }}</h2>
+			<h3>Testimonials</h3>
+			<h2>{{ slides[selectedScrollSnap].quote }}</h2>
 		</div>
 	</div>
 </template>
@@ -117,13 +117,11 @@ onMounted(() => {
 
 div.slider-container {
 	position: relative;
-	inset: 0;
-	height: 100%;
-	width: 100%;
 	display: flex;
     flex-flow: column nowrap;
     align-items: center;
 	aspect-ratio: 4 / 2;
+	margin: 0 var(--padding-base);
 	div.viewport {
 		position: relative;
 		height: 100%;
@@ -176,10 +174,17 @@ div.slider-container {
 		color: white;
 		text-align: center;
 		display: grid;
-		row-gap: calc(var(--padding-base) / 2);
+		row-gap: 10px;
 		h3 {
 			font-family: var(--font-sans);
+			font-size: 20px;
+			font-weight: 900;
 			text-transform: uppercase;
+			letter-spacing: 0.1em;
+		}
+		h2 {
+			font-size: var(--font-size-lg);
+			letter-spacing: 0.02em;
 		}
 	}
 }

@@ -116,6 +116,49 @@ const pageBuilderBQuery = `
 	},
 `
 
+const propertyQuery = `
+	_id, _type, title, slug, seo {
+		${seoQuery}
+	},
+	titleFormatted,
+	featuredImage {
+		${imageQuery}
+	},
+	images[] {
+		${imageQuery}
+	},
+	propertyGroup->{
+		_id, _type, title, slug, seo {
+			${seoQuery}
+		},
+	},
+	status->{
+		_id, _type, title, slug, seo {
+			${seoQuery}
+		},
+	},
+	statusOther,
+	location->{
+		_id, _type, title, slug, seo {
+			${seoQuery}
+		},
+	},
+	locationOther,
+	priceRange->{
+		_id, _type, title, slug, seo {
+			${seoQuery}
+		},
+	},
+	bedroomCount->{
+		_id, _type, title, slug, seo {
+			${seoQuery}
+		},
+	},
+	details[] {
+		label, value,
+	}
+`
+
 export default defineNuxtPlugin(nuxtApp => {
 	nuxtApp.provide('seoQuery', seoQuery)
 	nuxtApp.provide('internalLinkQuery', internalLinkQuery)
@@ -123,5 +166,6 @@ export default defineNuxtPlugin(nuxtApp => {
 	nuxtApp.provide('imageQuery', imageQuery)
 	nuxtApp.provide('pageBuilderBQuery', pageBuilderBQuery)
 	nuxtApp.provide('projectItemQuery', projectItemQuery)
+	nuxtApp.provide('propertyQuery', propertyQuery)
 	nuxtApp.provide('internalExternalLinkQuery', internalExternalLinkQuery)
 })

@@ -1,141 +1,127 @@
 <template>
-	<div class="home-layout">
-
-		<div class="home-featured-blocks" v-if="data.homePage.featuredLinks?.length">
-			<div v-for="block in data.homePage.featuredLinks" :key="block._id" class="block">
-				<NuxtLink :to="useInternalLinkUrl(block.internalLink)" class="inner">
-					<ImgWithRatio 
-						:src="block.image.asset.url" 
-						:sizes="`
-							(max-width: 768px) 100vw, 
-							33vw
-						`"
-						:alt="block.image.alt" 
-						:ratio="`3.5/4.2`"
-						v-if="block.image?.asset"
-					/>
-					<h3>{{ block.title }}</h3>
-				</NuxtLink>
+	<div>
+		<div class="landing" ref="landing" @click="skipLanding" v-show="!hideLanding" v-if="data.homePage.landing.image?.asset">
+			<Img 
+				:src="data.homePage.landing.image.asset.url" 
+				:sizes="`100vw`"
+				:loading="`eager`"
+				:priority="`high`"
+				:alt="data.homePage.landing.image.alt" 
+			/>
+			<div class="titles">
+				<Logo ref="landingLogo" />
+				<RichText :blocks="data.homePage.landing.text" v-if="data.homePage.landing.text?.length" ref="landingText" />
 			</div>
 		</div>
+		<div class="home-layout">
 
-		<SliderA :slides="data.homePage.testimonials" v-if="data.homePage.testimonials?.length" />
-
-		<div class="properties-sections">
-
-			<div class="properties-section" data-type="sale">
-				<h2 class="section-title title-h1">Featured Sales</h2>
-				<div class="properties-layout">
-					<div v-for="property in data.homePage.featuresSales" :key="property._id" class="property">
-						<div class="featured-image" v-if="property.featuredImage?.asset">
-							<ImgWithRatio 
-								:src="property.featuredImage.asset.url" 
-								:sizes="`
-									(max-width: 768px) 100vw, 
-									50vw
-								`"
-								:alt="property.featuredImage.alt" 
-								:ratio="`4/3`"
-							/>
-						</div>
-						<div class="details">
-							<h5 class="title-h5">{{ property.status.title }}</h5>
-							<h3 class="title">{{ property.titleFormatted }}</h3>
-							<NuxtLink :to="useInternalLinkUrl(property)" class="view-more">View more</NuxtLink>
-						</div>
-					</div>
-				</div>
-				<NuxtLink to="/sales" class="view-all">View all sales listing</NuxtLink>
+			<div class="home-hero" v-if="data.homePage.hero.image?.asset">
+				<Img 
+					:src="data.homePage.hero.image.asset.url" 
+					:sizes="`100vw`"
+					:loading="`eager`"
+					:priority="`high`"
+					:alt="data.homePage.hero.image.alt" 
+				/>
 			</div>
 
-			<div class="properties-section" data-type="holiday">
-				<h2 class="section-title title-h1">Featured Holidays</h2>
-				<div class="properties-layout">
-					<div v-for="property in data.homePage.featuresSales" :key="property._id" class="property">
-						<div class="featured-image" v-if="property.featuredImage?.asset">
-							<ImgWithRatio 
-								:src="property.featuredImage.asset.url" 
-								:sizes="`
-									(max-width: 768px) 100vw, 
-									50vw
-								`"
-								:alt="property.featuredImage.alt" 
-								:ratio="`4/3`"
-							/>
-						</div>
-						<div class="details">
-							<h5 class="title-h5">{{ property.status.title }}</h5>
-							<h3 class="title">{{ property.titleFormatted }}</h3>
-							<NuxtLink :to="useInternalLinkUrl(property)" class="view-more">View more</NuxtLink>
-						</div>
-					</div>
+			<div class="home-featured-blocks" v-if="data.homePage.featuredLinks?.length">
+				<div v-for="block in data.homePage.featuredLinks" :key="block._id" class="block">
+					<NuxtLink :to="useInternalLinkUrl(block.internalLink)" class="inner">
+						<ImgWithRatio 
+							:src="block.image.asset.url" 
+							:sizes="`
+								(max-width: 768px) 100vw, 
+								33vw
+							`"
+							:alt="block.image.alt" 
+							:ratio="`3.5/4.2`"
+							v-if="block.image?.asset"
+						/>
+						<h3>{{ block.title }}</h3>
+					</NuxtLink>
 				</div>
 			</div>
 
-			<div class="properties-section" data-type="letting">
-				<h2 class="section-title title-h1">Featured Lettings</h2>
-				<div class="properties-layout">
-					<div v-for="property in data.homePage.featuresSales" :key="property._id" class="property">
-						<div class="featured-image" v-if="property.featuredImage?.asset">
-							<ImgWithRatio 
-								:src="property.featuredImage.asset.url" 
-								:sizes="`
-									(max-width: 768px) 100vw, 
-									50vw
-								`"
-								:alt="property.featuredImage.alt" 
-								:ratio="`4/3`"
-							/>
-						</div>
-						<div class="details">
-							<h5 class="title-h5">{{ property.status.title }}</h5>
-							<h3 class="title">{{ property.titleFormatted }}</h3>
-							<NuxtLink :to="useInternalLinkUrl(property)" class="view-more">View more</NuxtLink>
-						</div>
+			<SliderA :slides="data.homePage.testimonials" v-if="data.homePage.testimonials?.length" />
+
+			<div class="properties-sections">
+
+				<div class="properties-section" data-type="sales" v-if="data.homePage.featuredSales?.length">
+					<h2 class="section-title">Featured Sales</h2>
+					<div class="properties-layout">
+						<PropertyCard v-for="property in data.homePage.featuredSales" :key="property._id" :property="property" />
 					</div>
+					<NuxtLink to="/" class="view-all">View all sales listing</NuxtLink>
+				</div>
+
+				<div class="properties-section" data-type="holidays" v-if="data.homePage.featuredHolidays?.length">
+					<h2 class="section-title">Featured Holidays</h2>
+					<div class="properties-layout">
+						<PropertyCard v-for="property in data.homePage.featuredHolidays" :key="property._id" :property="property" />
+					</div>
+					<NuxtLink to="/" class="view-all">View all holiday listing</NuxtLink>
+				</div>
+
+				<div class="properties-section" data-type="lettings" v-if="data.homePage.featuredLets?.length">
+					<h2 class="section-title">Featured Lettings</h2>
+					<div class="properties-layout">
+						<PropertyCard v-for="property in data.homePage.featuredLets" :key="property._id" :property="property" />
+					</div>
+					<NuxtLink to="/" class="view-all">View all lettings listing</NuxtLink>
+				</div>
+
+			</div>
+
+			<div class="home-journal-layout" v-if="data.homePage.featuredJournal?.length">
+				<div v-for="journal in data.homePage.featuredJournal" :key="journal._id" class="journal">
+					<NuxtLink :to="useInternalLinkUrl(journal)" class="inner">
+						<Img 
+							:src="journal.featuredImage.asset.url" 
+							:sizes="`
+								(max-width: 768px) 100vw, 
+								50vw
+							`"
+							:alt="journal.featuredImage.alt" 
+							v-if="journal.featuredImage?.asset"
+						/>
+						<div class="titles">
+							<h3>{{ journal.subtitle }}</h3>
+							<h2>{{ journal.title }}</h2>
+						</div>
+					</NuxtLink>
 				</div>
 			</div>
 
 		</div>
-
-		<div class="home-journal-layout" v-if="data.homePage.featuredJournal?.length">
-			<div v-for="journal in data.homePage.featuredJournal" :key="journal._id" class="journal">
-				<NuxtLink :to="useInternalLinkUrl(journal)" class="inner">
-					<Img 
-						:src="journal.featuredImage.asset.url" 
-						:sizes="`
-							(max-width: 768px) 100vw, 
-							50vw
-						`"
-						:alt="journal.featuredImage.alt" 
-						v-if="journal.featuredImage?.asset"
-					/>
-					<div class="titles">
-						<h3 class="title-h3">{{ journal.subtitle }}</h3>
-						<h2 class="title-h1">{{ journal.title }}</h2>
-					</div>
-				</NuxtLink>
-			</div>
-		</div>
-
 	</div>
 </template>
 
 <script setup>
 
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { lock, unlock } from 'tua-body-scroll-lock'
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
-
-const { $seoQuery, $imageQuery, $internalLinkQuery } = useNuxtApp()
+const { $seoQuery, $imageQuery, $internalLinkQuery, $richTextQuery, $propertyQuery } = useNuxtApp()
 
 const query = groq`{ 
 
 	"homePage": *[_type == "homePage"] {
 		_id, _type, title, slug, seo {
 			${$seoQuery}
+		},
+		landing {
+			image {
+				${$imageQuery}
+			},
+			text[] {
+				${$richTextQuery}
+			},
+		},
+		hero {
+			image {
+				${$imageQuery}
+			},
 		},
 		featuredLinks[] {
 			_type,
@@ -155,47 +141,14 @@ const query = groq`{
 				${$imageQuery}
 			},
 		},
-		featuresSales[]->{
-			_id, _type, title, slug, seo {
-				${$seoQuery}
-			},
-			titleFormatted,
-			featuredImage {
-				${$imageQuery}
-			},
-			images[] {
-				${$imageQuery}
-			},
-			propertyGroup->{
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			},
-			status->{
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			},
-			statusOther,
-			location->{
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			},
-			locationOther,
-			priceRange->{
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			},
-			bedroomCount->{
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			},
-			details[] {
-				label, value,
-			},
+		featuredSales[]->{
+			${$propertyQuery},
+		},
+		featuredHolidays[]->{
+			${$propertyQuery},
+		},
+		featuredLets[]->{
+			${$propertyQuery},
 		},
 		featuredJournal[]->{
 			_id, _type, title, slug, seo {
@@ -226,25 +179,131 @@ useHead({
 	}
 })
 
-const onAnimationComplete = (el, done) => {
+const hideLanding = ref(false)
 
-	gsap.to(el, {
-		opacity: 0,
-		duration: 1,
-		onComplete: () => {
-			done()
-		}
+const landing = ref(null)
+const landingLogo = ref(null)
+const landingText = ref(null)
+
+let landingTl
+let mm = gsap.matchMedia()
+
+const skipLanding = () => {
+	//landingTl.play(0)
+}
+
+onMounted(() => {
+
+	lock(landing.value)
+
+	mm.add({
+		isLandscape: `(orientation: landscape)`,
+		isPortrait: `(orientation: portrait)`,
+	}, (context) => {
+		let { isLandscape, isPortrait } = context.conditions
+
+		gsap.context(() => {
+
+			landingTl = gsap.timeline({
+				onComplete: () => {
+					hideLanding.value = true
+					unlock(landing.value)
+				}
+			})
+
+			landingTl
+			.to(landingLogo.value.$el, {
+				opacity: 1,
+				ease: "power3.out",
+				duration: 1,
+			})
+			.to(landingText.value.$el, {
+				opacity: 1,
+				ease: "power3.out",
+				duration: 1,
+			})
+			.to(landing.value, {
+				opacity: 0,
+				ease: "power3.out",
+				duration: 1,
+				delay: 1,
+			})
+
+		})
+
 	})
 
-}
+})
+
+onUnmounted(() => {
+	mm.revert()
+})
 
 </script>
 
 <style lang="scss" scoped>
 
+div.landing {
+	position: fixed;
+	inset: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 30;
+	cursor: pointer;
+	&:after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		height: 100%;
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.3);
+		z-index: 1;
+	}
+	img, video {
+		position: absolute;
+		inset: 0;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+	div.titles {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		display: grid;
+		row-gap: calc(var(--padding-base) * 2);
+		color: white;
+		text-align: center;
+		svg {
+			height: 28px;
+			fill: currentColor;
+			margin: 0 auto;
+			opacity: 0;
+		}
+		div.text {
+			opacity: 0;
+		}
+	}
+}
 div.home-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
+}
+div.home-hero {
+	aspect-ratio: 4 / 2;
+	margin: 0 var(--padding-base);
+	position: relative;
+	img {
+		position: absolute;
+		inset: 0;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
 }
 div.home-featured-blocks {
 	display: grid;
@@ -271,6 +330,7 @@ div.home-featured-blocks {
 				z-index: 1;
 			}
 			h3 {
+				font-size: var(--font-size-lg);
 				color: white;
 				position: absolute;
 				top: 50%;
@@ -286,20 +346,24 @@ div.properties-sections {
 	div.properties-section {
 		display: grid;
 		row-gap: var(--padding-base);
-		padding: var(--padding-base) 0;
-		&[data-type="holiday"] {
-			background-color: red;
+		padding: calc(var(--padding-base) * 2) 0;
+		&[data-type="sales"] {
+			padding-top: 0;
 		}
-		&[data-type="letting"] {
-			background-color: cyan;
+		&[data-type="holidays"] {
+			background-color: var(--color-holidays);
+		}
+		&[data-type="lettings"] {
+			background-color: var(--color-lettings);
 		}
 		h2.section-title {
+			font-size: var(--font-size-lg);
 			text-align: center;
 		}
 		a.view-all {
 			display: inline-flex;
 			font-family: var(--font-sans);
-			font-size: var(--font-size-title-sm);
+			font-size: 20px;
 			letter-spacing: 0.1em;
 			text-transform: uppercase;
 			border: 1px solid black;
@@ -318,15 +382,6 @@ div.properties-layout {
 	grid-template-columns: repeat(3, 1fr);
 	gap: calc(var(--padding-base) / 2);
 	padding: 0 var(--padding-base);
-	div.property {
-		h3.title {
-			white-space: pre;
-		}
-		a.view-more {
-			display: inline-flex;
-			margin-top: 10px;
-		}
-	}
 }
 
 div.home-journal-layout {
@@ -380,7 +435,7 @@ div.home-journal-layout {
 			}
 			div.titles {
 				display: grid;
-				row-gap: calc(var(--padding-base) / 2);
+				row-gap: 10px;
 				align-content: center;
 				background-color: rgba(0, 0, 0, 0.3);
 				color: white;
@@ -394,8 +449,14 @@ div.home-journal-layout {
 				opacity: 0;
 				transition: opacity 0.5s;
 				h3 {
-					font-family: var(--font-sans);
+				    font-family: var(--font-sans);
+					font-size: 20px;
+					font-weight: 900;
 					text-transform: uppercase;
+					letter-spacing: 0.1em;
+				}
+				h2 {
+					font-size: var(--font-size-md);
 				}
 			}
 		}
