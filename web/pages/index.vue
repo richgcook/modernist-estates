@@ -15,15 +15,7 @@
 		</div>
 		<div class="home-layout">
 
-			<div class="home-hero" v-if="data.homePage.hero.image?.asset">
-				<Img 
-					:src="data.homePage.hero.image.asset.url" 
-					:sizes="`100vw`"
-					:loading="`eager`"
-					:priority="`high`"
-					:alt="data.homePage.hero.image.alt" 
-				/>
-			</div>
+			<PageHero :image="data.homePage.hero?.image" v-if="data.homePage.hero.image?.asset" />
 
 			<div class="home-featured-blocks" v-if="data.homePage.featuredLinks?.length">
 				<div v-for="block in data.homePage.featuredLinks" :key="block._id" class="block">
@@ -38,6 +30,7 @@
 							:ratio="`3.5/4.2`"
 							v-if="block.image?.asset"
 						/>
+						<div class="overlay" :style="{ backgroundColor: block.bgColor?.value }"></div>
 						<h3>{{ block.title }}</h3>
 					</NuxtLink>
 				</div>
@@ -49,32 +42,32 @@
 
 				<div class="properties-section" data-type="sales" v-if="data.homePage.featuredSales?.length">
 					<h2 class="section-title">Featured Sales</h2>
-					<div class="properties-layout">
+					<PropertiesLayout>
 						<PropertyCard v-for="property in data.homePage.featuredSales" :key="property._id" :property="property" />
-					</div>
-					<NuxtLink to="/" class="view-all">View all sales listing</NuxtLink>
+					</PropertiesLayout>
+					<NuxtLink :to="useInternalLinkUrl(data.propertiesForSalePage)" class="view-all" v-if="data.propertiesForSalePage">View all sales listings</NuxtLink>
 				</div>
 
 				<div class="properties-section" data-type="holidays" v-if="data.homePage.featuredHolidays?.length">
 					<h2 class="section-title">Featured Holidays</h2>
-					<div class="properties-layout">
+					<PropertiesLayout>
 						<PropertyCard v-for="property in data.homePage.featuredHolidays" :key="property._id" :property="property" />
-					</div>
-					<NuxtLink to="/" class="view-all">View all holiday listing</NuxtLink>
+					</PropertiesLayout>
+					<NuxtLink :to="useInternalLinkUrl(data.propertiesForHolidayPage)" class="view-all" v-if="data.propertiesForHolidayPage">View all holiday listings</NuxtLink>
 				</div>
 
 				<div class="properties-section" data-type="lettings" v-if="data.homePage.featuredLets?.length">
 					<h2 class="section-title">Featured Lettings</h2>
-					<div class="properties-layout">
+					<PropertiesLayout>
 						<PropertyCard v-for="property in data.homePage.featuredLets" :key="property._id" :property="property" />
-					</div>
-					<NuxtLink to="/" class="view-all">View all lettings listing</NuxtLink>
+					</PropertiesLayout>
+					<NuxtLink :to="useInternalLinkUrl(data.propertiesForRentPage)" class="view-all" v-if="data.propertiesForRentPage">View all lettings listings</NuxtLink>
 				</div>
 
 			</div>
 
-			<div class="home-journal-layout" v-if="data.homePage.featuredJournal?.length">
-				<div v-for="journal in data.homePage.featuredJournal" :key="journal._id" class="journal">
+			<div class="home-journal-layout" v-if="data.latestJournalArticles?.length">
+				<div v-for="journal in data.latestJournalArticles" :key="journal._id" class="journal">
 					<NuxtLink :to="useInternalLinkUrl(journal)" class="inner">
 						<Img 
 							:src="journal.featuredImage.asset.url" 
@@ -133,6 +126,7 @@ const query = groq`{
 				internalLink->{
 					${$internalLinkQuery}
 				},
+				bgColor,s
 			}
 		},
 		testimonials[] {
@@ -158,6 +152,34 @@ const query = groq`{
 			featuredImage {
 				${$imageQuery}
 			},
+		},
+	}[0],
+
+	"latestJournalArticles": *[_type == "journalArticle"] | order(publishedDate desc) {
+		_id, _type, title, slug, seo {
+			${$seoQuery}
+		},
+		titleFormatted, subtitle,
+		featuredImage {
+			${$imageQuery}
+		},
+	}[0..2],
+
+	"propertiesForSalePage": *[_type == "propertiesForSalePage"] {
+		_id, _type, title, slug, seo {
+			${$seoQuery}
+		},
+	}[0],
+
+	"propertiesForHolidayPage": *[_type == "propertiesForHolidayPage"] {
+		_id, _type, title, slug, seo {
+			${$seoQuery}
+		},
+	}[0],
+
+	"propertiesForRentPage": *[_type == "propertiesForRentPage"] {
+		_id, _type, title, slug, seo {
+			${$seoQuery}
 		},
 	}[0],
 	
@@ -189,7 +211,18 @@ let landingTl
 let mm = gsap.matchMedia()
 
 const skipLanding = () => {
-	//landingTl.play(0)
+	landingTl.pause()
+
+	gsap.to(landing.value, {
+		opacity: 0,
+		ease: "power3.out",
+		duration: 1,
+		onComplete: () => {
+			hideLanding.value = true
+			unlock(landing.value)
+		}
+	})
+
 }
 
 onMounted(() => {
@@ -226,7 +259,7 @@ onMounted(() => {
 				opacity: 0,
 				ease: "power3.out",
 				duration: 1,
-				delay: 1,
+				delay: 2,
 			})
 
 		})
@@ -284,6 +317,9 @@ div.landing {
 			opacity: 0;
 		}
 		div.text {
+			font-family: var(--font-sans);
+			font-weight: 900;
+			letter-spacing: 0.02em;
 			opacity: 0;
 		}
 	}
@@ -291,19 +327,6 @@ div.landing {
 div.home-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
-}
-div.home-hero {
-	aspect-ratio: 4 / 2;
-	margin: 0 var(--padding-base);
-	position: relative;
-	img {
-		position: absolute;
-		inset: 0;
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-		object-position: center;
-	}
 }
 div.home-featured-blocks {
 	display: grid;
@@ -315,19 +338,19 @@ div.home-featured-blocks {
 			display: block;
 			position: relative;
 			&:hover {
-				&:after {
-					background-color: rgba(0, 0, 0, 0.4);
+				div.overlay {
+					opacity: 1;
 				}
 			}
-			&:after {
-				content: '';
+			div.overlay {
 				position: absolute;
 				inset: 0;
 				height: 100%;
 				width: 100%;
-				background-color: rgba(0, 0, 0, 0.3);
-				transition: background-color 0.5s;
 				z-index: 1;
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 0.3s;
 			}
 			h3 {
 				font-size: var(--font-size-lg);
@@ -375,13 +398,6 @@ div.properties-sections {
 			}
 		}
 	}
-}
-
-div.properties-layout {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: calc(var(--padding-base) / 2);
-	padding: 0 var(--padding-base);
 }
 
 div.home-journal-layout {

@@ -24,13 +24,13 @@
 		"react-dom": "^18.2.0",
 		"sanity": "^3.39.1",
 		"sanity-plugin-netlify": "^1.1.2",
+		"sanity-plugin-simpler-color-input": "^3.0.0",
 		"styled-components": "^6.1.8"
 	},
 	"devDependencies": {
 		"@sanity/eslint-config-studio": "^4.0.0",
 		"@types/react": "^18.0.25",
 		"prettier": "^3.0.2",
-		"sanity-plugin-simpler-color-input": "^2.2.1",
 		"typescript": "^5.1.6"
 	},
 	"prettier": {

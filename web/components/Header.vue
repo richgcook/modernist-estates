@@ -1,14 +1,14 @@
 <template>
 	<header :class="{ '--nav-open': navIsOpen, '--fixed': isFixed }">
 		<ul class="menu">
-			<li><NuxtLink to="/">Homes</NuxtLink></li>
-			<li><NuxtLink to="/">About</NuxtLink></li>
-			<li><NuxtLink to="/">Journal</NuxtLink></li>
+			<li><NuxtLink to="/homes" :class="{ 'router-link-active': isRouteActive('homes') }">Homes</NuxtLink></li>
+			<li><NuxtLink to="/about">About</NuxtLink></li>
+			<li><NuxtLink to="/journal" :class="{ 'router-link-active': isRouteActive('journal') }">Journal</NuxtLink></li>
 		</ul>
 		<NuxtLink to="/" class="logo"><Logo /></NuxtLink>
 		<ul class="menu">
-			<li><NuxtLink to="/">Selling</NuxtLink></li>
-			<li><NuxtLink to="/">Letting</NuxtLink></li>
+			<li><NuxtLink to="/selling">Selling</NuxtLink></li>
+			<li><NuxtLink to="/letting">Letting</NuxtLink></li>
 			<li><NuxtLink to="/">Subscribe</NuxtLink></li>
 		</ul>
 	</header>
@@ -50,6 +50,10 @@ const isFixed = computed(() => {
 	return false
 })
 
+const isRouteActive = (linkName) => {
+	return route.name && route.name.includes(linkName)
+}
+
 const navStore = useNavStore()
 
 const { isOpen: navIsOpen } = storeToRefs(navStore)
@@ -73,7 +77,7 @@ header {
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
-	padding: var(--padding-base);
+	padding: 40px var(--padding-base);
 	position: sticky;
 	top: 0;
 	z-index: 30;
@@ -130,6 +134,11 @@ header {
 		column-gap: 30px;
 		li {
 			font-size: var(--font-size-md);
+			a {
+				&.router-link-active {
+					border-bottom: 1px solid currentColor;
+				}
+			}
 		}
 	}
 }

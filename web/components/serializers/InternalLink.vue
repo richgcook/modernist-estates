@@ -1,5 +1,5 @@
 <template>
-	<NuxtLink :to="toPath">
+	<NuxtLink :to="useInternalLinkUrl(reference)">
 		<slot />
 	</NuxtLink>
 </template>
@@ -7,20 +7,7 @@
 <script setup>
 
 const props = defineProps({
-	slug: {
-		type: String,
-		default: ''
-	},
-	dataType: {
-		type: String,
-		default: ''
-	}
-})
-
-const toPath = computed(() => {
-	if (props.dataType === 'project') return `/projects/${props.slug}`
-	if (props.dataType === 'projectProgramme') return `/projects/hmmm/${props.slug}`
-	return props.slug
+	reference: Object,
 })
 
 </script>
@@ -29,6 +16,7 @@ const toPath = computed(() => {
 
 a {
 	color: currentColor;
+	border-bottom: 1px solid currentColor;
 }
 
 </style>

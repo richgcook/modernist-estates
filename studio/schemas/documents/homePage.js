@@ -1,6 +1,6 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { Quotes } from '@phosphor-icons/react'
-import { PAGE_REFERENCES } from '../../constants'
+import { PAGE_REFERENCES, BASE_COLORS } from '../../constants'
 
 export default defineType({
 	type: "document",
@@ -84,6 +84,16 @@ export default defineType({
 							title: 'Internal link',
 							name: 'internalLink',
 							to: PAGE_REFERENCES,
+						}),
+						defineField({
+							type: 'simplerColor',
+							title: 'Background colour',
+							name: 'bgColor',
+							description: 'Used on hover',
+							options: {
+								colorList: BASE_COLORS,
+							},
+							validation: Rule => Rule.required(),
 						}),
 					],
 				}),

@@ -4,11 +4,11 @@
 	</a>
 </template>
 
-<script>
+<script setup>
 
-export default {
-	props: ['file']
-}
+const props = defineProps({
+	file: Object
+})
 
 </script>
 
@@ -16,6 +16,7 @@ export default {
 
 a {
 	color: currentColor;
+	border-bottom: 1px solid currentColor;
 }
 
 </style>

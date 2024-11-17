@@ -1,4 +1,4 @@
-import { Play, YoutubeLogo } from '@phosphor-icons/react'
+import { TextAlignLeft } from '@phosphor-icons/react'
 import { defineType, defineField, defineArrayMember } from 'sanity'
 
 export default defineType({
@@ -59,6 +59,26 @@ export default defineType({
 					type: 'richText',
 					title: 'Caption',
 					name: 'caption'
+				}),
+				defineField({
+					type: 'object',
+					title: 'Settings',
+					name: 'settings',
+					fields: [
+						defineField({
+							type: 'string',
+							title: 'Image size',
+							name: 'mediaSize',
+							options: {
+								list: [
+									{ title: 'Default', value: 'default' },
+									{ title: 'Full width', value: 'full' },
+								],
+							},
+							initialValue: 'default',
+							validation: Rule => Rule.required()
+						}),
+					],
 				}),
 			],
 			preview: {

@@ -6,6 +6,7 @@ export const useBlockType = (type) => {
 		case 'videoBlock': return 'video'
 		case 'embedBlock': return 'embed'
 		case 'mediaTextBlock': return 'media-and-text'
+		case 'accordionListBlock': return 'accordion-list'
 		default: return
 	}
 }

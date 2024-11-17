@@ -61,59 +61,66 @@ const internalExternalLinkQuery = `
 	}
 `
 
-const projectItemQuery = `
-	_id, _type, title, slug, seo {
-		${seoQuery}
-	},
-	featuredImage {
-		${imageQuery}
-	},
-`
-
 const pageBuilderBQuery = `
 	_type,
-	_type == "mediaTextBlock" => {
-		media[] {
-			_type,
-			_type == "imageBlock" => {
-				image {
-					${imageQuery}
-				},
-				caption[] {
-					${richTextQuery}
-				},
-			},
-			_type == "videoBlock" => {
-				"video": video.asset->url,
-				caption[] {
-					${richTextQuery}
-				},
-			},
-			_type == "embedBlock" => {
-				coverImage {
-					${imageQuery}
-				},
-				embedCode,
-				caption[] {
-					${richTextQuery}
-				},
-			},
-		},
-		text[] {
-			${richTextQuery}
-		},
-		settings,
-		relatedProjects[]-> {
-			${projectItemQuery}
-		},
-	},
-	_type == "textBlock" => {
-		heading,
+		_type == "textBlock" => {
+		title,
 		text[] {
 			${richTextQuery}
 		},
 		textColumnCount
 	},
+	_type == "imageBlock" => {
+		image {
+			${imageQuery}
+		},
+		caption[] {
+			${richTextQuery}
+		},
+		settings,
+	},
+	_type == "imagesBlock" => {
+		images[] {
+			image {
+				${imageQuery}
+			},
+			caption[] {
+				${richTextQuery}
+			},
+		},
+	}
+`
+
+const pageBuilderCQuery = `
+	_type,
+	_type == "textBlock" => {
+		title,
+		text[] {
+			${richTextQuery}
+		},
+	},
+	_type == "accordionListBlock" => {
+		title,
+		list[] {
+			title,
+			text[] {
+				${richTextQuery}
+			},
+		},
+	}
+`
+
+const journalArticleQuery = `
+	_id, _type, title, slug, seo {
+		${seoQuery}
+	},
+	titleFormatted, subtitle,
+	featuredImage {
+		${imageQuery}
+	},
+	pageBuilder[] {
+		${pageBuilderBQuery}
+	}
 `
 
 const propertyQuery = `
@@ -156,6 +163,20 @@ const propertyQuery = `
 	},
 	details[] {
 		label, value,
+	},
+	links[] {
+		${internalExternalLinkQuery}
+	},
+	description[] {
+		${richTextQuery}
+	},
+	contact {
+		title,
+		details[] {
+			${richTextQuery}
+		},
+		showEnquiryButton, enquireButtonLabel, enquireButtonEmail, enquireButtonRef, 
+		showAlternativeContactButton, alternativeContactLabel, alternativeContactLink,
 	}
 `
 
@@ -165,7 +186,8 @@ export default defineNuxtPlugin(nuxtApp => {
 	nuxtApp.provide('richTextQuery', richTextQuery)
 	nuxtApp.provide('imageQuery', imageQuery)
 	nuxtApp.provide('pageBuilderBQuery', pageBuilderBQuery)
-	nuxtApp.provide('projectItemQuery', projectItemQuery)
+	nuxtApp.provide('pageBuilderCQuery', pageBuilderCQuery)
 	nuxtApp.provide('propertyQuery', propertyQuery)
+	nuxtApp.provide('journalArticleQuery', journalArticleQuery)
 	nuxtApp.provide('internalExternalLinkQuery', internalExternalLinkQuery)
 })

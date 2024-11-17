@@ -36,7 +36,7 @@
 }
 
 :root {
-	--font-size-base: 32px;
+	--font-size-base: 24px;
 
 	--font-size-title-lg: 53px;
 
@@ -45,7 +45,7 @@
 	--font-size-title-sm: 27px;
 	--font-size-title-xs: 20px;
 
-	--padding-base: 40px;
+	--padding-base: 50px;
 
 	--color-primary: #e8e7df;
 
@@ -60,7 +60,7 @@
 
 	--color-bg: #e8e7df;
 
-
+	--color-grey: #878787;
 
 	--logo-height: 18px;
 
@@ -123,7 +123,7 @@ body {
 	letter-spacing: 0.01em;
 	background-color: var(--color-bg);
 	color: black;
-	line-height: 1.2;
+	line-height: 1.4;
 }
 a {
 	&:active, &:focus, &:hover {

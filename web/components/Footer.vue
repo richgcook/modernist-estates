@@ -75,8 +75,7 @@ footer {
 					max-height: 100%;
 					width: auto;
 					max-width: 100%;
-					fill: v-bind(textAndAssetColor);
-					transition: fill 0.5s;
+					fill: black;
 				}
 			}
 		}
@@ -88,7 +87,7 @@ footer {
 				font-family: var(--font-sans);
 				font-size: 20px;
 				text-transform: uppercase;
-				letter-spacing: 0.1em;
+				letter-spacing: 0.06em;
 			}
 		}
 		div.contact {

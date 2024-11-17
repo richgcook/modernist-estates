@@ -6,9 +6,7 @@ export const useCursorStore = defineStore({
 		return {
 			direction: null,
 			active: false,
-			state: '',
-			text: '',
-			textStyle: '',
+			state: 'arrow',
 			x: 0,
 			y: 0
 		}
@@ -25,26 +23,10 @@ export const useCursorStore = defineStore({
 		},
 		turnOff() {
 			this.active = false
-			this.state = ''
-			this.text = ''
-			this.textStyle = ''
 		},
 		setXY(x, y) {
 			this.x = x
 			this.y = y
-		},
-		setText(text) {
-			this.text = text
-		},
-		setTextStyle(textStyle) {
-			this.textStyle = textStyle
-		},
-		reset() {
-			this.direction = null
-			this.active = false
-			this.state = ''
-			this.text = ''
-			this.textStyle = ''
 		}
 	},
 	getters: {
@@ -52,8 +34,6 @@ export const useCursorStore = defineStore({
 		getActive: state => state.active,
 		getState: state => state.state,
 		getX: state => state.x,
-		getY: state => state.y,
-		getText: state => state.text,
-		getTextStyle: state => state.textStyle,
+		getY: state => state.y
 	}
 })

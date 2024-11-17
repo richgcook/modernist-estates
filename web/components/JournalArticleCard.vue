@@ -1,20 +1,20 @@
 <template>
-	<div class="property">
-		<NuxtLink :to="useInternalLinkUrl(property)" class="featured-image" v-if="property.featuredImage?.asset">
+	<div class="article">
+		<NuxtLink :to="useInternalLinkUrl(article)" class="featured-image" v-if="article.featuredImage?.asset">
 			<ImgWithRatio 
-				:src="property.featuredImage.asset.url" 
+				:src="article.featuredImage.asset.url" 
 				:sizes="`
 					(max-width: 768px) 100vw, 
 					50vw
 				`"
-				:alt="property.featuredImage.alt" 
+				:alt="article.featuredImage.alt" 
 				:ratio="`4/3`"
 			/>
 		</NuxtLink>
 		<div class="details">
-			<h5 class="status">{{ property.status ? property.status.title : property.statusOther }}</h5>
-			<h3 class="title">{{ property.titleFormatted }}</h3>
-			<NuxtLink :to="useInternalLinkUrl(property)" class="view-more">View more</NuxtLink>
+			<h5 class="subtitle" v-if="article.subtitle">{{ article.subtitle }}</h5>
+			<h3 class="title">{{ article.titleFormatted }}</h3>
+			<NuxtLink :to="useInternalLinkUrl(article)" class="view-more">Read</NuxtLink>
 		</div>
 	</div>
 </template>
@@ -22,20 +22,21 @@
 <script setup>
 
 const props = defineProps({
-	property: Object
+	article: Object
 })
 
 </script>
 
 <style lang="scss" scoped>
 
-div.property {
+div.article {
 	display: grid;
 	row-gap: calc(var(--padding-base) / 2);
+	align-content: flex-start;
 	a.featured-image {
 		display: block;
 	}
-	h5.status {
+	h5.subtitle {
 		font-family: var(--font-sans);
 		font-size: 15px;
 		font-weight: 900;
@@ -44,7 +45,7 @@ div.property {
 	}
 	h3.title {
 		font-size: var(--font-size-md);
-	    white-space: pre-wrap;
+		white-space: pre-wrap;
 	}
 	a.view-more {
 		display: inline-flex;

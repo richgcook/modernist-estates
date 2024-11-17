@@ -36,6 +36,16 @@ export default defineType({
 			validation: Rule => Rule.required()
 		}),
 		defineField({
+			type: 'date',
+			title: 'Published date',
+			name: 'publishedDate',
+			options: {
+				dateFormat: 'DD.MM.YYYY',
+				calendarTodayLabel: 'Today'
+			},
+			validation: Rule => Rule.required(),
+		}),
+		defineField({
 			type: 'image',
 			title: 'Featured image',
 			name: 'featuredImage',

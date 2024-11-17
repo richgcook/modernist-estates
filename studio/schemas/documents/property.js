@@ -137,40 +137,9 @@ export default defineType({
 			]
 		}),
 		defineField({
-			type: 'array',
-			title: 'Downloads',
-			name: 'downloads',
-			of: [
-				defineArrayMember({
-					type: 'object',
-					title: 'Download',
-					name: 'download',
-					fields: [
-						defineField({
-							type: 'string',
-							title: 'Label',
-							name: 'label',
-						}),
-						defineField({
-							type: 'file',
-							title: 'File',
-							name: 'file',
-						}),
-					],
-					preview: {
-						select: {
-							label: 'label',
-						},
-						prepare(selection) {
-							const { label } = selection
-							return {
-								title: label,
-								media: FileArrowDown
-							}
-						},
-					},
-				})
-			]
+			type: 'links',
+			title: 'Downloads/links',
+			name: 'links',
 		}),
 		defineField({
 			type: 'richText',

@@ -12,6 +12,19 @@ S.listItem()
 			.items([
 
 				S.listItem()
+				.title('Overview')
+				.icon(File)
+				.child(
+					S.document()
+					.title('Overview')
+					.id('homesPage')
+					.documentId('homesPage')
+					.schemaType('homesPage')
+				),
+
+				S.divider(),
+
+				S.listItem()
 				.title('For Sale')
 				.icon(House)
 				.child(

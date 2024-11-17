@@ -17,6 +17,7 @@ const props = defineProps({
 
 a {
 	color: currentColor;
+	border-bottom: 1px solid currentColor;
 }
 
 </style>

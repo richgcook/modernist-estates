@@ -29,11 +29,15 @@ const serializers = {
 div.text {
 	white-space: pre-line;
 	:deep(h3) {
-		font-size: 28px;
-		line-height: 1.1;
-		@include media('phone') {
-			font-size: 25px;
-		}
+		font-size: var(--font-size-md);
+		line-height: 1.33;
+	}
+	:deep(strong) {
+		font-family: var(--font-sans);
+		font-size: 20px;
+		font-weight: normal;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
 	}
 	:deep(ul) {
 		li {
