@@ -29,10 +29,11 @@ const props = defineProps({
 		default: null
 	},
 	ratio: {
-		type: Number,
+		type: [Number, String],
 		default: null
 	},
 })
+
 </script>
 
 <style scoped lang="scss">

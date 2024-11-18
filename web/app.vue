@@ -8,8 +8,6 @@
 
 <script setup>
 
-import { useNavStore } from '~/store/nav'
-
 const config = useRuntimeConfig()
 
 useHead({
@@ -22,16 +20,5 @@ useHead({
 		}
 	}
 })
-
-const navStore = useNavStore()
-const route = useRoute()
-
-// Having to add this watcher to close the nav when the route changes
-// Middleware fires before the route changes (or at least too early for this)
-watch(() => route.path, (newRoute) => {
-	
-	navStore.setClose()
-
-}, { immediate: true })
 
 </script>

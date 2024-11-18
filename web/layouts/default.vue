@@ -1,7 +1,6 @@
 <template>
 	<div class="layout">
 		<Header />
-		<Nav />
 		<Cursor />
 		<slot />
 		<Footer />
