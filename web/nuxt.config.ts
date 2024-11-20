@@ -57,4 +57,18 @@ export default defineNuxtConfig({
 
 	compatibilityDate: '2024-10-01',
 
+	nitro: {
+		prerender: {
+			crawlLinks: true,
+		},
+	},
+
+	routeRules: {
+
+		// Exclude specific routes from prerendering (SSR fresh data on each request)
+		'/selling': { prerender: false },
+		'/letting': { prerender: false },
+
+	},
+
 })

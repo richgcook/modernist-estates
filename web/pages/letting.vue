@@ -7,8 +7,11 @@
 				<RichText :blocks="data.lettingPage.introduction" v-if="data.lettingPage.introduction?.length" />
 			</div>
 			<PageBuilderC :content="data.lettingPage.content" v-if="data.lettingPage.content?.length" />
-			<div>//TODO: REQUEST A VALUATION FORM</div>
 		</div>
+		<ContactForm 
+			:title="`Landlord enquiry form`"
+			:successMessage="data.lettingPage.formSuccessMessage" 
+		/>
 	</div>
 </template>
 
@@ -32,6 +35,7 @@ const query = groq`{
 		content[] {
 			${$pageBuilderCQuery}
 		},
+		formSuccessMessage,
 	}[0],
 	
 }`

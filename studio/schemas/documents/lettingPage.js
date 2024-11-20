@@ -42,6 +42,12 @@ export default defineType({
 			name: 'content',
 		}),
 		defineField({
+			type: 'text',
+			title: `'Landlord Enquiry' form success message`,
+			name: 'formSuccessMessage',
+			rows: 3,
+		}),
+		defineField({
 			title: 'SEO',
 			name: 'seo',
 			type: 'seo'

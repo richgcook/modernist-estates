@@ -7,8 +7,11 @@
 				<RichText :blocks="data.sellingPage.introduction" v-if="data.sellingPage.introduction?.length" />
 			</div>
 			<PageBuilderC :content="data.sellingPage.content" v-if="data.sellingPage.content?.length" />
-			<div>//TODO: REQUEST A VALUATION FORM</div>
 		</div>
+		<ContactForm 
+			:title="`Request a Valuation`"
+			:successMessage="data.sellingPage.formSuccessMessage" 
+		/>
 	</div>
 </template>
 
@@ -32,6 +35,7 @@ const query = groq`{
 		content[] {
 			${$pageBuilderCQuery}
 		},
+		formSuccessMessage,
 	}[0],
 	
 }`
