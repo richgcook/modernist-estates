@@ -8,10 +8,6 @@
 			</div>
 			<PageBuilderC :content="data.lettingPage.content" v-if="data.lettingPage.content?.length" />
 		</div>
-		<ContactForm 
-			:title="`Landlord enquiry form`"
-			:successMessage="data.lettingPage.formSuccessMessage" 
-		/>
 	</div>
 </template>
 
