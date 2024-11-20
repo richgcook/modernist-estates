@@ -8,6 +8,10 @@
 			</div>
 			<PageBuilderC :content="data.sellingPage.content" v-if="data.sellingPage.content?.length" />
 		</div>
+		<ContactForm 
+			:title="`Request a Valuation`"
+			:successMessage="data.sellingPage.formSuccessMessage" 
+		/>
 	</div>
 </template>
 
