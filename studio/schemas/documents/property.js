@@ -33,6 +33,43 @@ export default defineType({
 			validation: Rule => Rule.required()
 		}),
 		defineField({
+			type: 'object',
+			title: 'Featured image(s)',
+			name: 'featuredImages',
+			fields: [
+				defineField({
+					type: 'image',
+					title: 'Image (primary)',
+					name: 'imagePrimary',
+					fields: [
+						defineField({
+							type: 'alt',
+							name: 'alt'
+						})
+					],
+					options: {
+						collapsible: false
+					},
+					validation: Rule => Rule.required()
+				}),
+				defineField({
+					type: 'image',
+					title: 'Image (secondary)',
+					name: 'imageSecondary',
+					description: 'Optional — used on hover',
+					fields: [
+						defineField({
+							type: 'alt',
+							name: 'alt'
+						})
+					],
+					options: {
+						collapsible: false
+					},
+				}),
+			],
+		}),
+		defineField({
 			type: 'image',
 			title: 'Featured image',
 			name: 'featuredImage',

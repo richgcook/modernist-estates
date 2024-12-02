@@ -1,14 +1,22 @@
 <template>
 	<div class="property">
-		<NuxtLink :to="useInternalLinkUrl(property)" class="featured-image" v-if="property.featuredImage?.asset">
-			<ImgWithRatio 
-				:src="property.featuredImage.asset.url" 
+		<NuxtLink :to="useInternalLinkUrl(property)" class="featured-images" :class="{ '--has-secondary': property.featuredImages.imageSecondary?.asset }" v-if="property.featuredImages?.imagePrimary?.asset">
+			<Img
+				:src="property.featuredImages.imagePrimary.asset.url" 
 				:sizes="`
 					(max-width: 768px) 100vw, 
-					50vw
-				`"
-				:alt="property.featuredImage.alt" 
-				:ratio="`4/3`"
+					(min-width: 768px) and (max-width: 1023px) 50vw, 
+					33vw`"
+				:alt="property.featuredImages.imagePrimary.alt" 
+			/>
+			<Img
+				:src="property.featuredImages.imageSecondary.asset.url" 
+				:sizes="`
+					(max-width: 768px) 100vw, 
+					(min-width: 768px) and (max-width: 1023px) 50vw, 
+					33vw`"
+				:alt="property.featuredImages.imageSecondary.alt" 
+				v-if="property.featuredImages.imageSecondary?.asset"
 			/>
 		</NuxtLink>
 		<div class="details">
@@ -32,8 +40,33 @@ const props = defineProps({
 div.property {
 	display: grid;
 	row-gap: calc(var(--padding-base) / 2);
-	a.featured-image {
+	align-content: flex-start;
+	a.featured-images {
 		display: block;
+		aspect-ratio: 4 / 3;
+		position: relative;
+		overflow: hidden;
+		&.--has-secondary {
+			&:hover {
+				img {
+					&:nth-child(2) {
+						opacity: 1;
+					}
+				}
+			}
+		}
+		img {
+			position: absolute;
+			inset: 0;
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+			transition: opacity 0.3s;
+			&:nth-child(2) {
+				opacity: 0;
+				z-index: 1;
+			}
+		}
 	}
 	h5.status {
 		font-family: var(--font-sans);

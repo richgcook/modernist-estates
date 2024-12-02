@@ -133,6 +133,14 @@ const propertyQuery = `
 	featuredImage {
 		${imageQuery}
 	},
+	featuredImages {
+		imagePrimary {
+			${imageQuery}
+		},
+		imageSecondary {
+			${imageQuery}
+		},
+	},
 	images[] {
 		${imageQuery}
 	},

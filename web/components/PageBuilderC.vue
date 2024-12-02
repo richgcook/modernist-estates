@@ -71,7 +71,6 @@ div.blocks-layout {
 			h3 {
 				font-family: var(--font-sans);
 				font-size: 20px;
-				font-weight: 900;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				margin-bottom: calc(var(--padding-base) / 4);

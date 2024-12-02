@@ -145,6 +145,7 @@ div.page-layout {
 			div.text {
 				font-size: 24px;
 				line-height: calc(32/24 * 1em);
+				max-width: 90%;
 			}
 		}
 	}
