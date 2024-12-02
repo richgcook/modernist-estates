@@ -1,14 +1,15 @@
 <template>
-	<a :href="href" :target="blank ? '_blank' : false">
+	<NuxtLink :to="href" :target="blank ? '_blank' : false" :class="{ '--has-symbol': symbolArrow }">
    		<slot />
-	</a>
+	</NuxtLink>
 </template>
 
 <script setup>
 
 const props = defineProps({
 	href: String,
-	blank: Boolean
+	blank: Boolean,
+	symbolArrow: Boolean,
 })
 
 </script>
@@ -17,7 +18,17 @@ const props = defineProps({
 
 a {
 	color: currentColor;
-	border-bottom: 1px solid currentColor;
+	&.--has-symbol {
+		display: inline-flex;
+		align-items: baseline;
+		column-gap: 1ch;
+		svg {
+			height: 0.6em;
+		}
+	}
+	&:not(.--has-symbol) {
+		border-bottom: 1px solid currentColor;
+	}
 }
 
 </style>
