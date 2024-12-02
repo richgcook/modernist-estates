@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="content">
-				<div class="featured-image" v-if="data.property.featuredImage?.asset">
+				<div class="featured-image" v-if="data.property.featuredImage?.asset" @click="data.property.images?.length ? mediaOverlayOpen = true : null">
 					<Img 
 						:src="data.property.featuredImage.asset?.url"
 						:alt="data.property.featuredImage.alt"
@@ -280,6 +280,7 @@ div.page-layout {
 		div.featured-image {
 			position: relative;
 			width: 100%;
+			cursor: pointer;
 			height: calc(100vh - var(--header-height) - var(--padding-base));
 			@supports (height: 100svh) {
 				height: calc(100svh - var(--header-height) - var(--padding-base));
