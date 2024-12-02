@@ -161,6 +161,7 @@ const propertyQuery = `
 		},
 	},
 	locationOther,
+	locationMap,
 	priceRange->{
 		_id, _type, title, slug, seo {
 			${seoQuery}

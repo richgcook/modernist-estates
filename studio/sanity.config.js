@@ -5,6 +5,7 @@ import { schemaTypes } from './schemas'
 import { deskStructure } from './desk'
 import { netlifyTool } from 'sanity-plugin-netlify'
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
+import { googleMapsInput } from '@sanity/google-maps-input'
 
 const devOnlyPlugins = [visionTool()]
 
@@ -29,6 +30,14 @@ export default defineConfig({
 		}), 
 		netlifyTool(),
 		simplerColorInput(),
+		googleMapsInput({
+			apiKey: `AIzaSyCU8q_focgghGF1tMuJ2nz9HUaPKbGj-oQ`,
+			defaultZoom: 15,
+			defaultLocation: {
+				lat: 51.519673111328046,
+				lng: -0.09472659469203472
+			},
+		}),
 		...(isDev ? devOnlyPlugins : []),
 	],
   	schema: {

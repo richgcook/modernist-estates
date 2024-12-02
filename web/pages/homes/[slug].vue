@@ -17,6 +17,9 @@
 								<li v-for="(link, index) in data.property.links" :key="index">
 									<NuxtLink :to="useLinkLink(link)">{{ link.label }}</NuxtLink>
 								</li>
+								<li v-if="data.property.locationMap">
+									<button type="button" @click="mapOpen = true">Map</button>
+								</li>
 								<li v-if="data.property.images?.length">
 									<button type="button" @click="mediaOverlayOpen = true">View all images</button>
 								</li>
@@ -59,6 +62,10 @@
 				<li v-if="nextProperty"><NuxtLink :to="useInternalLinkUrl(nextProperty)">Next property &rarr;</NuxtLink></li>
 			</ul>
 		</div>
+		<div class="map-popup" v-if="data.property.locationMap" v-show="mapOpen">
+			<button type="button" @click="mapOpen = false" class="close"><SymbolClose /></button>
+			<GoogleMap :marker="data.property.locationMap" :circleFillColor="mapCircleFillColor" :circleStrokeColor="mapCircleStrokeColor" />
+		</div>
 		<div class="media-overlay" v-if="data.property.images?.length" v-show="mediaOverlayOpen" ref="mediaOverlayElem">
 			<button type="button" @click="mediaOverlayOpen = false" class="close"><SymbolClose /></button>
 			<SliderB :images="data.property.images" />
@@ -72,6 +79,7 @@ import { lock, unlock } from 'tua-body-scroll-lock'
 import { onKeyStroke } from '@vueuse/core'
 import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { useCssVar } from '@vueuse/core'
 
 const { $propertyQuery } = useNuxtApp()
 
@@ -112,17 +120,43 @@ const descriptionElem = ref(null)
 
 const scrollToInfo = () => {
 
-	const headerHeight = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--header-height'))
+	const headerOffset = parseInt(useCssVar('--header-height').value)
 
 	gsap.to(window, { 
 		duration: 1, 
 		scrollTo: {
 			y: descriptionElem.value,
-			offsetY: headerHeight,
+			offsetY: headerOffset,
 			autoKill: true,
 		},
 	})
 }
+
+const mapPopupElem = ref(null)
+const mapOpen = ref(false)
+
+watch(mapOpen, (isOpen, wasOpen) => {
+	if (isOpen) lock(mapPopupElem.value)
+	if (wasOpen) unlock(mapPopupElem.value)
+})
+
+const mapCircleFillColor = computed(() => {
+	// let fillColor = useCssVar('--color-highlight').value
+	// if (data?.value.property.propertyGroup?.slug?.current == 'for-sale') {
+	// 	fillColor = useCssVar('--color-primary').value
+	// }
+	// if (data?.value.property.propertyGroup?.slug?.current == 'for-rent') {
+	// 	fillColor = useCssVar('--color-lettings').value
+	// }
+	// if (data?.value.property.propertyGroup?.slug?.current == 'holiday') {
+	// 	fillColor = useCssVar('--color-holidays').value
+	// }
+	// return fillColor
+	return useCssVar('--color-highlight').value
+})
+const mapCircleStrokeColor = computed(() => {
+	return useCssVar('--color-highlight').value
+})
 
 const mediaOverlayElem = ref(null)
 const mediaOverlayOpen = ref(false)
@@ -309,6 +343,27 @@ div.page-navigation {
 			&.--all {
 				grid-column: 2 / span 1;
 			}
+		}
+	}
+}
+div.map-popup {
+	position: fixed;
+	inset: 0;
+	height: 100%;
+	width: 100%;
+	background-color: var(--color-bg);
+	z-index: 100;
+	button.close {
+		all: unset;
+		box-sizing: border-box;
+		cursor: pointer;
+		position: absolute;
+		top: calc(var(--padding-base) - 5px);
+		right: var(--padding-base);
+		z-index: 1;
+		svg {
+			height: 22px;
+			width: 22px;
 		}
 	}
 }

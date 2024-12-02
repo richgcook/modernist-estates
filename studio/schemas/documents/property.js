@@ -122,6 +122,11 @@ export default defineType({
 			name: 'locationOther',
 		}),
 		defineField({
+			type: 'geopoint',
+			title: 'Location (map)',
+			name: 'locationMap',
+		}),
+		defineField({
 			type: 'reference',
 			title: 'Price (range)',
 			name: 'priceRange',
