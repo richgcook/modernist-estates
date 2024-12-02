@@ -108,13 +108,13 @@ div.page-layout {
 		div.introduction {
 			grid-column: 4 / span 6;
 			h2 {
-				font-size: 40px;
+				font-size: var(--font-size-lg);
 				margin-bottom: calc(var(--padding-base) / 2);
 				text-align: center;
 			}
 			div.text {
-				font-size: 30px;
-				line-height: calc(40/30 * 1em);
+				font-size: var(--font-size-md);
+				line-height: calc(38/28 * 1em);
 			}
 		}
 	}

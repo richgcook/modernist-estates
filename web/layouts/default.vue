@@ -2,6 +2,7 @@
 	<div class="layout">
 		<Header />
 		<Cursor />
+		<NewsletterSubscribePopup />
 		<slot />
 		<Footer />
 	</div>

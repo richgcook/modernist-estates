@@ -9,7 +9,7 @@
 		<ul class="menu">
 			<li><NuxtLink to="/selling">Selling</NuxtLink></li>
 			<li><NuxtLink to="/letting">Letting</NuxtLink></li>
-			<li><NuxtLink to="/">Subscribe</NuxtLink></li>
+			<li><button type="button" @click="newsletterSubscribeStore.toggleOpen()">Subscribe</button></li>
 		</ul>
 	</header>
 </template>
@@ -19,6 +19,7 @@
 import { computed } from 'vue'
 import { useNavStore } from '~/store/nav'
 import { useThemeModeStore } from '~/store/themeMode'
+import { useNewsletterSubscribeStore } from '~/store/newsletterSubscribe'
 import { storeToRefs } from 'pinia'
 
 const { $seoQuery } = useNuxtApp()
@@ -68,6 +69,8 @@ const textAndAssetColor = computed(() => {
 	}
 })
 
+const newsletterSubscribeStore = useNewsletterSubscribeStore()
+
 </script>
 
 <style lang="scss" scoped>
@@ -114,16 +117,12 @@ header {
 	}
 	a.logo {
 		display: inline-flex;
-		height: var(--logo-height);
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		svg {
-			height: auto;
-			max-height: 100%;
-			width: auto;
-			max-width: 100%;
+			height: var(--logo-height);
 			fill: v-bind(textAndAssetColor);
 			transition: fill 0.5s;
 		}
@@ -138,6 +137,11 @@ header {
 				&.router-link-active {
 					border-bottom: 1px solid currentColor;
 				}
+			}
+			button {
+				all: unset;
+				box-sizing: border-box;
+				cursor: pointer;
 			}
 		}
 	}

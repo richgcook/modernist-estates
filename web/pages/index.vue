@@ -126,7 +126,7 @@ const query = groq`{
 				internalLink->{
 					${$internalLinkQuery}
 				},
-				bgColor,s
+				bgColor,
 			}
 		},
 		testimonials[] {
@@ -318,6 +318,7 @@ div.landing {
 		}
 		div.text {
 			font-family: var(--font-sans);
+			font-size: 34px;
 			font-weight: 900;
 			letter-spacing: 0.02em;
 			opacity: 0;
@@ -386,12 +387,12 @@ div.properties-sections {
 		a.view-all {
 			display: inline-flex;
 			font-family: var(--font-sans);
-			font-size: 20px;
+			font-size: 16px;
 			letter-spacing: 0.1em;
 			text-transform: uppercase;
 			border: 1px solid black;
-			margin: 0 auto;
-			padding: 20px 40px;
+			margin: var(--padding-base) auto 0 auto;
+			padding: 15px 40px;
 			&:hover {
 				background-color: black;
 				color: white;
