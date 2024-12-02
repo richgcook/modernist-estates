@@ -3,13 +3,13 @@
 		<div class="inner">
 			<h3>{{ title }}</h3>
 			<form 
-				name="landlord-enquiry" 
+				:name="titleAsSlug" 
 				method="POST" 
 				@submit.prevent="submitForm"
 				ref="form"
 			>
-				<input type="hidden" name="form-title" value="`Landlord Enquiry`" />
-				<input type="hidden" name="form-name" value="`landlord-enquiry`" />
+				<input type="hidden" name="form-title" :value="title" />
+				<input type="hidden" name="form-name" :value="titleAsSlug" />
 				<input type="text" name="usercode" tabindex="-1" value="" autocomplete="off" />
 				<div class="fields">
 					<input type="text" name="name" placeholder="Name" required />
@@ -32,10 +32,14 @@
 
 <script setup>
 
+import slugify from 'slugify'
+
 const props = defineProps({
 	title: String,
 	successMessage: String
 })
+
+const titleAsSlug = computed(() => slugify(props.title, { lower: true, strict: true }))
 
 const form = ref(null)
 

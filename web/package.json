@@ -25,6 +25,7 @@
 		"nuxt": "3.13.2",
 		"pinia": "^2.1.7",
 		"sass": "^1.70.0",
+		"slugify": "^1.6.6",
 		"tua-body-scroll-lock": "^1.5.1",
 		"unhead": "^1.8.10",
 		"vue": "^3.4.19",

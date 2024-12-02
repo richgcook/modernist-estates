@@ -1,5 +1,5 @@
 const RESEND_API_KEY = process.env.RESEND_API_KEY
-const primaryEmailAddress = 'rich@rd-ck.com'
+const primaryEmailAddress = 'mail@modernistestates.com'
 const toEmailAddresses = [primaryEmailAddress]
 
 const formatKey = (key) => {
@@ -41,17 +41,15 @@ export default defineEventHandler(async (event) => {
 				'Authorization': `Bearer ${RESEND_API_KEY}`,
 			},
 			body: JSON.stringify({
-				//from: `Richard Cool <${primaryEmailAddress}>`,
-				from: 'Acme <onboarding@resend.dev>',
+				from: `Modernist Estates <${primaryEmailAddress}>`,
+				//from: 'Acme <onboarding@resend.dev>',
 				reply_to: email ? email : '',
-				//to: toEmailAddresses,
-				to: `delivered@resend.dev`,
+				to: toEmailAddresses,
+				//to: `delivered@resend.dev`,
 				subject: `New submission from website form: ${formTitle}`,
 				html: emailHtml
 			}),
 		})
-
-		console.log(res)
 
 		if (res.ok) {
 			return {
