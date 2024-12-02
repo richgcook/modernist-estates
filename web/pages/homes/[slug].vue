@@ -3,31 +3,38 @@
 		<div class="page-layout">
 			<div class="details">
 				<div class="inner">
-					<h5 class="status">{{ data.property.status ? data.property.status.title : data.property.statusOther }}</h5>
-					<h3 class="title">{{ data.property.titleFormatted }}</h3>
-					<div class="meta-details" v-if="data.property.details?.length">
-						<div v-for="(detail, index) in data.property.details" :key="index" class="item">
-							<h3>{{ detail.label }}</h3>
-							<p>{{ detail.value }}</p>
+					<div class="top">
+						<h5 class="status">{{ data.property.status ? data.property.status.title : data.property.statusOther }}</h5>
+						<h3 class="title">{{ data.property.titleFormatted }}</h3>
+						<div class="meta-details" v-if="data.property.details?.length">
+							<div v-for="(detail, index) in data.property.details" :key="index" class="item">
+								<h3>{{ detail.label }}</h3>
+								<p>{{ detail.value }}</p>
+							</div>
 						</div>
+						<div class="links">
+							<ul>
+								<li v-for="(link, index) in data.property.links" :key="index">
+									<NuxtLink :to="useLinkLink(link)">{{ link.label }}</NuxtLink>
+								</li>
+								<li v-if="data.property.images?.length">
+									<button type="button" @click="mediaOverlayOpen = true">View all images</button>
+								</li>
+							</ul>
+						</div>
+
+						<div class="contact">
+							<h3 v-if="data.property.contact?.title">{{ data.property.contact.title }}</h3>
+							<RichText :blocks="data.property.contact?.details" v-if="data.property.contact?.details?.length" />
+							<ul class="buttons">
+								<li v-if="data.property.contact?.showEnquiryButton"><button type="button">{{ data.property.contact.enquireButtonLabel ? data.property.contact.enquireButtonLabel : `Contact` }}</button></li>
+								<li v-if="data.property.contact?.showAlternativeContactButton"><NuxtLink :to="data.property.contact.alternativeContactLink" target="_blank">{{ data.property.contact.alternativeContactLabel ? data.property.contact.alternativeContactLabel : `Contact` }}</NuxtLink></li>
+							</ul>
+						</div>
+
 					</div>
-					<div class="links">
-						<ul>
-							<li v-for="(link, index) in data.property.links" :key="index">
-								<NuxtLink :to="useLinkLink(link)">{{ link.label }}</NuxtLink>
-							</li>
-							<li v-if="data.property.images?.length">
-								<button type="button" @click="mediaOverlayOpen = true">View all images</button>
-							</li>
-						</ul>
-					</div>
-					<div class="contact">
-						<h3 v-if="data.property.contact?.title">{{ data.property.contact.title }}</h3>
-						<RichText :blocks="data.property.contact?.details" v-if="data.property.contact?.details?.length" />
-						<ul class="buttons">
-							<li v-if="data.property.contact?.showEnquiryButton"><button type="button">{{ data.property.contact.enquireButtonLabel ? data.property.contact.enquireButtonLabel : `Contact` }}</button></li>
-							<li v-if="data.property.contact?.showAlternativeContactButton"><NuxtLink :to="data.property.contact.alternativeContactLink" target="_blank">{{ data.property.contact.alternativeContactLabel ? data.property.contact.alternativeContactLabel : `Contact` }}</NuxtLink></li>
-						</ul>
+					<div class="bottom">
+						<button type="button" class="more-info" @click="scrollToInfo" v-if="data.property.description?.length"><span>More info</span><SymbolPlusB /></button>
 					</div>
 				</div>
 			</div>
@@ -40,7 +47,9 @@
 						:priority="`high`"
 					/>
 				</div>
-				<RichText :blocks="data.property.description" v-if="data.property.description?.length" />
+				<div class="description" ref="descriptionElem" v-if="data.property.description?.length">
+					<RichText :blocks="data.property.description" />
+				</div>
 			</div>
 		</div>
 		<div class="page-navigation" v-if="data.property.propertiesByCurrentPropertyGroup">
@@ -61,6 +70,8 @@
 
 import { lock, unlock } from 'tua-body-scroll-lock'
 import { onKeyStroke } from '@vueuse/core'
+import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
 const { $propertyQuery } = useNuxtApp()
 
@@ -94,6 +105,24 @@ useHead({
 		class: bodyClass.value
 	}
 })
+
+gsap.registerPlugin(ScrollToPlugin)
+
+const descriptionElem = ref(null)
+
+const scrollToInfo = () => {
+
+	const headerHeight = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--header-height'))
+
+	gsap.to(window, { 
+		duration: 1, 
+		scrollTo: {
+			y: descriptionElem.value,
+			offsetY: headerHeight,
+			autoKill: true,
+		},
+	})
+}
 
 const mediaOverlayElem = ref(null)
 const mediaOverlayOpen = ref(false)
@@ -134,7 +163,15 @@ div.page-layout {
 		grid-column: 1 / span 3;
 		div.inner {
 			position: sticky;
-			top: 122px; // var(--header-height);
+			top: var(--header-height);
+			display: flex;
+			flex-flow: column nowrap;
+			row-gap: calc(var(--padding-base) / 2);
+			justify-content: space-between;
+			height: calc(100vh - var(--header-height) - var(--padding-base));
+			@supports (height: 100svh) {
+				height: calc(100svh - var(--header-height) - var(--padding-base));
+			}
 		}
 		h5.status {
 			font-family: var(--font-sans);
@@ -181,6 +218,26 @@ div.page-layout {
 				}
 			}
 		}
+		button.more-info {
+			all: unset;
+			box-sizing: border-box;
+			cursor: pointer;
+			display: inline-flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			column-gap: 1ch;
+			font-family: var(--font-sans);
+			font-size: 20px;
+			text-transform: uppercase;
+			letter-spacing: 0.06em;
+			span {
+				flex-shrink: 0;
+			}
+			svg {
+				height: 14px;
+				width: 14px;
+			}
+		}
 	}
 	div.content {
 		grid-column: 4 / span 9;
@@ -189,9 +246,9 @@ div.page-layout {
 		div.featured-image {
 			position: relative;
 			width: 100%;
-			height: calc(100vh - 122px - var(--padding-base));
+			height: calc(100vh - var(--header-height) - var(--padding-base));
 			@supports (height: 100svh) {
-				height: calc(100svh - 122px - var(--padding-base));
+				height: calc(100svh - var(--header-height) - var(--padding-base));
 			}
 			img {
 				position: absolute;

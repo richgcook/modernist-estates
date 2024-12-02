@@ -80,9 +80,11 @@ header {
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
-	padding: 40px var(--padding-base);
+	height: var(--header-height);
+	padding: 0 var(--padding-base);
 	position: sticky;
 	top: 0;
+	background-color: var(--color-bg);
 	z-index: 30;
 	&.--nav-open {
 		a.logo {
