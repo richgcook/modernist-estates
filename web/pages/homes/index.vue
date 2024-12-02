@@ -13,7 +13,7 @@ const { $seoQuery, $propertyQuery } = useNuxtApp()
 
 const query = groq`{ 
 
-	"properties": *[_type == "property"] {
+	"properties": *[_type == "property"] | order(orderRank) {
 		${$propertyQuery},
 	},
 

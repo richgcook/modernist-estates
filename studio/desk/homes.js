@@ -58,8 +58,13 @@ S.listItem()
 				),
 
 				S.divider(),
-
-				S.documentTypeListItem('property').title('All properties').icon(Buildings),
+				
+				orderableDocumentListDeskItem({
+					type: 'property', 
+					title: 'All properties',
+					icon: Buildings,
+					S, context
+				}),
 
 				S.divider(),
 
