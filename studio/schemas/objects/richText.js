@@ -44,6 +44,11 @@ export default {
 								name: 'blank',
 								type: 'boolean'
 							},
+							{
+								type: 'boolean',
+								name: 'symbolArrow',
+								title: 'Add arrow symbol',
+							},
 						],
 					},
 					{
@@ -58,6 +63,11 @@ export default {
 								title: 'Reference',
 								to: PAGE_REFERENCES,
 							},
+							{
+								type: 'boolean',
+								name: 'symbolArrow',
+								title: 'Add arrow symbol',
+							},
 						],
 					},
 					{
@@ -70,6 +80,11 @@ export default {
 								type: 'file',
 								title: 'File upload',
 								name: 'file'
+							},
+							{
+								type: 'boolean',
+								name: 'symbolArrow',
+								title: 'Add arrow symbol',
 							},
 						],
 					}

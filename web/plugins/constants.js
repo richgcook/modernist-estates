@@ -16,12 +16,14 @@ const richTextQuery = `
 		_type == "internalLink" => {
 			"reference": @.reference->{
 				${internalLinkQuery}
-			}
+			},
+			symbolArrow,
 		},
 		_type == "fileUploadLink" => {
 			"file": file.asset->{
 				url, extension, size
-			}
+			},
+			symbolArrow,
 		},
 	}
 `
