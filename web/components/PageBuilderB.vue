@@ -41,7 +41,7 @@ div.blocks-layout {
 	grid-column: 1 / -1;
 	display: grid;
 	grid-template-columns: subgrid;
-	row-gap: calc(var(--padding-base) * 2);
+	row-gap: var(--padding-base);
 	> div.block {
 		grid-column: 1 / -1;
 		&[data-type="text"] {
@@ -58,6 +58,7 @@ div.blocks-layout {
 				}
 			}
 			div.caption {
+				font-family: var(--font-sans);
 				font-size: 18px;
 				margin-top: 10px;
 			}

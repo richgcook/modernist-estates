@@ -19,6 +19,11 @@ export default defineType({
 			},
 		}),
 		defineField({
+			type: 'pageBuilderC',
+			title: 'Content',
+			name: 'content',
+		}),
+		defineField({
 			title: 'SEO',
 			name: 'seo',
 			type: 'seo'

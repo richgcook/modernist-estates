@@ -15,7 +15,6 @@
 	</div>
 </template>
 
-
 <script setup>
 
 const { $seoQuery, $imageQuery, $richTextQuery, $pageBuilderCQuery } = useNuxtApp()

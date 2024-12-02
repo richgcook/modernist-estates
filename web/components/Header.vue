@@ -136,6 +136,7 @@ header {
 		li {
 			font-size: var(--font-size-md);
 			a {
+				&:hover,
 				&.router-link-active {
 					border-bottom: 1px solid currentColor;
 				}
@@ -144,6 +145,10 @@ header {
 				all: unset;
 				box-sizing: border-box;
 				cursor: pointer;
+				border-bottom: 1px solid transparent;
+				&:hover {
+					border-bottom: 1px solid currentColor;
+				}
 			}
 		}
 	}

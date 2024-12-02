@@ -47,7 +47,7 @@ useHead({
 div.page-layout {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
-	grid-gap: calc(var(--padding-base) * 2) calc(var(--padding-base) / 2);
+	grid-gap: var(--padding-base) calc(var(--padding-base) / 2);
 	padding: 0 var(--padding-base);
 	div.title {
 		text-align: center;

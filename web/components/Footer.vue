@@ -83,6 +83,12 @@ footer {
 				font-size: 20px;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
+				a {
+					&:hover,
+					&.router-link-active {
+						border-bottom: 1px solid currentColor;
+					}
+				}
 			}
 		}
 		div.contact {
