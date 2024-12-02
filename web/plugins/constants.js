@@ -148,6 +148,7 @@ const propertyQuery = `
 		_id, _type, title, slug, seo {
 			${seoQuery}
 		},
+		enquiryFormSettings,
 	},
 	status->{
 		_id, _type, title, slug, seo {
@@ -186,7 +187,7 @@ const propertyQuery = `
 		details[] {
 			${richTextQuery}
 		},
-		showEnquiryButton, enquireButtonLabel, enquireButtonEmail, enquireButtonRef, 
+		showEnquiryButton, enquireButtonLabel, enquireEmail, enquireRef, 
 		showAlternativeContactButton, alternativeContactLabel, alternativeContactLink,
 	}
 `

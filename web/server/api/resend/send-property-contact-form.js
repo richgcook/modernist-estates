@@ -1,6 +1,15 @@
+import { createClient } from '@sanity/client'
+
 const RESEND_API_KEY = process.env.RESEND_API_KEY
-const primaryEmailAddress = 'mail@modernistestates.com'
-const toEmailAddresses = [primaryEmailAddress]
+
+const client = createClient({
+	projectId: process.env.SANITY_PROJECT_ID,
+	dataset: process.env.SANITY_PROJECT_DATASET,
+	apiVersion: process.env.SANITY_API_VERSION,
+	useCdn: false
+})
+
+const fromEmailAddress = 'mail@modernistestates.com'
 
 const formatKey = (key) => {
 	const words = key.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -16,12 +25,27 @@ export default defineEventHandler(async (event) => {
 		const requestBody = JSON.parse(body)
 
 		const { 
-			'form-title': formTitle,
+			'property-id': propertyId,
+			'property-title': propertyTitle,
+			'property-ref': propertyRef,
 			email
 		} = requestBody
 
+		const property = await client.fetch(
+			`*[_type == "property" && _id == $propertyId]{
+				contact {
+					enquireEmail
+			  	}
+			}[0]`, { propertyId }
+		)
+
+		if (!property) throw new Error(`Property (${propertyId}) not found`)
+
+		const { enquireEmail } = property.contact || {}
+    	if (!enquireEmail) throw new Error(`Property (${propertyId}) does not have an enquiry email`)
+
 		const keys = Object.keys(requestBody)
-		const excludedFields = ['form-name', 'form-title', 'usercode']
+		const excludedFields = ['fatty-acid', 'consent', 'property-id',  'property-title', 'property-ref']
 
 		let emailHtml = ''
 
@@ -41,20 +65,23 @@ export default defineEventHandler(async (event) => {
 				'Authorization': `Bearer ${RESEND_API_KEY}`,
 			},
 			body: JSON.stringify({
-				from: `Modernist Estates <${primaryEmailAddress}>`,
+				from: `Modernist Estates <${fromEmailAddress}>`,
 				//from: 'Acme <onboarding@resend.dev>',
 				reply_to: email ? email : '',
-				to: toEmailAddresses,
+				to: enquireEmail, // Recipient email from Sanity
 				//to: `delivered@resend.dev`,
-				subject: `New submission from website form: ${formTitle}`,
+				bcc: fromEmailAddress,
+				subject: `​​I am interested in the property ${propertyTitle} (ref: ${propertyRef}) via modernistestates.com`,
 				html: emailHtml
 			}),
 		})
 
-		if (res.status === 200) {
+		console.log(res)
+
+		if (res.ok) {
 			return {
-				statusCode: res.status,
-				body: JSON.stringify({ message: res.statusText }),
+				statusCode: 200,
+				body: JSON.stringify({ message: "OK" }),
 			}
 		} else {
 			throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`)

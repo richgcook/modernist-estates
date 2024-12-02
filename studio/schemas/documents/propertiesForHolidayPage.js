@@ -21,6 +21,11 @@ export default defineType({
 			validation: Rule => Rule.required()
 		}),
 		defineField({
+			type: 'enquiryFormSettings',
+			title: 'Enquiry form settings',
+			name: 'enquiryFormSettings',
+		}),
+		defineField({
 			title: 'SEO',
 			name: 'seo',
 			type: 'seo'

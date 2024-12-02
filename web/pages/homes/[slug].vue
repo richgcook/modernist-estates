@@ -30,7 +30,7 @@
 							<h3 v-if="data.property.contact?.title">{{ data.property.contact.title }}</h3>
 							<RichText :blocks="data.property.contact?.details" v-if="data.property.contact?.details?.length" />
 							<ul class="buttons">
-								<li v-if="data.property.contact?.showEnquiryButton"><button type="button">{{ data.property.contact.enquireButtonLabel ? data.property.contact.enquireButtonLabel : `Contact` }}</button></li>
+								<li v-if="data.property.contact?.showEnquiryButton"><button type="button" @click="contactFormOpen = true">{{ data.property.contact.enquireButtonLabel ? data.property.contact.enquireButtonLabel : `Contact` }}</button></li>
 								<li v-if="data.property.contact?.showAlternativeContactButton"><NuxtLink :to="data.property.contact.alternativeContactLink" target="_blank">{{ data.property.contact.alternativeContactLabel ? data.property.contact.alternativeContactLabel : `Contact` }}</NuxtLink></li>
 							</ul>
 						</div>
@@ -62,11 +62,24 @@
 				<li v-if="nextProperty"><NuxtLink :to="useInternalLinkUrl(nextProperty)">Next property &rarr;</NuxtLink></li>
 			</ul>
 		</div>
-		<div class="map-popup" v-if="data.property.locationMap" v-show="mapOpen">
+		<div class="contact-form-popup" v-show="contactFormOpen" v-cloak ref="contactFormPopupElem" v-if="data.property.contact?.showEnquiryButton && data.property.propertyGroup">
+			<div class="inner">
+				<button type="button" @click="contactFormOpen = false" class="close"><SymbolClose /></button>
+				<div class="property-details">
+					<h4 class="subtitle">{{ data.property.propertyGroup.enquiryFormSettings?.subtitle }}</h4>
+					<h3 class="title">{{ data.property.titleFormatted }}</h3>
+					<div class="disclaimer" v-if="data.property.propertyGroup.enquiryFormSettings?.disclaimer">
+						<p>{{ data.property.propertyGroup.enquiryFormSettings?.disclaimer }}</p>
+					</div>
+				</div>
+				<PropertyContactForm :property="data.property" />
+			</div>
+		</div>
+		<div class="map-popup" v-show="mapOpen" v-cloak ref="mapPopUpElem" v-if="data.property.locationMap">
 			<button type="button" @click="mapOpen = false" class="close"><SymbolClose /></button>
 			<GoogleMap :marker="data.property.locationMap" :circleFillColor="mapCircleFillColor" :circleStrokeColor="mapCircleStrokeColor" />
 		</div>
-		<div class="media-overlay" v-if="data.property.images?.length" v-show="mediaOverlayOpen" ref="mediaOverlayElem">
+		<div class="media-overlay" v-show="mediaOverlayOpen" v-cloak ref="mediaOverlayElem" v-if="data.property.images?.length">
 			<button type="button" @click="mediaOverlayOpen = false" class="close"><SymbolClose /></button>
 			<SliderB :images="data.property.images" />
 		</div>
@@ -171,6 +184,14 @@ onKeyStroke('Escape', (e) => {
 		e.preventDefault()
 		mediaOverlayOpen.value = false
 	}
+})
+
+const contactFormPopupElem = ref(null)
+const contactFormOpen = ref(false)
+
+watch(contactFormOpen, (isOpen, wasOpen) => {
+	if (isOpen) lock(contactFormPopupElem.value)
+	if (wasOpen) unlock(contactFormPopupElem.value)
 })
 
 const propertyIndex = ref(0)
@@ -347,6 +368,63 @@ div.page-navigation {
 		}
 	}
 }
+div.contact-form-popup {
+	position: fixed;
+	inset: 0;
+	height: 100%;
+	width: 100%;
+	padding: var(--header-height) 0;
+	background-color: var(--color-bg);
+	display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+	z-index: 25;
+	div.inner {
+		background-color: var(--color-bg);
+		padding: var(--padding-base);
+		width: 50%;
+		max-width: 768px;
+		position: relative;
+		div.property-details {
+			width: calc(100% - (var(--padding-base) + 20px));
+			margin-bottom: var(--padding-base);
+			h4.subtitle {
+				font-family: var(--font-sans);
+				font-size: 15px;
+				font-weight: 900;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+			}
+			h3.title {
+				font-size: var(--font-size-md);
+				line-height: 1.2;
+				white-space: pre-wrap;
+			}
+			div.disclaimer {
+				font-family: var(--font-sans);
+				font-size: 13px;
+				text-transform: uppercase;
+				margin-top: 10px;
+				white-space: pre-wrap;
+			}
+		}
+	}
+	button.close {
+		all: unset;
+		box-sizing: border-box;
+		cursor: pointer;
+		position: absolute;
+		top: var(--padding-base);
+		right: var(--padding-base);
+		z-index: 1;
+		svg {
+			height: 22px;
+			width: 22px;
+		}
+	}
+}
 div.map-popup {
 	position: fixed;
 	inset: 0;
@@ -359,7 +437,7 @@ div.map-popup {
 		box-sizing: border-box;
 		cursor: pointer;
 		position: absolute;
-		top: calc(var(--padding-base) - 5px);
+		top: var(--padding-base);
 		right: var(--padding-base);
 		z-index: 1;
 		svg {

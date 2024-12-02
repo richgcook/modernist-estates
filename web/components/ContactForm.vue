@@ -14,11 +14,11 @@
 				<div class="fields">
 					<input type="text" name="name" placeholder="Name" required />
 					<input type="email" name="email" placeholder="Email" required />
-					<input type="tel" name="telephone" placeholder="Telephone" />
-					<input type="text" name="address" placeholder="Address" />
-					<input type="text" name="town" placeholder="Town" />
-					<input type="text" name="postcode" placeholder="Postcode" />
-					<input type="text" name="message" placeholder="Message" />
+					<input type="tel" name="telephone" placeholder="Telephone" required />
+					<input type="text" name="address" placeholder="Address" required />
+					<input type="text" name="town" placeholder="Town" required />
+					<input type="text" name="postcode" placeholder="Postcode" required />
+					<input type="text" name="message" placeholder="Message" required />
 				</div>
 				<div class="actions" v-show="!formSuccess">
 					<button type="submit" :disabled="formSending">{{ formSending ? `Sending...` : `Submit` }}</button>
@@ -72,7 +72,6 @@ const submitForm = () => {
 		if (!response.ok) {
 			throw new Error('Failed to submit form...')
 		}
-		console.log(response)
 		return response.json()
 	})
 	.then(() => {
@@ -149,15 +148,16 @@ form {
 		all: unset;
 		box-sizing: border-box;
 		cursor: pointer;
+		display: inline-flex;
 		font-family: var(--font-sans);
-		font-size: 20px;
+		font-size: 16px;
+		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		border: 1px solid currentColor;
-		padding: 7px 30px;
-		&[disabled] {
-			cursor: not-allowed;
-			opacity: 0.5;
+		border: 1px solid black;
+		padding: 15px 40px;
+		&:hover {
+			background-color: black;
+			color: white;
 		}
 	}
 }

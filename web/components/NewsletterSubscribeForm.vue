@@ -6,7 +6,7 @@
 			<input id="fieldEmail" class="js-cm-email-input" type="email" placeholder="Email" name="cm-gldhly-gldhly" required />
 			<div class="consent">
 				<input type="checkbox" :id="`consent-${context}`" name="consent" required />
-				<label :for="`consent-${context}`">I accept the Privacy and Cookies Policy and Terms and Conditions *</label>
+				<label :for="`consent-${context}`">I accept the Privacy and Cookies Policy and Terms and Conditions*</label>
 			</div>
 			<button type="submit">Subscribe</button>
 		</form>

@@ -220,15 +220,15 @@ export default defineType({
 				defineField({
 					type: 'string',
 					title: 'Email address',
-					name: 'enquireButtonEmail',
+					name: 'enquireEmail',
 					description: 'Used when an enquiry is submitted and will not be publicly visible',
 					validation: Rule => Rule.regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
 					hidden: ({ parent }) => !parent?.showEnquiryButton,
 				}),
 				defineField({
 					type: 'string',
-					title: 'Reference number',
-					name: 'enquireButtonRef',
+					title: 'Reference ID/number',
+					name: 'enquireRef',
 					description: 'Used when an enquiry is submitted and will not be publicly visible',
 					hidden: ({ parent }) => !parent?.showEnquiryButton,
 				}),

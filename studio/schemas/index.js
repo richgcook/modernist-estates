@@ -31,6 +31,7 @@ import pageBuilderB from './objects/pageBuilderB'
 import pageBuilderC from './objects/pageBuilderC'
 import themeMode from './objects/themeMode'
 import links from './objects/links'
+import enquiryFormSettings from './objects/enquiryFormSettings'
 
 export const schemaTypes = [
 	// Documents
@@ -66,4 +67,5 @@ export const schemaTypes = [
 	pageBuilderC,
 	themeMode,
 	links,
+	enquiryFormSettings,
 ]
