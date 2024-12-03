@@ -72,6 +72,10 @@ export default defineNuxtConfig({
 		// Exclude specific routes from prerendering (SSR fresh data on each request)
 		'/selling': { prerender: false },
 		'/letting': { prerender: false },
+		'/homes/**': { prerender: false },
+
+		// Disable pre-rendering for all API routes
+		'/api/**': { prerender: false },
 
 	},
 

@@ -292,6 +292,7 @@ div.landing {
 	inset: 0;
 	height: 100%;
 	width: 100%;
+	background-color: var(--color-bg);
 	z-index: 30;
 	cursor: pointer;
 	&:after {
