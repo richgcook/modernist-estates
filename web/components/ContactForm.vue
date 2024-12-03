@@ -128,7 +128,7 @@ form {
 			color: currentColor;
 		}
 		border-bottom: 1px dashed currentColor;
-		&[name="usercode"] {
+		&[name="fatty-acids"] {
 			opacity: 0;
 			pointer-events: none;
 			position: absolute;
