@@ -8,7 +8,7 @@
 							:src="slide.image?.asset?.url"
 							:alt="slide.image?.alt"
 							:loading="index == 0 ? `eager` : `lazy`"
-							:priority="index == 0 ? `high` : null"
+							:priority="index == 0 ? `high` : `auto`"
 						/>
 					</div>
 				</template>
@@ -122,6 +122,11 @@ div.slider-container {
     align-items: center;
 	aspect-ratio: 4 / 2;
 	margin: 0 var(--padding-base);
+	@include media('phone') {
+		aspect-ratio: 4 / 3;
+		margin: 0;
+		background-color: var(--color-lettings);
+	}
 	div.viewport {
 		position: relative;
 		height: 100%;
@@ -149,6 +154,9 @@ div.slider-container {
 					width: 100%;
 					background-color: rgba(0, 0, 0, 0.3);
 					z-index: 1;
+					@include media('phone') {
+						content: none;
+					}
 				}
 				img, video {
 					position: absolute;
@@ -160,6 +168,9 @@ div.slider-container {
 					object-fit: cover;
 					object-position: center;
 					user-select: none;
+					@include media('phone') {
+						display: none;
+					}
 				}
 			}
 		}
@@ -175,15 +186,22 @@ div.slider-container {
 		text-align: center;
 		display: grid;
 		row-gap: 10px;
+		@include media('phone') {
+			color: black;
+		}
 		h3 {
 			font-family: var(--font-sans);
 			font-size: 20px;
 			font-weight: 900;
 			text-transform: uppercase;
 			letter-spacing: 0.1em;
+			@include media('phone') {
+				font-size: 12px;
+			}
 		}
 		h2 {
 			font-size: var(--font-size-lg);
+			line-height: 1.25;
 			letter-spacing: 0.02em;
 		}
 	}

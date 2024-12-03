@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
 		} = requestBody
 
 		const keys = Object.keys(requestBody)
-		const excludedFields = ['form-name', 'form-title', 'usercode']
+		const excludedFields = ['fatty-acids', 'form-name', 'form-title']
 
 		let emailHtml = ''
 

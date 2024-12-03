@@ -83,7 +83,15 @@
 }
 @include media('phone') {
 	:root { 
-		--padding-base: 20px;
+		--font-size-base: 16px;
+
+		--font-size-lg: 26px;
+		--font-size-md: 20px;
+
+		--padding-base: 25px;
+
+		--header-height: 80px;
+		--logo-height: 12px;
 	}
 }
 

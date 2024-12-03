@@ -7,6 +7,7 @@
 						:src="image?.asset?.url" 
 						:alt="image?.alt" 
 						:lazy="index === 0 ? 'eager' : 'lazy'"
+						:priority="index === 0 ? 'high' : 'auto'"
 						v-if="image"
 					/>
 				</div>
@@ -23,6 +24,7 @@ import { useCursorStore } from '~/store/cursor'
 
 const props = defineProps({
 	images: Array,
+	mediaOverlayOpen: Boolean,
 })
 
 const [viewport, embla] = emblaCarouselVue({
@@ -88,7 +90,10 @@ const onSelect = () => {
 	canScrollPrev.value = embla.value.canScrollPrev()
 	canScrollNext.value = embla.value.canScrollNext()
 
-	setEagerLoadingForClosestSlides()
+	if (props.mediaOverlayOpen) {
+		setEagerLoadingForClosestSlides()
+	}
+	
 }
 
 const pointerPosition = ref(null)

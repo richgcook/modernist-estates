@@ -74,6 +74,10 @@ div.property {
 			}
 		}
 	}
+	div.details {
+		padding: 0 var(--padding-base);
+		margin-top: var(--padding-base);
+	}
 	h5.status {
 		font-family: var(--font-sans);
 		font-size: 15px;

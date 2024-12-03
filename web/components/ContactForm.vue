@@ -10,7 +10,7 @@
 			>
 				<input type="hidden" name="form-title" :value="title" />
 				<input type="hidden" name="form-name" :value="titleAsSlug" />
-				<input type="text" name="usercode" tabindex="-1" value="" autocomplete="off" />
+				<input type="text" name="fatty-acids" tabindex="-1" value="" autocomplete="new-password" aria-hidden="true" />
 				<div class="fields">
 					<input type="text" name="name" placeholder="Name" required />
 					<input type="email" name="email" placeholder="Email" required />
@@ -49,6 +49,7 @@ const formSending = ref(false)
 const errorMessage = ref('')
 
 const submitForm = () => {
+
 	formSending.value = true
 	
 	const formData = new FormData(form.value)
@@ -59,7 +60,7 @@ const submitForm = () => {
 	})
 
 	// Honeypot
-	if (formDataObject['usercode']) {
+	if (formDataObject['fatty-acids']) {
 		formSending.value = false
 		return
 	}

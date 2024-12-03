@@ -1,6 +1,7 @@
 <template>
 	<div class="layout">
 		<Header />
+		<Nav />
 		<Cursor />
 		<NewsletterSubscribePopup />
 		<slot />

@@ -83,7 +83,7 @@ const submitForm = () => {
 	})
 
 	// Honeypot
-	if (formDataObject['usercode']) {
+	if (formDataObject['fatty-acids']) {
 		formSending.value = false
 		return
 	}

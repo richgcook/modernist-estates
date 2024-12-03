@@ -59,9 +59,16 @@ footer {
 		grid-template-columns: 1fr 1fr 1fr;
 		gap: var(--padding-base);
 		align-items: flex-end;
+		@include media('phone') {
+			grid-template-columns: 1fr;
+			row-gap: calc(var(--padding-base) * 2);
+		}
 		div.logo {
 			grid-column: 1 / -1;
 			margin-bottom: var(--padding-base);
+			@include media('phone') {
+				display: none;
+			}
 			a.logo {
 				display: inline-flex;
 				height: 18px;
@@ -83,6 +90,9 @@ footer {
 				font-size: 20px;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
+				@include media('phone') {
+					font-size: 16px;
+				}
 				a {
 					&:hover,
 					&.router-link-active {
@@ -94,12 +104,18 @@ footer {
 		div.contact {
 			font-size: var(--font-size-md);
 			letter-spacing: 0.02em;
+			@include media('phone') {
+				grid-row: 3;
+			}
 			h5 {
 				font-family: var(--font-sans);
 				font-size: 15px;
 				font-weight: 900;
 				text-transform: uppercase;
 				letter-spacing: 0.1em;
+				@include media('phone') {
+					display: none;
+				}
 			}
 		}
 	}

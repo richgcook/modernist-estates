@@ -29,8 +29,11 @@ const props = defineProps({
 div.newsletter-signup {
 	display: grid;
 	row-gap: calc(var(--padding-base) / 2);
-	font-size: var(--font-size-md);
-	letter-spacing: 0.02em;
+	> h3 {
+		font-size: var(--font-size-md);
+		line-height: 1.25;
+		letter-spacing: 0.02em;
+	}
 	form {
 		display: grid;
 		row-gap: calc(var(--padding-base) / 2);
@@ -48,7 +51,6 @@ div.newsletter-signup {
 		div.consent {
 			display: flex;
 			flex-flow: row nowrap;
-			font-size: 24px;
 			column-gap: calc(var(--padding-base) / 3);
 			input[type="checkbox"] {
 				all: unset;

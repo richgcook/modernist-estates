@@ -1,9 +1,18 @@
 <template>
 	<div>
 		<div class="page-layout">
+
+			<SliderC :images="data.property.images" v-if="data.property.images?.length" />
+
+			<div class="actions-bar">
+				<PropertyActions :property="data.property" @openMap="mapOpen = true" @openMedia="mediaOverlayOpen = true" />
+				<PropertyContacts :property="data.property" @openContactForm="contactFormOpen = true" />
+			</div>
+
 			<div class="details">
 				<div class="inner">
 					<div class="top">
+
 						<h5 class="status">{{ data.property.status ? data.property.status.title : data.property.statusOther }}</h5>
 						<h3 class="title">{{ data.property.titleFormatted }}</h3>
 						<div class="meta-details" v-if="data.property.details?.length">
@@ -12,27 +21,13 @@
 								<p>{{ detail.value }}</p>
 							</div>
 						</div>
-						<div class="links">
-							<ul>
-								<li v-for="(link, index) in data.property.links" :key="index">
-									<NuxtLink :to="useLinkLink(link)">{{ link.label }}</NuxtLink>
-								</li>
-								<li v-if="data.property.locationMap">
-									<button type="button" @click="mapOpen = true">Map</button>
-								</li>
-								<li v-if="data.property.images?.length">
-									<button type="button" @click="mediaOverlayOpen = true">View all images</button>
-								</li>
-							</ul>
+						<div class="description" v-if="data.property.description?.length">
+							<RichText :blocks="data.property.description" />
 						</div>
 
-						<div class="contact">
-							<h3 v-if="data.property.contact?.title">{{ data.property.contact.title }}</h3>
-							<RichText :blocks="data.property.contact?.details" v-if="data.property.contact?.details?.length" />
-							<ul class="buttons">
-								<li v-if="data.property.contact?.showEnquiryButton"><button type="button" @click="contactFormOpen = true">{{ data.property.contact.enquireButtonLabel ? data.property.contact.enquireButtonLabel : `Contact` }}</button></li>
-								<li v-if="data.property.contact?.showAlternativeContactButton"><NuxtLink :to="data.property.contact.alternativeContactLink" target="_blank">{{ data.property.contact.alternativeContactLabel ? data.property.contact.alternativeContactLabel : `Contact` }}</NuxtLink></li>
-							</ul>
+						<div class="actions-container">
+							<PropertyActions :property="data.property" @openMap="mapOpen = true" @openMedia="mediaOverlayOpen = true" />
+							<PropertyContacts :property="data.property" @openContactForm="contactFormOpen = true" />
 						</div>
 
 					</div>
@@ -41,6 +36,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="content">
 				<div class="featured-image" v-if="data.property.featuredImage?.asset" @click="data.property.images?.length ? mediaOverlayOpen = true : null">
 					<Img 
@@ -55,13 +51,15 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="page-navigation" v-if="data.property.propertiesByCurrentPropertyGroup">
 			<ul>
-				<li v-if="prevProperty"><NuxtLink :to="useInternalLinkUrl(prevProperty)">&larr; Previous property</NuxtLink></li>
+				<li class="--prev" v-if="prevProperty"><NuxtLink :to="useInternalLinkUrl(prevProperty)">&larr; Previous<span> property</span></NuxtLink></li>
 				<li class="--all"><NuxtLink to="/homes">All properties</NuxtLink></li>
-				<li v-if="nextProperty"><NuxtLink :to="useInternalLinkUrl(nextProperty)">Next property &rarr;</NuxtLink></li>
+				<li class="--next" v-if="nextProperty"><NuxtLink :to="useInternalLinkUrl(nextProperty)">Next<span> property</span> &rarr;</NuxtLink></li>
 			</ul>
 		</div>
+
 		<div class="contact-form-popup" v-show="contactFormOpen" v-cloak ref="contactFormPopupElem" v-if="data.property.contact?.showEnquiryButton && data.property.propertyGroup">
 			<div class="inner">
 				<button type="button" @click="contactFormOpen = false" class="close"><SymbolClose /></button>
@@ -75,14 +73,17 @@
 				<PropertyContactForm :property="data.property" />
 			</div>
 		</div>
+
 		<div class="map-popup" v-show="mapOpen" v-cloak ref="mapPopUpElem" v-if="data.property.locationMap">
 			<button type="button" @click="mapOpen = false" class="close"><SymbolClose /></button>
 			<GoogleMap :marker="data.property.locationMap" :circleFillColor="mapCircleFillColor" :circleStrokeColor="mapCircleStrokeColor" />
 		</div>
+
 		<div class="media-overlay" v-show="mediaOverlayOpen" v-cloak ref="mediaOverlayElem" v-if="data.property.images?.length">
 			<button type="button" @click="mediaOverlayOpen = false" class="close"><SymbolClose /></button>
-			<SliderB :images="data.property.images" />
+			<SliderB :images="data.property.images" :mediaOverlayOpen="mediaOverlayOpen" />
 		</div>
+
 	</div>
 </template>
 
@@ -214,8 +215,41 @@ div.page-layout {
 	grid-template-columns: repeat(12, 1fr);
 	grid-gap: calc(var(--padding-base) * 2) calc(var(--padding-base) / 2);
 	padding: 0 var(--padding-base);
+	@include media('phone') {
+		grid-template-columns: 1fr;
+		grid-gap: 0;
+		padding: 0;
+	}
+	div.actions-bar {
+		position: sticky;
+		top: calc(var(--header-height) - 1px);
+		flex-flow: row nowrap;
+		column-gap: 10px;
+		align-items: center;
+		justify-content: space-between;
+		background-color: var(--color-bg);
+		height: 48px;
+		padding: 0 var(--padding-base);
+		border-bottom: 1px solid black;
+		overflow-y: auto;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
+  			display: none;
+		}
+		z-index: 10;
+		display: none;
+		@include media('phone') {
+			display: flex;
+		}
+	}
 	div.details {
 		grid-column: 1 / span 3;
+		@include media('phone') {
+			grid-column: 1 / -1;
+			padding: 0 var(--padding-base);
+			margin-top: var(--padding-base);
+		}
 		div.inner {
 			position: sticky;
 			top: var(--header-height);
@@ -227,6 +261,11 @@ div.page-layout {
 			@supports (height: 100svh) {
 				min-height: calc(100svh - var(--header-height) - var(--padding-base));
 			}
+			div.bottom {
+				@include media('phone') {
+					display: none;
+				}
+			}
 		}
 		h5.status {
 			font-family: var(--font-sans);
@@ -235,6 +274,9 @@ div.page-layout {
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			margin-bottom: 5px;
+			@include media('phone') {
+				font-size: 12px;
+			}
 		}
 		h3.title {
 			font-size: var(--font-size-md);
@@ -252,6 +294,9 @@ div.page-layout {
 					text-transform: uppercase;
 					letter-spacing: 0.06em;
 					margin-bottom: 5px;
+					@include media('phone') {
+						font-size: 12px;
+					}
 				}
 				p {
 					font-size: var(--font-size-md);
@@ -259,20 +304,11 @@ div.page-layout {
 				}
 			}
 		}
-		div.links {
+		div.description {
 			margin-top: var(--padding-base);
-			ul {
-				li {
-					font-family: var(--font-sans);
-					font-size: 20px;
-					text-transform: uppercase;
-					letter-spacing: 0.06em;
-					button {
-						all: unset;
-						box-sizing: border-box;
-						cursor: pointer;
-					}
-				}
+			display: none;
+			@include media('phone') {
+				display: block;
 			}
 		}
 		button.more-info {
@@ -300,6 +336,9 @@ div.page-layout {
 		grid-column: 4 / span 9;
 		display: grid;
 		row-gap: var(--padding-base);
+		@include media('phone') {
+			display: none;
+		}
 		div.featured-image {
 			position: relative;
 			width: 100%;
@@ -321,51 +360,55 @@ div.page-layout {
 			max-width: 66%;
 		}
 	}
-	div.contact {
+	div.actions-container {
 		margin-top: var(--padding-base);
-		h3 {
-			font-family: var(--font-sans);
-			font-size: 15px;
-			text-transform: uppercase;
-			letter-spacing: 0.06em;
-		}
-		ul.buttons {
-			display: flex;
-			flex-flow: column nowrap;
-			row-gap: 15px;
-			margin-top: calc(var(--padding-base) / 2);
-			li {
-				a, button {
-					all: unset;
-					box-sizing: border-box;
-					cursor: pointer;
-					display: inline-block;
-					font-family: var(--font-sans);
-					font-size: 20px;
-					text-transform: uppercase;
-					letter-spacing: 0.06em;
-					border: 1px solid currentColor;
-					padding: 5px 15px 5px 15px;
-				}
-			}
+		display: flex;
+		flex-flow: column nowrap;
+		row-gap: var(--padding-base);
+		@include media('phone') {
+			display: none;
 		}
 	}
 }
 div.page-navigation {
 	margin: calc(var(--padding-base) * 4) 0 calc(var(--padding-base) * 2) 0;
+	@include media('phone') {
+		margin: calc(var(--padding-base) * 2) 0 var(--padding-base) 0;
+	}
 	ul {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		gap: 0 var(--padding-base);
 		padding: 0 var(--padding-base);
+		@include media('phone') {
+			gap: 0;
+		}
 		li {
 			font-family: var(--font-sans);
 			font-size: 20px;
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			text-align: center;
+			@include media('phone') {
+				font-size: 12px;
+			}
+			&.--prev {
+				@include media('phone') {
+					text-align: left;
+				}
+			}
 			&.--all {
 				grid-column: 2 / span 1;
+			}
+			&.--next {
+				@include media('phone') {
+					text-align: right;
+				}
+			}
+			span {
+				@include media('phone') {
+					display: none;
+				}
 			}
 		}
 	}

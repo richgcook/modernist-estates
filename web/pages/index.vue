@@ -79,10 +79,15 @@
 							v-if="journal.featuredImage?.asset"
 						/>
 						<div class="titles">
+							<h1>{{ data.journalPage?.title }}</h1>
 							<h3>{{ journal.subtitle }}</h3>
 							<h2>{{ journal.title }}</h2>
 						</div>
 					</NuxtLink>
+					<div class="titles --xs">
+						<h5>{{ journal.subtitle }}</h5>
+						<h3><NuxtLink :to="useInternalLinkUrl(journal)">{{ journal.title }}</NuxtLink></h3>
+					</div>
 				</div>
 			</div>
 
@@ -164,6 +169,12 @@ const query = groq`{
 			${$imageQuery}
 		},
 	}[0..2],
+
+	"journalPage": *[_type == "journalPage"] {
+		_id, _type, title, slug, seo {
+			${$seoQuery}
+		},
+	}[0],
 
 	"propertiesForSalePage": *[_type == "propertiesForSalePage"] {
 		_id, _type, title, slug, seo {
@@ -305,6 +316,7 @@ div.landing {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+		width: calc(100% - (var(--padding-base) * 4));
 		z-index: 2;
 		display: grid;
 		row-gap: calc(var(--padding-base) * 2);
@@ -315,6 +327,9 @@ div.landing {
 			fill: currentColor;
 			margin: 0 auto;
 			opacity: 0;
+			@include media('phone') {
+				height: 16px;
+			}
 		}
 		div.text {
 			font-family: var(--font-sans);
@@ -322,18 +337,32 @@ div.landing {
 			font-weight: 900;
 			letter-spacing: 0.02em;
 			opacity: 0;
+			@include media('phone') {
+				font-size: 24px;
+				white-space: normal;
+			}
 		}
 	}
 }
 div.home-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
+	div.page-hero {
+		@include media('phone') {
+			display: none;
+		}
+	}
 }
 div.home-featured-blocks {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: calc(var(--padding-base) / 2);
 	padding: 0 var(--padding-base);
+	@include media('phone') {
+		grid-template-columns: 1fr;
+		padding: 0;
+		row-gap: calc(var(--padding-base) * 2);
+	}
 	div.block {
 		a.inner {
 			display: block;
@@ -393,6 +422,10 @@ div.properties-sections {
 			border: 1px solid black;
 			margin: var(--padding-base) auto 0 auto;
 			padding: 15px 40px;
+			@include media('phone') {
+				font-size: 12px;
+				padding: 10px var(--padding-base);
+			}
 			&:hover {
 				background-color: black;
 				color: white;
@@ -407,18 +440,34 @@ div.home-journal-layout {
 	grid-template-rows: 1fr 1fr;
 	gap: calc(var(--padding-base) / 2);
 	padding: 0 var(--padding-base);
+	@include media('phone') {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+		padding: 0;
+	}
 	div.journal {
 		&:nth-of-type(1) {
 			grid-column: 1 / span 1;
 			grid-row: 1 / span 2;
+			@include media('phone') {
+				grid-column: 1 / -1;
+				grid-row: auto;
+			}
 			a.inner {
 				height: 100%;
 				width: 100%;
+				@include media('phone') {
+					height: auto;
+					width: auto;
+				}
 			}
 		}
 		&:nth-of-type(2) {
 			grid-column: 2 / span 1;
 			grid-row: 1 / span 1;
+			@include media('phone') {
+				display: none;
+			}
 			a.inner {
 				@supports (aspect-ratio: 1 / 1) {
 					aspect-ratio: 4 / 3;
@@ -428,6 +477,9 @@ div.home-journal-layout {
 		&:nth-of-type(3) {
 			grid-column: 2 / span 1;
 			grid-row: 2 / span 1;
+			@include media('phone') {
+				display: none;
+			}
 			a.inner {
 				@supports (aspect-ratio: 1 / 1) {
 					aspect-ratio: 4 / 3;
@@ -437,6 +489,9 @@ div.home-journal-layout {
 		a.inner {
 			display: block;
 			position: relative;
+			@include media('phone') {
+				aspect-ratio: 3.5 / 4.2;
+			}
 			&:hover {
 				div.titles {
 					opacity: 1;
@@ -465,16 +520,53 @@ div.home-journal-layout {
 				z-index: 2;
 				opacity: 0;
 				transition: opacity 0.5s;
+				@include media('phone') {
+					opacity: 1;
+				}
+				h1 {
+					font-size: var(--font-size-lg);
+					display: none;
+					@include media('phone') {
+						display: block;
+					}
+				}
 				h3 {
 				    font-family: var(--font-sans);
 					font-size: 20px;
 					font-weight: 900;
 					text-transform: uppercase;
 					letter-spacing: 0.1em;
+					@include media('phone') {
+						display: none;
+					}
 				}
 				h2 {
 					font-size: var(--font-size-md);
+					@include media('phone') {
+						display: none;
+					}
 				}
+			}
+		}
+		div.titles.--xs {
+			display: none;
+			padding: 0 var(--padding-base);
+			margin-top: var(--padding-base);
+			@include media('phone') {
+				display: block;
+			}
+			h5 {
+				font-family: var(--font-sans);
+				font-size: 15px;
+				font-weight: 900;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				margin-bottom: 5px;
+			}
+			h3 {
+				font-size: var(--font-size-md);
+				line-height: 1.25;
+				white-space: pre-wrap;
 			}
 		}
 	}

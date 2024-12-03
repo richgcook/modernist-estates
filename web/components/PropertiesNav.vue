@@ -51,15 +51,25 @@ nav.properties-groups {
 	padding: 0 var(--padding-base);
 	margin-bottom: var(--padding-base);
 	position: relative;
+	@include media('phone') {
+		flex-flow: column nowrap;
+		row-gap: calc(var(--padding-base) / 2);
+	}
 	ul {
 		display: flex;
 		flex-flow: row nowrap;
 		column-gap: var(--padding-base);
+		@include media('phone') {
+			justify-content: center;
+		}
 		li {
 			font-family: var(--font-sans);
 			font-size: 15px;
 			letter-spacing: 0.06em;
 			text-transform: uppercase;
+			@include media('phone') {
+				font-size: 12px;
+			}
 			a {
 				color: var(--color-grey);
 				&.router-link-active,
@@ -75,6 +85,10 @@ nav.properties-groups {
 	div.filter {
 		position: absolute;
 		right: var(--padding-base);
+		@include media('phone') {
+			position: relative;
+			right: 0;
+		}
 	}
 }
 

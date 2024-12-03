@@ -1,11 +1,12 @@
 <template>
 	<header :class="{ '--nav-open': navIsOpen, '--fixed': isFixed }">
 		<ul class="menu">
-			<li><NuxtLink to="/homes" :class="{ 'router-link-active': isRouteActive('homes') }">Homes</NuxtLink></li>
+			<li><NuxtLink to="/homes" :class="{ 'router-link-active': useIsRouteActive('homes') }">Homes</NuxtLink></li>
 			<li><NuxtLink to="/about">About</NuxtLink></li>
-			<li><NuxtLink to="/journal" :class="{ 'router-link-active': isRouteActive('journal') }">Journal</NuxtLink></li>
+			<li><NuxtLink to="/journal" :class="{ 'router-link-active': useIsRouteActive('journal') }">Journal</NuxtLink></li>
 		</ul>
 		<NuxtLink to="/" class="logo"><Logo /></NuxtLink>
+		<button @click="navStore.toggleOpen()" class="nav-trigger"><SymbolNavClosed /></button>
 		<ul class="menu">
 			<li><NuxtLink to="/selling">Selling</NuxtLink></li>
 			<li><NuxtLink to="/letting">Letting</NuxtLink></li>
@@ -51,10 +52,6 @@ const isFixed = computed(() => {
 	return false
 })
 
-const isRouteActive = (linkName) => {
-	return route.name && route.name.includes(linkName)
-}
-
 const navStore = useNavStore()
 
 const { isOpen: navIsOpen } = storeToRefs(navStore)
@@ -86,36 +83,24 @@ header {
 	top: 0;
 	background-color: var(--color-bg);
 	z-index: 30;
-	&.--nav-open {
-		a.logo {
-			svg {
-				fill: white;
-			}
+	button.nav-trigger {
+		all: unset;
+		box-sizing: border-box;
+		cursor: pointer;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		height: 40px;
+		width: 40px;
+		display: none;
+		@include media('phone') {
+			display: flex;
 		}
-		button.nav-trigger {
-			height: 34px;
-			transform: rotate(45deg);
-			&:hover {
-				opacity: 0.5;
-			}
-			span {
-				background-color: white;
-				&:nth-child(1) {
-					top: 50%;
-					transform: translateY(-50%);
-				}
-				&:nth-child(2) {
-					top: 50%;
-					transform: translateY(-50%) rotate(-90deg);
-				}
-			}
+		svg {
+			height: 10px;
+			width: 20px;
+			fill: black;
 		}
-	}
-	&.--fixed {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
 	}
 	a.logo {
 		display: inline-flex;
@@ -133,6 +118,9 @@ header {
 		display: flex;
 		flex-flow: row nowrap;
 		column-gap: 30px;
+		@include media('phone') {
+			display: none;
+		}
 		li {
 			font-size: var(--font-size-md);
 			a {

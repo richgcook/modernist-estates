@@ -20,7 +20,7 @@
 			</div>
 
 			<div v-else-if="useBlockType(block._type) == 'images' && block.images?.length">
-				<SliderB :slides="block.images" />
+				<SliderD :slides="block.images" />
 			</div>
 
 		</div>

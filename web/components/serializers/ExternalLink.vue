@@ -1,5 +1,5 @@
 <template>
-	<NuxtLink :to="href" :target="blank ? '_blank' : false" :class="{ '--has-symbol': symbolArrow }">
+	<NuxtLink :to="href" :target="blank ? '_blank' : null" :class="{ '--has-symbol': symbolArrow }">
    		<slot />
 	</NuxtLink>
 </template>
