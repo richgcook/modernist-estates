@@ -223,9 +223,9 @@ div.page-layout {
 			flex-flow: column nowrap;
 			row-gap: calc(var(--padding-base) / 2);
 			justify-content: space-between;
-			height: calc(100vh - var(--header-height) - var(--padding-base));
+			min-height: calc(100vh - var(--header-height) - var(--padding-base));
 			@supports (height: 100svh) {
-				height: calc(100svh - var(--header-height) - var(--padding-base));
+				min-height: calc(100svh - var(--header-height) - var(--padding-base));
 			}
 		}
 		h5.status {
@@ -234,10 +234,11 @@ div.page-layout {
 			font-weight: 900;
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
+			margin-bottom: 5px;
 		}
 		h3.title {
 			font-size: var(--font-size-md);
-			line-height: 1.33;
+			line-height: 1.25;
 			white-space: pre-wrap;
 		}
 		div.meta-details {
@@ -250,10 +251,11 @@ div.page-layout {
 					font-size: 15px;
 					text-transform: uppercase;
 					letter-spacing: 0.06em;
+					margin-bottom: 5px;
 				}
 				p {
 					font-size: var(--font-size-md);
-					line-height: 1.2;
+					line-height: 1.25;
 				}
 			}
 		}

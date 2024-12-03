@@ -42,9 +42,11 @@ div.article {
 		font-weight: 900;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
+		margin-bottom: 5px;
 	}
 	h3.title {
 		font-size: var(--font-size-md);
+		line-height: 1.25;
 		white-space: pre-wrap;
 	}
 	a.view-more {

@@ -49,7 +49,7 @@ div.blocks-layout {
 	grid-column: 1 / -1;
 	display: grid;
 	grid-template-columns: subgrid;
-	row-gap: calc(var(--padding-base) * 2);
+	row-gap: var(--padding-base);
 	> div.block {
 		grid-column: 1 / -1;
 		&[data-type="text"] {

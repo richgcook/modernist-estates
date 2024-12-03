@@ -59,7 +59,7 @@ div.page-layout {
 		}
 		h1 {
 			font-size: var(--font-size-lg);
-			line-height: 1.25em;
+			line-height: 1.25;
 			white-space: pre-wrap;
 		}
 	}

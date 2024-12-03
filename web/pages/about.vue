@@ -103,7 +103,7 @@ div.page-layout {
 	div.content {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
-		grid-gap: calc(var(--padding-base) * 2) calc(var(--padding-base) / 2);
+		grid-gap: var(--padding-base) calc(var(--padding-base) / 2);
 		padding: 0 var(--padding-base);
 		div.introduction {
 			grid-column: 4 / span 6;
