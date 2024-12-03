@@ -65,7 +65,6 @@ footer {
 		}
 		div.logo {
 			grid-column: 1 / -1;
-			margin-bottom: var(--padding-base);
 			@include media('phone') {
 				display: none;
 			}
