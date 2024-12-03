@@ -4,7 +4,10 @@ export const useNewsletterSubscribeStore = defineStore({
 	id: 'newsletter-subscribe-store',
 	state: () => {
 		return {
-			open: false
+			open: false,
+			subscribing: false,
+			success: false,
+			error: false,
 		}
 	},
 	actions: {
@@ -16,9 +19,29 @@ export const useNewsletterSubscribeStore = defineStore({
 		},
 		setClose() {
 			this.open = false
+		},
+		setSubscribing() {
+			this.subscribing = true
+		},
+		setSuccess() {
+			this.success = true
+		},
+		setError() {
+			this.error = true
+		},
+		resetError() {
+			this.error = false
+		},
+		resetSubscribing() {
+			this.subscribing = false
+			this.success = false
+			this.error = false
 		}
 	},
 	getters: {
-		isOpen: state => state.open
+		isOpen: state => state.open,
+		isSubscribing: state => state.subscribing,
+		isSuccess: state => state.success,
+		isError: state => state.error,
 	}
 })

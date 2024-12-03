@@ -9,8 +9,10 @@
 <script setup>
 
 import { useNavStore } from '~/store/nav'
+import { useNewsletterSubscribeStore } from '~/store/newsletterSubscribe'
 
 const navStore = useNavStore()
+const newsletterSubscribeStore = useNewsletterSubscribeStore()
 
 const config = useRuntimeConfig()
 const route = useRoute()
@@ -31,6 +33,8 @@ useHead({
 watch(() => route.path, (newRoute) => {
 	
 	navStore.setClose()
+	newsletterSubscribeStore.resetSubscribing()
+
 
 }, { immediate: true })
 

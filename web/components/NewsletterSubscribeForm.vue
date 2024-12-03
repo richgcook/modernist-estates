@@ -1,19 +1,23 @@
 <template>
 	<div class="newsletter-signup">
 		<h3>Join our mailing list for regular property updates and news</h3>
-		<!-- TODO -->
-		<form id="subForm" class="subscribe__form js-cm-form" action="https://www.createsend.com/t/subscribeerror?description=" method="post" data-id="A61C50BEC994754B1D79C5819EC1255C1D338FFC5C5C212B1BD020EAC9F8B4909AFDB44BA255766D944F107CDF4532824455EEAC3CFE8EAB2C84A1641C991EAB">
-			<input id="fieldEmail" class="js-cm-email-input" type="email" placeholder="Email" name="cm-gldhly-gldhly" required />
+		<form @submit.prevent="subscribe" v-show="!isSuccess">
+			<input type="email" v-model="email" placeholder="Email" required />
 			<div class="consent">
-				<input type="checkbox" :id="`consent-${context}`" name="consent" required />
+				<input type="checkbox" :id="`consent-${context}`" name="consent" v-model="consent" required />
 				<label :for="`consent-${context}`">I accept the Privacy and Cookies Policy and Terms and Conditions*</label>
 			</div>
-			<button type="submit">Subscribe</button>
+			<button type="submit" :disabled="isSubscribing">Subscribe</button>
 		</form>
+		<div class="message --success" v-show="isSuccess">Thanks for subscribing!</div>
+		<div class="message --error" v-show="isError">An unexpected error occurred. Please try again later.</div>
 	</div>
 </template>
 
 <script setup>
+
+import { useNewsletterSubscribeStore } from '~/store/newsletterSubscribe'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
 	context: {
@@ -21,6 +25,38 @@ const props = defineProps({
 		default: 'footer'
 	}
 })
+
+const newsletterSubscribeStore = useNewsletterSubscribeStore()
+
+const { isSubscribing, isSuccess, isError } = storeToRefs(newsletterSubscribeStore)
+const { setSubscribing, setSuccess, setError, resetError } = newsletterSubscribeStore
+
+const email = ref('')
+const consent = ref(false)
+
+const resetForm = () => {
+	email.value = ''
+	consent.value = false
+	resetError()
+}
+
+const subscribe = async () => {
+
+	setSubscribing()
+
+	try {
+    	const response = await $fetch('/api/campaign-monitor/subscribe', {
+      		method: 'POST',
+      		body: {
+        		email: email.value,
+      		},
+    	})
+		setSuccess()
+		resetForm()
+  	} catch (error) {
+		setError()
+  	}
+}
 
 </script>
 

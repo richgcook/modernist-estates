@@ -15,6 +15,10 @@ export default defineNuxtConfig({
 	},
 
 	runtimeConfig: {
+		private: {
+			campaignMonitorApiKey: process.env.CAMPAIGN_MONITOR_API_KEY,
+			campaignMonitorListId: process.env.CAMPAIGN_MONITOR_LIST_ID,
+		},
 		public: {
 			siteTitle: process.env.SITE_TITLE
 		}
