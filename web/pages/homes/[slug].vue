@@ -13,7 +13,7 @@
 				<div class="inner">
 					<div class="top">
 
-						<h5 class="status">{{ data.property.status ? data.property.status.title : data.property.statusOther }}</h5>
+						<h5 class="status" :class="{ '--unavailable': data.property.status && usePropertyIsUnavailable(data.property.status) }">{{ data.property.status ? data.property.status.title : data.property.statusOther }}</h5>
 						<h3 class="title">{{ data.property.titleFormatted }}</h3>
 						<div class="meta-details" v-if="data.property.details?.length">
 							<div v-for="(detail, index) in data.property.details" :key="index" class="item">
@@ -277,6 +277,9 @@ div.page-layout {
 			@include media('phone') {
 				font-size: 12px;
 			}
+			&.--unavailable {
+				color: var(--color-highlight);
+			}
 		}
 		h3.title {
 			font-size: var(--font-size-md);
@@ -429,7 +432,6 @@ div.contact-form-popup {
 	div.inner {
 		background-color: var(--color-bg);
 		padding: var(--padding-base);
-		width: 50%;
 		max-width: 768px;
 		position: relative;
 		div.property-details {

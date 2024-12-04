@@ -20,7 +20,7 @@
 			/>
 		</NuxtLink>
 		<div class="details">
-			<h5 class="status">{{ property.status ? property.status.title : property.statusOther }}</h5>
+			<h5 class="status" :class="{ '--unavailable': property.status && usePropertyIsUnavailable(property.status) }">{{ property.status ? property.status.title : property.statusOther }}</h5>
 			<h3 class="title">{{ property.titleFormatted }}</h3>
 			<h3 class="price" v-if="priceFromDetails">{{ priceFromDetails }}</h3>
 			<NuxtLink :to="useInternalLinkUrl(property)" class="view-more">View more</NuxtLink>
@@ -87,6 +87,9 @@ div.property {
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		margin-bottom: 5px;
+		&.--unavailable {
+			color: var(--color-highlight);
+		}
 	}
 	h3.title,
 	h3.price {

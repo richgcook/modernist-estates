@@ -77,7 +77,8 @@ nav.properties-groups {
 					color: black;
 				}
 				&.router-link-active {
-					border-bottom: 1px solid currentColor;
+					text-decoration: 1px solid underline;
+					text-underline-offset: 5px;
 				}
 			}
 		}

@@ -5,7 +5,7 @@
 			<input type="email" v-model="email" placeholder="Email" required />
 			<div class="consent">
 				<input type="checkbox" :id="`consent-${context}`" name="consent" v-model="consent" required />
-				<label :for="`consent-${context}`">I accept the Privacy and Cookies Policy and Terms and Conditions*</label>
+				<label :for="`consent-${context}`">I accept the Privacy Policy and Terms and Conditions*</label>
 			</div>
 			<button type="submit" :disabled="isSubscribing">Subscribe</button>
 		</form>
@@ -87,18 +87,22 @@ div.newsletter-signup {
 		div.consent {
 			display: flex;
 			flex-flow: row nowrap;
-			column-gap: calc(var(--padding-base) / 3);
+			align-items: center;
+			column-gap: 10px;
 			input[type="checkbox"] {
 				all: unset;
 				box-sizing: border-box;
 				cursor: pointer;
 				flex-shrink: 0;
 				position: relative;
-				top: 0.3em;
 				display: block;
 				border: 1px solid currentColor;
-				height: calc(var(--padding-base) / 2);
-				width: calc(var(--padding-base) / 2);
+				height: 20px;
+				width: 20px;
+				@include media('phone') {
+					height: 16px;
+					width: 16px;
+				}
 				&:checked:after {
 					content: '';
 					position: absolute;
@@ -114,8 +118,12 @@ div.newsletter-signup {
 				}
 			}
 			label {
+				font-size: 16px;
 				user-select: none;
 				cursor: pointer;
+				@include media('phone') {
+					font-size: 12px;
+				}
 			}
 		}
 		button {
