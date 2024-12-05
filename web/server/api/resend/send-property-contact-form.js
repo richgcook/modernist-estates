@@ -71,7 +71,7 @@ export default defineEventHandler(async (event) => {
 				to: enquireEmail, // Recipient email from Sanity
 				//to: `delivered@resend.dev`,
 				bcc: fromEmailAddress,
-				subject: `​​I am interested in the property ${propertyTitle} (ref: ${propertyRef}) via modernistestates.com`,
+				subject: `Enquiry about ${propertyTitle} (ref: ${propertyRef}) via modernistestates.com`,
 				html: emailHtml
 			}),
 		})
