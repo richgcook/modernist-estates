@@ -39,7 +39,7 @@ const [viewport, embla] = emblaCarouselVue({
 	loop: true,
 }, [
 	Autoplay({ 
-		playOnInit: false,
+		playOnInit: true,
 		stopOnInteraction: false,
 	 }),
 	 Fade(),
