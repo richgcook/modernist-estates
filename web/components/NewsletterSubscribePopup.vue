@@ -32,6 +32,7 @@ watch(isOpen, (newValue, oldValue) => {
 div.newsletter-popup {
 	background-color: var(--color-blue);
 	padding: var(--padding-base) calc(var(--padding-base) / 2 + var(--padding-base) / 2 + var(--padding-base)) var(--padding-base) var(--padding-base);
+	width: calc(100% - (var(--padding-base) * 2));
 	max-width: 600px;
 	position: fixed;
 	top: 50%;
@@ -48,6 +49,10 @@ div.newsletter-popup {
 		svg {
 			height: calc(var(--padding-base) / 2);
 			width: calc(var(--padding-base) / 2);
+			@include media('phone') {
+				height: 14px;
+				width: 14px;
+			}
 		}
 	}
 }
