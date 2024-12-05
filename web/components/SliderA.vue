@@ -204,6 +204,10 @@ div.slider-container {
 			font-size: var(--font-size-lg);
 			line-height: 1.25;
 			letter-spacing: 0.02em;
+			@include media('phone') {
+				font-size: var(--font-size-md);
+				letter-spacing: 0;
+			}
 		}
 	}
 }
