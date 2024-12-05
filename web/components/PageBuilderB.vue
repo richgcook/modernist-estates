@@ -42,6 +42,9 @@ div.blocks-layout {
 	display: grid;
 	grid-template-columns: subgrid;
 	row-gap: var(--padding-base);
+	@include media('phone') {
+		grid-template-columns: auto;
+	}
 	> div.block {
 		grid-column: 1 / -1;
 		&[data-type="text"] {
@@ -55,6 +58,7 @@ div.blocks-layout {
 			display: grid;
 			grid-template-columns: subgrid;
 			@include media('phone') {
+				grid-template-columns: auto;
 				width: 100vw;
 				margin: 0 calc(50% - 50vw);
 			}

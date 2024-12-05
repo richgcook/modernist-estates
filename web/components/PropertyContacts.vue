@@ -31,14 +31,19 @@ div.contacts {
 	display: flex;
 	flex-flow: column nowrap;
 	row-gap: calc(var(--padding-base) / 2);
-	h3 {
-		font-family: var(--font-sans);
-		font-size: 15px;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		margin-bottom: 5px;
+	div.details {
 		@include media('phone') {
-			font-size: 12px;
+			display: none;
+		}
+		h3 {
+			font-family: var(--font-sans);
+			font-size: 15px;
+			text-transform: uppercase;
+			letter-spacing: 0.06em;
+			margin-bottom: 5px;
+			@include media('phone') {
+				font-size: 12px;
+			}
 		}
 	}
 	ul.buttons {

@@ -21,7 +21,6 @@
 			<div class="details">
 				<div class="inner">
 					<div class="top">
-
 						<h5 class="status" :class="{ '--unavailable': data.property.status && usePropertyIsUnavailable(data.property.status) }">{{ data.property.status ? data.property.status.title : data.property.statusOther }}</h5>
 						<h3 class="title">{{ data.property.titleFormatted }}</h3>
 						<div class="meta-details" v-if="data.property.details?.length">
@@ -30,15 +29,17 @@
 								<p>{{ detail.value }}</p>
 							</div>
 						</div>
+						<div class="contact" v-if="data.property.contact?.title || data.property.contact?.details?.length">
+							<h3 v-if="data.property.contact?.title">{{ data.property.contact.title }}</h3>
+							<RichText :blocks="data.property.contact?.details" v-if="data.property.contact?.details?.length" />
+						</div>
 						<div class="description" v-if="data.property.description?.length">
 							<RichText :blocks="data.property.description" />
 						</div>
-
 						<div class="actions-container">
 							<PropertyActions :property="data.property" @openMap="mapOpen = true" @openMedia="mediaOverlayOpen = true" />
 							<PropertyContacts :property="data.property" @openContactForm="contactFormOpen = true" />
 						</div>
-
 					</div>
 					<div class="bottom">
 						<button type="button" class="more-info" @click="scrollToInfo" v-if="data.property.description?.length"><span>More info</span><SymbolPlusB /></button>
@@ -321,6 +322,20 @@ div.page-layout {
 					font-size: var(--font-size-md);
 					line-height: 1.25;
 				}
+			}
+		}
+		div.contact {
+			margin-top: var(--padding-base);
+			display: none;
+			@include media('phone') {
+				display: block;
+			}
+			h3 {
+				font-family: var(--font-sans);
+				font-size: 14px;
+				font-weight: normal;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
 			}
 		}
 		div.description {

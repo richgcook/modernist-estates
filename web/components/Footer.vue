@@ -113,7 +113,7 @@ footer {
 				text-transform: uppercase;
 				letter-spacing: 0.1em;
 				@include media('phone') {
-					display: none;
+					font-size: 12px;
 				}
 			}
 		}

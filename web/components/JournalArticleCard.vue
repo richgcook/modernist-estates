@@ -33,6 +33,9 @@ div.article {
 	display: grid;
 	row-gap: calc(var(--padding-base) / 2);
 	align-content: flex-start;
+	@include media('phone') {
+		row-gap: 0;
+	}
 	a.featured-image {
 		display: block;
 	}

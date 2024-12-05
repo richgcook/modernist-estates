@@ -60,6 +60,7 @@ div.page-layout {
 		grid-template-columns: subgrid;
 		row-gap: calc(var(--padding-base) * 2);
 		@include media('phone') {
+			grid-template-columns: auto;
 			grid-column: 1 / -1;
 			grid-template-columns: 1fr;
 		}
