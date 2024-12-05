@@ -1,3 +1,3 @@
 <template>
-	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.7 30.41"><rect x="14.35" y="-5.36" width="1" height="41" transform="translate(-6.36 14.64) rotate(-45)"/><rect x="-5.65" y="15.35" width="41" height="1" transform="translate(-6.86 14.85) rotate(-45)"/></svg>
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.73 16.22"><path d="M.64,15.87-.26,15l.17-.18L14.48-.34l.9.86L15.21.7Z" transform="translate(0.35 0.35)"/><path d="M14.39,15.87-.35.52l.9-.87L15.29,15Z" transform="translate(0.35 0.35)"/></svg>
 </template>

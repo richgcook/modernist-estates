@@ -6,7 +6,10 @@
 			<li><NuxtLink to="/journal" :class="{ 'router-link-active': useIsRouteActive('journal') }">Journal</NuxtLink></li>
 		</ul>
 		<NuxtLink to="/" class="logo"><Logo /></NuxtLink>
-		<button @click="navStore.toggleOpen()" class="nav-trigger"><SymbolNavClosed /></button>
+		<button @click="navStore.toggleOpen()" class="nav-trigger">
+			<SymbolNavClosed class="--closed" v-show="!navIsOpen" />
+			<SymbolNavOpen class="--open" v-show="navIsOpen" />
+		</button>
 		<ul class="menu">
 			<li><NuxtLink to="/selling">Selling</NuxtLink></li>
 			<li><NuxtLink to="/letting">Letting</NuxtLink></li>
@@ -87,19 +90,26 @@ header {
 		all: unset;
 		box-sizing: border-box;
 		cursor: pointer;
-		display: flex;
-		flex-flow: column nowrap;
-		justify-content: center;
 		height: 40px;
 		width: 40px;
+		position: relative;
 		display: none;
 		@include media('phone') {
 			display: flex;
 		}
 		svg {
-			height: 10px;
-			width: 20px;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
 			fill: black;
+			&.--closed {
+				height: 13px;
+				width: 24px;
+			}
+			&.--open {
+				height: 14px;
+				width: 14px;
+			}
 		}
 	}
 	a.logo {
