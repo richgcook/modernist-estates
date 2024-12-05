@@ -308,6 +308,7 @@ div.page-layout {
 			}
 		}
 		div.description {
+			font-size: var(--font-size-md);
 			margin-top: var(--padding-base);
 			display: none;
 			@include media('phone') {
