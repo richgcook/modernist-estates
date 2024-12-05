@@ -71,6 +71,10 @@ div.blocks-layout {
 				font-family: var(--font-sans);
 				font-size: 18px;
 				margin-top: 10px;
+				@include media('phone') {
+					font-size: 12px;
+					margin-left: var(--padding-base);
+				}
 			}
 		}
 	}
