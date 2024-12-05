@@ -90,7 +90,7 @@ footer {
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				@include media('phone') {
-					font-size: 16px;
+					font-size: 14px;
 				}
 				a {
 					&:hover,
