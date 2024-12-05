@@ -46,13 +46,23 @@ div.blocks-layout {
 		grid-column: 1 / -1;
 		&[data-type="text"] {
 			grid-column: 4 / span 6;
+			@include media('phone') {
+				grid-column: 1 / -1;
+			}
 		}
 		&[data-type="image"] {
 			grid-column: 1 / -1;
 			display: grid;
 			grid-template-columns: subgrid;
+			@include media('phone') {
+				width: 100vw;
+				margin: 0 calc(50% - 50vw);
+			}
 			> div {
 				grid-column: 3 / span 8;
+				@include media('phone') {
+					grid-column: 1 / -1;
+				}
 				&[data-image-size="full"] {
 					grid-column: 1 / -1;
 				}
