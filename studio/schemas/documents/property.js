@@ -1,13 +1,15 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { FileArrowDown } from '@phosphor-icons/react'
 import { orderRankField } from '@sanity/orderable-document-list'
+import { SlidersHorizontal } from '@phosphor-icons/react'
 
 export default defineType({
 	type: "document",
 	title: "Property",
 	name: "property",
 	fieldsets: [
-		{ name: 'location', options: { columns: 2 } }
+		{ name: 'location', options: { columns: 2 } },
+		{ name: 'filters', options: { columns: 2 } },
 	],
 	fields: [
 		defineField({
@@ -70,18 +72,6 @@ export default defineType({
 			],
 		}),
 		defineField({
-			type: 'image',
-			title: 'Featured image',
-			name: 'featuredImage',
-			fields: [
-				{
-					type: 'alt',
-					name: 'alt'
-				}
-			],
-			validation: Rule => Rule.required()
-		}),
-		defineField({
 			type: 'array',
 			name: 'images',
 			title: 'Images',
@@ -106,39 +96,32 @@ export default defineType({
 			to: [{ type: 'propertyFilterStatus' }],
 		}),
 		defineField({
-			type: 'string',
-			title: 'Status (other)',
-			name: 'statusOther',
-		}),
-		defineField({
 			type: 'reference',
 			title: 'Location',
 			name: 'location',
 			to: [{ type: 'propertyFilterLocation' }],
-		}),
-		defineField({
-			type: 'string',
-			title: 'Location (other)',
-			name: 'locationOther',
-		}),
-		defineField({
-			type: 'geopoint',
-			title: 'Location (map)',
-			name: 'locationMap',
+			fieldset: 'filters',
 		}),
 		defineField({
 			type: 'reference',
 			title: 'Price (range)',
 			name: 'priceRange',
 			to: [{ type: 'propertyFilterPrice' }],
+			fieldset: 'filters',
 		}),
 		defineField({
 			type: 'reference',
 			title: 'Bedrooms',
 			name: 'bedroomCount',
 			to: [{ type: 'propertyFilterBedrooms' }],
+			fieldset: 'filters',
 		}),
 		// End filter fields
+		defineField({
+			type: 'geopoint',
+			title: 'Location (map)',
+			name: 'locationMap',
+		}),
 		defineField({
 			type: 'array',
 			title: 'Details',
@@ -191,7 +174,7 @@ export default defineType({
 		}),
 		defineField({
 			type: 'object',
-			title: 'Contact details',
+			title: 'Contact',
 			name: 'contact',
 			fields: [
 				defineField({
@@ -259,5 +242,20 @@ export default defineType({
 		orderRankField(
 			{ type: 'property' }
 		)
-	]
+	],
+	preview: {
+		select: {
+			title: 'title',
+			group: 'propertyGroup.title',
+			image: 'featuredImages.imagePrimary',
+		},
+		prepare(selection) {
+			const { title, group, image } = selection
+			return {
+				title,
+				subtitle: group,
+				media: image
+			}
+		}
+	}
 })
