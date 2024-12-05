@@ -49,18 +49,36 @@ div.page-layout {
 	grid-template-columns: repeat(12, 1fr);
 	grid-gap: calc(var(--padding-base) * 2) calc(var(--padding-base) / 2);
 	padding: 0 var(--padding-base);
+	@include media('phone') {
+		grid-template-columns: 1fr;
+		padding: 0;
+		row-gap: calc(var(--padding-base) * 2);
+	}
 	div.journal-layout {
 		grid-column: 2 / span 10;
 		display: grid;
 		grid-template-columns: subgrid;
 		row-gap: calc(var(--padding-base) * 2);
+		@include media('phone') {
+			grid-column: 1 / -1;
+			grid-template-columns: 1fr;
+		}
 		div.article {
 			grid-column: span 5;
+			@include media('phone') {
+				grid-column: 1 / -1;
+			}
 			&:nth-child(2) {
 				margin-top: calc(var(--padding-base) * 2);
+				@include media('phone') {
+					margin-top: 0;
+				}
 			}
 			&:not(:first-child):nth-child(odd) {
 				margin-top: calc(-1 * (var(--padding-base) * 2));
+				@include media('phone') {
+					margin-top: 0;
+				}
 			}
 		}
 	}

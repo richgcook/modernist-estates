@@ -62,13 +62,25 @@ useHead({
 div.page-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
+	div.page-hero {
+		@include media('phone') {
+			display: none;
+		}
+	}
 	div.content {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
 		grid-gap: var(--padding-base) calc(var(--padding-base) / 2);
 		padding: 0 var(--padding-base);
+		@include media('phone') {
+			grid-template-columns: 1fr;
+			row-gap: var(--padding-base);
+		}
 		div.introduction {
 			grid-column: 4 / span 6;
+			@include media('phone') {
+				grid-column: 1 / -1;
+			}
 			h2 {
 				font-size: var(--font-size-lg);
 				margin-bottom: calc(var(--padding-base) / 2);
@@ -76,7 +88,7 @@ div.page-layout {
 			}
 			div.text {
 				font-size: var(--font-size-md);
-				line-height: calc(38/28 * 1em);
+				line-height: 1.35;
 			}
 		}
 	}

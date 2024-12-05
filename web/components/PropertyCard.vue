@@ -90,6 +90,9 @@ div.property {
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		margin-bottom: 5px;
+		@include media('phone') {
+			font-size: 12px;
+		}
 		&.--unavailable {
 			color: var(--color-highlight);
 		}
@@ -102,7 +105,6 @@ div.property {
 	}
 	a.view-more {
 		display: inline-flex;
-		font-size: 24px;
 		margin-top: 10px;
 		@include media('phone') {
 			font-size: var(--font-size-md);

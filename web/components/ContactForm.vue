@@ -97,16 +97,25 @@ div.form {
 	margin-bottom: calc(-1 * (var(--padding-base) * 2));
 	padding: calc(var(--padding-base) * 2) var(--padding-base);
 	background-color: var(--color-holidays);
+	@include media('phone') {
+		grid-template-columns: 1fr;
+	}
 	div.inner {
 		grid-column: 4 / span 6;
 		display: grid;
 		row-gap: var(--padding-base);
+		@include media('phone') {
+			grid-column: 1 / -1;
+		}
 		h3 {
 			font-family: var(--font-sans);
 			font-size: 20px;
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			text-align: center;
+			@include media('phone') {
+				font-size: 14px;
+			}
 		}
 	}
 }
@@ -118,6 +127,9 @@ form {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 10px calc(var(--padding-base) / 2);
+		@include media('phone') {
+			grid-template-columns: 1fr;
+		}
 	}
 	input[type="text"],
 	input[type="email"],
@@ -139,6 +151,9 @@ form {
 		}
 		&[name="message"] {
 			grid-column: 1 / span 2;
+			@include media('phone') {
+				grid-column: 1 / -1;
+			}
 		}
 	}
 	div.actions {
@@ -156,6 +171,10 @@ form {
 		text-transform: uppercase;
 		border: 1px solid black;
 		padding: 15px 40px;
+		@include media('phone') {
+			font-size: 12px;
+			padding: 10px var(--padding-base);
+		}
 		&:hover {
 			background-color: black;
 			color: white;

@@ -36,6 +36,12 @@ div.article {
 	a.featured-image {
 		display: block;
 	}
+	div.details {
+		@include media('phone') {
+			padding: 0 var(--padding-base);
+			margin-top: var(--padding-base);
+		}
+	}
 	h5.subtitle {
 		font-family: var(--font-sans);
 		font-size: 15px;
@@ -43,6 +49,9 @@ div.article {
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		margin-bottom: 5px;
+		@include media('phone') {
+			font-size: 12px;
+		}
 	}
 	h3.title {
 		font-size: var(--font-size-md);
@@ -51,8 +60,10 @@ div.article {
 	}
 	a.view-more {
 		display: inline-flex;
-		font-size: 24px;
 		margin-top: 10px;
+		@include media('phone') {
+			font-size: var(--font-size-md);
+		}
 	}
 }
 

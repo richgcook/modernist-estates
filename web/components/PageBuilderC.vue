@@ -60,10 +60,9 @@ div.blocks-layout {
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				margin-bottom: calc(var(--padding-base) / 4);
-			}
-			div.text {
-				font-size: 24px;
-				line-height: calc(32/24 * 1em);
+				@include media('phone') {
+					font-size: 14px;
+				}
 			}
 		}
 		&[data-type="accordion-list"] {
@@ -74,11 +73,12 @@ div.blocks-layout {
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				margin-bottom: calc(var(--padding-base) / 4);
+				@include media('phone') {
+					font-size: 14px;
+				}
 			}
 			ul.list {
 				li {
-					font-size: 24px;
-					line-height: calc(32/24 * 1em);
 					&.--open {
 						h4 button svg {
 							transform: rotate(45deg);
@@ -93,15 +93,23 @@ div.blocks-layout {
 							column-gap: 5px;
 							align-items: center;
 							svg {
+								flex-shrink: 0;
 								display: block;
 								height: 16px;
 								width: 16px;
 								transition: transform 0.3s;
+								@include media('phone') {
+									height: 14px;
+									width: 14px;
+								}
 							}
 						}
 					}
 					div.content {
 						padding: 10px 0 10px calc(var(--padding-base) / 2);
+						@include media('phone') {
+							padding-left: var(--padding-base);
+						}
 					}
 				}
 			}

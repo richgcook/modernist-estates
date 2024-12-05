@@ -23,7 +23,9 @@
 					/>
 				</NuxtLink>
 				<h4><NuxtLink :to="useInternalLinkUrl(service.internalLink)">{{ service.title }}</NuxtLink></h4>
-				<RichText :blocks="service.description" v-if="service.description?.length" />
+				<div class="text-container" v-if="service.description?.length">
+					<RichText :blocks="service.description" />
+				</div>
 			</div>
 		</div>
 
@@ -100,13 +102,25 @@ useHead({
 div.page-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
+	div.page-hero {
+		@include media('phone') {
+			display: none;
+		}
+	}
 	div.content {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
-		grid-gap: var(--padding-base) calc(var(--padding-base) / 2);
+		grid-gap: 0 calc(var(--padding-base) / 2);
 		padding: 0 var(--padding-base);
+		@include media('phone') {
+			grid-template-columns: 1fr;
+			row-gap: var(--padding-base);
+		}
 		div.introduction {
 			grid-column: 4 / span 6;
+			@include media('phone') {
+				grid-column: 1 / -1;
+			}
 			h2 {
 				font-size: var(--font-size-lg);
 				margin-bottom: calc(var(--padding-base) / 2);
@@ -114,15 +128,19 @@ div.page-layout {
 			}
 			div.text {
 				font-size: var(--font-size-md);
-				line-height: calc(38/28 * 1em);
+				line-height: 1.35;
 			}
 		}
 	}
 	div.services {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
-		grid-gap: 0 calc(var(--padding-base) / 2);
+		grid-gap: var(--padding-base) calc(var(--padding-base) / 2);
 		padding: 0 var(--padding-base);
+		@include media('phone') {
+			grid-template-columns: 1fr;
+			padding: 0;
+		}
 		h3.section-title {
 			grid-column: 1 / -1;
 			font-family: var(--font-sans);
@@ -131,9 +149,16 @@ div.page-layout {
 			letter-spacing: 0.06em;
 			text-align: center;
 			margin-bottom: calc(var(--padding-base) / 2);
+			@include media('phone') {
+				font-size: 14px;
+				margin-bottom: 0;
+			}
 		}
 		div.service {
 			grid-column: span 4;
+			@include media('phone') {
+				grid-column: 1 / -1;
+			}
 			h4 {
 				font-family: var(--font-sans);
 				font-size: 20px;
@@ -141,11 +166,17 @@ div.page-layout {
 				letter-spacing: 0.06em;
 				text-align: center;
 				margin: calc(var(--padding-base) / 2) 0 calc(var(--padding-base) / 4) 0;
+				@include media('phone') {
+					font-size: 14px;
+					margin: var(--padding-base) 0 calc(var(--padding-base) / 2) 0;
+				}
 			}
-			div.text {
-				font-size: 24px;
-				line-height: calc(32/24 * 1em);
+			div.text-container {
 				max-width: 90%;
+				@include media('phone') {
+					max-width: none;
+					padding: 0 var(--padding-base);
+				}
 			}
 		}
 	}
