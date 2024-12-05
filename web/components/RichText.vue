@@ -39,7 +39,7 @@ div.text {
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
 		@include media('phone') {
-			font-size: 12px;
+			font-size: 14px;
 		}
 	}
 	:deep(ul) {

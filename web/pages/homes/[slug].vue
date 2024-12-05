@@ -2,7 +2,16 @@
 	<div>
 		<div class="page-layout">
 
-			<SliderC :images="data.property.images" v-if="data.property.images?.length" />
+			<div class="featured-image-xs" v-if="data.property.featuredImages.imagePrimary?.asset" @click="data.property.images?.length ? mediaOverlayOpen = true : null">
+				<ImgWithRatio 
+					:src="data.property.featuredImages.imagePrimary.asset.url" 
+					:sizes="`100vw`"
+					:alt="data.property.featuredImages.imagePrimary.alt" 
+					:ratio="`4/3`"
+					:loading="`eager`"
+					:priority="`high`"
+				/>
+			</div>
 
 			<div class="actions-bar">
 				<PropertyActions :property="data.property" @openMap="mapOpen = true" @openMedia="mediaOverlayOpen = true" />
@@ -38,10 +47,11 @@
 			</div>
 
 			<div class="content">
-				<div class="featured-image" v-if="data.property.featuredImage?.asset" @click="data.property.images?.length ? mediaOverlayOpen = true : null">
+				<div class="featured-image" v-if="data.property.featuredImages?.imagePrimary?.asset" @click="data.property.images?.length ? mediaOverlayOpen = true : null">
 					<Img 
-						:src="data.property.featuredImage.asset?.url"
-						:alt="data.property.featuredImage.alt"
+						:src="data.property.featuredImages.imagePrimary.asset?.url"
+						:alt="data.property.featuredImages.imagePrimary.alt"
+						:sizes="`100vw`"
 						:loading="`eager`"
 						:priority="`high`"
 					/>
@@ -166,10 +176,10 @@ const mapCircleFillColor = computed(() => {
 	// 	fillColor = useCssVar('--color-holidays').value
 	// }
 	// return fillColor
-	return useCssVar('--color-highlight').value
+	return useCssVar('--color-blue').value
 })
 const mapCircleStrokeColor = computed(() => {
-	return useCssVar('--color-highlight').value
+	return useCssVar('--color-blue').value
 })
 
 const mediaOverlayElem = ref(null)
@@ -219,6 +229,12 @@ div.page-layout {
 		grid-template-columns: 1fr;
 		grid-gap: 0;
 		padding: 0;
+	}
+	div.featured-image-xs {
+		display: none;
+		@include media('phone') {
+			display: block;
+		}
 	}
 	div.actions-bar {
 		position: sticky;
@@ -470,6 +486,10 @@ div.contact-form-popup {
 		svg {
 			height: 22px;
 			width: 22px;
+			@include media('phone') {
+				height: 14px;
+				width: 14px;
+			}
 		}
 	}
 }
@@ -491,6 +511,10 @@ div.map-popup {
 		svg {
 			height: 22px;
 			width: 22px;
+			@include media('phone') {
+				height: 14px;
+				width: 14px;
+			}
 		}
 	}
 }
@@ -509,9 +533,16 @@ div.media-overlay {
 		top: calc(var(--padding-base) - 5px);
 		right: var(--padding-base);
 		z-index: 1;
+		@include media('phone') {
+			top: var(--padding-base);
+		}
 		svg {
 			height: 22px;
 			width: 22px;
+			@include media('phone') {
+				height: 14px;
+				width: 14px;
+			}
 		}
 	}
 }

@@ -196,8 +196,7 @@ div.slider-container {
 					object-fit: contain;
 					object-position: center;
 					@include media('phone') {
-						//height: calc(100% - ((var(--padding-base) * 2) + (var(--padding-base) * 2)));
-						//width: calc(100% - (var(--padding-base) * 2));
+						height: calc(100% - ((var(--padding-base) * 4) + 20px));
 					}
 				}
 			}
@@ -212,6 +211,9 @@ div.slider-container {
 		font-size: 20px;
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
+		@include media('phone') {
+			font-size: 14px;
+		}
 		span {
 			color: var(--color-highlight);
 		}

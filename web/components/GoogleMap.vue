@@ -21,11 +21,11 @@ const props = defineProps({
 	marker: Object,
 	circleFillColor: {
 		type: String,
-		default: '#ff0000',
+		default: '#5f9db4',
 	},
 	circleStrokeColor: {
 		type: String,
-		default: '#ff0000',
+		default: '#5f9db4',
 	},
 })
 
