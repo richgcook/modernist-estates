@@ -94,6 +94,7 @@ export default defineType({
 			title: 'Status',
 			name: 'status',
 			to: [{ type: 'propertyFilterStatus' }],
+			fieldset: 'filters',
 		}),
 		defineField({
 			type: 'reference',
@@ -117,6 +118,12 @@ export default defineType({
 			fieldset: 'filters',
 		}),
 		// End filter fields
+		defineField({
+			type: 'string',
+			title: 'Status',
+			name: 'statusOther',
+			description: `If the status is not in the 'Status' list above or if you need to override the 'status' label`,
+		}),
 		defineField({
 			type: 'geopoint',
 			title: 'Location (map)',

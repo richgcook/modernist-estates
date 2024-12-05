@@ -376,6 +376,18 @@ div.home-featured-blocks {
 					opacity: 1;
 				}
 			}
+			&:after {
+				content: none;
+				position: absolute;
+				inset: 0;
+				height: 100%;
+				width: 100%;
+				background-color: rgba(0, 0, 0, 0.3);
+				z-index: 1;
+				@include media('phone') {
+					content: '';
+				}
+			}
 			div.image {
 				@include media('phone') {
 					aspect-ratio: auto;
@@ -394,6 +406,9 @@ div.home-featured-blocks {
 				opacity: 0;
 				pointer-events: none;
 				transition: opacity 0.3s;
+				@include media('phone') {
+					display: none;
+				}
 			}
 			h3 {
 				font-size: var(--font-size-lg);
