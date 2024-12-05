@@ -348,6 +348,9 @@ div.landing {
 div.home-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
+	@include media('phone') {
+		row-gap: 0;
+	}
 	div.page-hero {
 		@include media('phone') {
 			display: none;
@@ -371,6 +374,15 @@ div.home-featured-blocks {
 			&:hover {
 				div.overlay {
 					opacity: 1;
+				}
+			}
+			div.image {
+				@include media('phone') {
+					aspect-ratio: auto;
+					height: calc(100vh - var(--header-height));
+					@supports (height: 100svh) {
+						height: calc(100svh - var(--header-height));
+					}
 				}
 			}
 			div.overlay {
@@ -445,6 +457,7 @@ div.home-journal-layout {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto;
 		padding: 0;
+		margin-top: calc(var(--padding-base) * 2);
 	}
 	div.journal {
 		&:nth-of-type(1) {

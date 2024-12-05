@@ -101,6 +101,9 @@ div.property {
 		display: inline-flex;
 		font-size: 24px;
 		margin-top: 10px;
+		@include media('phone') {
+			font-size: var(--font-size-md);
+		}
 	}
 }
 
