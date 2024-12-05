@@ -65,7 +65,7 @@
 		<div class="page-navigation" v-if="data.property.propertiesByCurrentPropertyGroup">
 			<ul>
 				<li class="--prev" v-if="prevProperty"><NuxtLink :to="useInternalLinkUrl(prevProperty)">&larr; Previous<span> property</span></NuxtLink></li>
-				<li class="--all"><NuxtLink to="/homes">All properties</NuxtLink></li>
+				<li class="--all"><NuxtLink :to="useInternalLinkUrl(data.property.propertyGroup)">All properties</NuxtLink></li>
 				<li class="--next" v-if="nextProperty"><NuxtLink :to="useInternalLinkUrl(nextProperty)">Next<span> property</span> &rarr;</NuxtLink></li>
 			</ul>
 		</div>
