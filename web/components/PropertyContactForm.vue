@@ -121,6 +121,9 @@ form {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: calc(var(--padding-base) / 2);
+		@include media('phone') {
+			grid-template-columns: 1fr;
+		}
 		div.field {
 			display: flex;
 			flex-flow: column nowrap;
@@ -175,6 +178,10 @@ form {
 			border: 1px solid currentColor;
 			height: 20px;
 			width: 20px;
+			@include media('phone') {
+				height: 16px;
+				width: 16px;
+			}
 			&:checked:after {
 				content: '';
 				position: absolute;
@@ -193,8 +200,11 @@ form {
 			user-select: none;
 			cursor: pointer;
 			font-family: var(--font-sans);
-			font-size: 13px;
+			font-size: 14px;
 			text-transform: uppercase;
+			@include media('phone') {
+				font-size: 12px;
+			}
 		}
 	}
 	div.actions {
@@ -214,6 +224,10 @@ form {
 		color: white;
 		border: 1px solid black;
 		padding: 15px 40px;
+		@include media('phone') {
+			font-size: 12px;
+			padding: 10px var(--padding-base);
+		}
 		&:hover {
 			background-color: transparent;
 			color: black;

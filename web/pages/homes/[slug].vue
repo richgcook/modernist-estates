@@ -460,6 +460,10 @@ div.contact-form-popup {
 				font-weight: 900;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
+				margin-bottom: 5px;
+				@include media('phone') {
+					font-size: 12px;
+				}
 			}
 			h3.title {
 				font-size: var(--font-size-md);
@@ -468,10 +472,13 @@ div.contact-form-popup {
 			}
 			div.disclaimer {
 				font-family: var(--font-sans);
-				font-size: 13px;
+				font-size: 14px;
 				text-transform: uppercase;
 				margin-top: 10px;
 				white-space: pre-wrap;
+				@include media('phone') {
+					font-size: 12px;
+				}
 			}
 		}
 	}
