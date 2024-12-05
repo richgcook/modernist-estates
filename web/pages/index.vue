@@ -413,6 +413,9 @@ div.properties-sections {
 		display: grid;
 		row-gap: var(--padding-base);
 		padding: calc(var(--padding-base) * 2) 0;
+		@include media('phone') {
+			padding-top: var(--padding-base);
+		}
 		&[data-type="sales"] {
 			padding-top: 0;
 		}
