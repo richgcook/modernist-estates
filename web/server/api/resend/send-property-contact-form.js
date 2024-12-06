@@ -76,8 +76,6 @@ export default defineEventHandler(async (event) => {
 			}),
 		})
 
-		console.log(res)
-
 		if (res.ok) {
 			return {
 				statusCode: 200,

@@ -6,13 +6,22 @@
 			<li v-if="data.propertiesForHolidayPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForHolidayPage)">{{ data.propertiesForHolidayPage.title }}</NuxtLink></li>
 			<li v-if="data.propertiesForRentPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForRentPage)">{{ data.propertiesForRentPage.title }}</NuxtLink></li>
 		</ul>
-		<div class="filter">
-			//TODO: FILTER
+		<div class="filters" v-if="filters?.length" ref="filtersElem">
+			<button type="button" @click="filtersOpen = !filtersOpen" class="filters-trigger">Filter</button>
+			<div class="filters-panel" v-show="filtersOpen" v-cloak>
+				<PropertyFilter v-for="(filter, index) in filters" :key="index" :filter="filter" :isLast="index == filters.length - 1" />
+			</div>
 		</div>
 	</nav>
 </template>
 
 <script setup>
+
+import { onClickOutside } from '@vueuse/core'
+
+const props = defineProps({
+	filters: Array,
+})
 
 const { $seoQuery } = useNuxtApp()
 
@@ -40,24 +49,37 @@ const query = groq`{
 
 const { data } = await useSanityQuery(query)
 
+const filtersOpen = ref(false)
+
+const filtersElem = ref(null)
+
+onClickOutside(filtersElem, () => {
+	if (filtersOpen) filtersOpen.value = false
+})
+
 </script>
 
 <style lang="scss" scoped>
 
 nav.properties-groups {
-	display: flex;
-	flex-flow: row nowrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 	justify-content: center;
-	padding: 0 var(--padding-base);
-	margin-bottom: var(--padding-base);
-	position: relative;
+	padding: 0 var(--padding-base) calc(var(--padding-base) / 2) var(--padding-base);
+	margin-bottom: calc(var(--padding-base) / 2);
+	position: sticky;
+	top: var(--header-height);
+	background-color: var(--color-bg);
+	z-index: 10;
 	@include media('phone') {
-		flex-flow: column nowrap;
-		row-gap: calc(var(--padding-base) / 2);
+		//flex-flow: column nowrap;
+		//row-gap: calc(var(--padding-base) / 2);
 	}
 	ul {
+		grid-column: 2;
 		display: flex;
 		flex-flow: row nowrap;
+		justify-content: center;
 		column-gap: var(--padding-base);
 		@include media('phone') {
 			justify-content: center;
@@ -83,12 +105,27 @@ nav.properties-groups {
 			}
 		}
 	}
-	div.filter {
-		position: absolute;
-		right: var(--padding-base);
-		@include media('phone') {
-			position: relative;
-			right: 0;
+	div.filters {
+		display: flex;
+		justify-self: flex-end;
+		button.filters-trigger {
+			all: unset;
+			box-sizing: border-box;
+			cursor: pointer;
+			font-family: var(--font-sans);
+			font-size: 15px;
+			font-weight: 900;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+		}
+		div.filters-panel {
+			position: absolute;
+			top: calc(var(--padding-base) / 2);
+			right: calc(var(--padding-base) / 2);
+			background-color: white;
+			width: 340px;
+			padding: 3px 10px;
+			z-index: 5;
 		}
 	}
 }

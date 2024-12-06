@@ -1,15 +1,17 @@
 <template>
 	<div>
-		<PropertiesNav />
-		<PropertiesLayout v-if="data.propertiesForSalePage.properties?.length">
-			<PropertyCard v-for="property in data.propertiesForSalePage.properties" :key="property._id" :property="property" />
+		<PropertiesNav :filters="data.propertiesForSalePage.filters" />
+		<PropertiesLayout v-if="filterAndSearchStore.filterData(data.propertiesForSalePage.properties)?.length">
+			<PropertyCard v-for="property in filterAndSearchStore.filterData(data.propertiesForSalePage.properties)" :key="property._id" :property="property" />
 		</PropertiesLayout>
 	</div>
 </template>
 
 <script setup>
 
-const { $seoQuery, $propertyQuery } = useNuxtApp()
+import { useFilterAndSearchStore } from '~/store/filterAndSearch'
+
+const { $seoQuery, $propertyQuery, $propertyGroupFiltersQuery } = useNuxtApp()
 
 const query = groq`{ 
 
@@ -20,6 +22,9 @@ const query = groq`{
 		"properties": *[_type == "property" && references(^._id)] {
 			${$propertyQuery},
 		},
+		"filters": [
+			${$propertyGroupFiltersQuery},
+		],
 	}[0],
 	
 }`
@@ -39,5 +44,7 @@ useHead({
 		class: bodyClass.value
 	}
 })
+
+const filterAndSearchStore = useFilterAndSearchStore()
 
 </script>

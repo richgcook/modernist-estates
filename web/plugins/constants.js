@@ -188,6 +188,51 @@ const propertyQuery = `
 		},
 		showEnquiryButton, enquireButtonLabel, enquireEmail, enquireRef, 
 		showAlternativeContactButton, alternativeContactLabel, alternativeContactLink,
+	},
+	"filterables": {
+		"propertyFilterLocation": [location->{
+			_id, title
+		}][defined(@)],
+		"propertyFilterPrice": [priceRange->{
+			_id, title
+		}][defined(@)],
+		"propertyFilterBedrooms": [bedroomCount->{
+			_id, title
+		}][defined(@)],
+		"propertyFilterStatus": [status->{
+			_id, title
+		}][defined(@)],
+	}
+`
+
+const propertyGroupFiltersQuery = `
+	{
+		"title": "Location",
+		"_type": "propertyFilterLocation",
+		"items": *[_type == "propertyFilterLocation" && _id in *[_type == "property" && references(^.^._id)].location._ref] | order(title asc) {
+			_id, _type, title, slug,
+		}
+	},
+	{
+		"title": "Price",
+		"_type": "propertyFilterPrice",
+		"items": *[_type == "propertyFilterPrice" && _id in *[_type == "property" && references(^.^._id)].priceRange._ref] | order(title asc) {
+			_id, _type, title, slug,
+		}
+	},
+	{
+		"title": "Bedrooms",
+		"_type": "propertyFilterBedrooms",
+		"items": *[_type == "propertyFilterBedrooms" && _id in *[_type == "property" && references(^.^._id)].bedroomCount._ref] | order(title asc) {
+			_id, _type, title, slug,
+		}
+	},
+	{
+		"title": "Status",
+		"_type": "propertyFilterStatus",
+		"items": *[_type == "propertyFilterStatus" && _id in *[_type == "property" && references(^.^._id)].status._ref] | order(title asc) {
+			_id, _type, title, slug,
+		}
 	}
 `
 
@@ -199,6 +244,7 @@ export default defineNuxtPlugin(nuxtApp => {
 	nuxtApp.provide('pageBuilderBQuery', pageBuilderBQuery)
 	nuxtApp.provide('pageBuilderCQuery', pageBuilderCQuery)
 	nuxtApp.provide('propertyQuery', propertyQuery)
+	nuxtApp.provide('propertyGroupFiltersQuery', propertyGroupFiltersQuery)
 	nuxtApp.provide('journalArticleQuery', journalArticleQuery)
 	nuxtApp.provide('internalExternalLinkQuery', internalExternalLinkQuery)
 })

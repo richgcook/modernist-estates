@@ -35,6 +35,7 @@ export const useFilterAndSearchStore = defineStore({
 		},
 		filterData(data) {
 			// If no filters are active, return all data
+			//if (!Object.keys(this.activeFilters).length) return data
 			if (!Object.keys(this.activeFilters).length && !this.searchQuery) return data
 
 			// Filter the data array based on active filters
@@ -56,13 +57,13 @@ export const useFilterAndSearchStore = defineStore({
     				// If at least one value matches, return true for this filter type
 					// Compare based on _id
 					return activeFilterValues.some(activeFilter =>
-						itemFilterValues.some(itemFilter => itemFilter._id === activeFilter._id)
+						itemFilterValues.some(itemFilter => itemFilter && activeFilter && itemFilter._id === activeFilter._id)
 					)
 				})
 
 				// Check search query
-				const searchQueryLower = this.searchQuery.toLowerCase()
-				const searchMatch = item.searchables.some(text => text && text.toLowerCase().includes(searchQueryLower))
+				//const searchQueryLower = this.searchQuery.toLowerCase()
+				//const searchMatch = item.searchables.some(text => text && text.toLowerCase().includes(searchQueryLower))
 
 				// Return true if item passes both filter and search conditions
 				return passesFilters && (this.searchQuery ? searchMatch : true)
@@ -81,8 +82,5 @@ export const useFilterAndSearchStore = defineStore({
 			)
 		},
 		getSearchQuery: state => state.searchQuery,
-		isFilterActive: (state) => {
-			return (filterType, item) => state.activeFilters[filterType]?.some(activeFilter => activeFilter._id === item._id)
-		}
 	}
 })
