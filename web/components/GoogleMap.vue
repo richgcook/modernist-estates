@@ -10,13 +10,15 @@
 		api-key="AIzaSyCU8q_focgghGF1tMuJ2nz9HUaPKbGj-oQ"
 		mapId="3b003f46384c7b3b"
 	>
-		<AdvancedMarker :options="markerOptions" :pin-options="pinOptions" />
+		<CustomMarker :options="markerOptions">
+			<div class="pin"></div>
+		</CustomMarker>
 	</GoogleMap>
 </template>
 
 <script setup>
 
-import { GoogleMap, AdvancedMarker } from 'vue3-google-map'
+import { GoogleMap, CustomMarker } from 'vue3-google-map'
 
 const props = defineProps({
 	marker: Object,
@@ -45,6 +47,11 @@ const customInlineStyles = {
 
 <style lang="scss" scoped>
 
-
+div.pin {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: rgb(95, 157, 180, 0.75);
+}
 
 </style>
