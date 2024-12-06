@@ -60,6 +60,9 @@ div.filter {
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		padding: 7px 0;
+		@include media('phone') {
+			font-size: 12px;
+		}
 		svg {
 			flex-shrink: 0;
 			display: block;
@@ -71,7 +74,8 @@ div.filter {
 	> ul.items {
 		max-height: 300px;
    		overflow-y: auto;
-		padding-bottom: 7px;
+		padding-bottom: 5px;
+		margin-top: -2px;
 		li {
 			font-family: var(--font-sans);
 			font-size: 15px;
@@ -79,6 +83,9 @@ div.filter {
 			text-transform: uppercase;
 			display: flex;
 			flex-flow: row nowrap;
+			@include media('phone') {
+				font-size: 12px;
+			}
 			&.--active {
 				button {
 					span.radio {
@@ -98,6 +105,10 @@ div.filter {
 				justify-content: space-between;
 				align-items: baseline;
 				position: relative;
+				padding: 2px 0;
+				@include media('phone') {
+					align-items: baseline;
+				}
 				span.radio {
 					height: 12px;
 					width: 12px;

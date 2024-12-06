@@ -72,8 +72,10 @@ nav.properties-groups {
 	background-color: var(--color-bg);
 	z-index: 10;
 	@include media('phone') {
-		//flex-flow: column nowrap;
-		//row-gap: calc(var(--padding-base) / 2);
+		display: flex;
+		flex-flow: column nowrap;
+		row-gap: var(--padding-base);
+		margin-bottom: 0;
 	}
 	ul {
 		grid-column: 2;
@@ -108,6 +110,7 @@ nav.properties-groups {
 	div.filters {
 		display: flex;
 		justify-self: flex-end;
+		position: relative;
 		button.filters-trigger {
 			all: unset;
 			box-sizing: border-box;
@@ -117,15 +120,24 @@ nav.properties-groups {
 			font-weight: 900;
 			text-transform: uppercase;
 			letter-spacing: 0.1em;
+			@include media('phone') {
+				font-size: 12px;
+			}
 		}
 		div.filters-panel {
 			position: absolute;
 			top: calc(var(--padding-base) / 2);
-			right: calc(var(--padding-base) / 2);
+			right: calc(-1 * var(--padding-base) / 2);
 			background-color: white;
 			width: 340px;
 			padding: 3px 10px;
 			z-index: 5;
+			@include media('phone') {
+				right: auto;
+				top: calc(var(--padding-base) / 1);
+				left: calc(-1 * var(--padding-base) / 2);
+				width: 300px;
+			}
 		}
 	}
 }
