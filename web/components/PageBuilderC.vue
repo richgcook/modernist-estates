@@ -64,7 +64,12 @@ div.blocks-layout {
 				letter-spacing: 0.06em;
 				margin-bottom: calc(var(--padding-base) / 4);
 				@include media('phone') {
-					font-size: 14px;
+					font-size: 15px;
+				}
+			}
+			div.text {
+				@include media('phone') {
+					font-size: var(--font-size-md);
 				}
 			}
 		}
@@ -77,11 +82,14 @@ div.blocks-layout {
 				letter-spacing: 0.06em;
 				margin-bottom: calc(var(--padding-base) / 4);
 				@include media('phone') {
-					font-size: 14px;
+					font-size: 15px;
 				}
 			}
 			ul.list {
 				li {
+					@include media('phone') {
+						font-size: var(--font-size-md);
+					}
 					&.--open {
 						h4 button svg {
 							transform: rotate(45deg);

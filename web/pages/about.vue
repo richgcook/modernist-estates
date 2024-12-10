@@ -150,7 +150,7 @@ div.page-layout {
 			text-align: center;
 			margin-bottom: calc(var(--padding-base) / 2);
 			@include media('phone') {
-				font-size: 14px;
+				font-size: 15px;
 				margin-bottom: 0;
 			}
 		}
@@ -167,7 +167,7 @@ div.page-layout {
 				text-align: center;
 				margin: calc(var(--padding-base) / 2) 0 calc(var(--padding-base) / 4) 0;
 				@include media('phone') {
-					font-size: 14px;
+					font-size: 15px;
 					margin: var(--padding-base) 0 calc(var(--padding-base) / 2) 0;
 				}
 			}
@@ -175,6 +175,7 @@ div.page-layout {
 				max-width: 90%;
 				@include media('phone') {
 					max-width: none;
+					font-size: var(--font-size-md);
 					padding: 0 var(--padding-base);
 				}
 			}

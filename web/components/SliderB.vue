@@ -212,7 +212,7 @@ div.slider-container {
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
 		@include media('phone') {
-			font-size: 14px;
+			font-size: 15px;
 		}
 		span {
 			color: var(--color-highlight);

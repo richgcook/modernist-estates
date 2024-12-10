@@ -114,7 +114,7 @@ div.form {
 			letter-spacing: 0.06em;
 			text-align: center;
 			@include media('phone') {
-				font-size: 14px;
+				font-size: 15px;
 			}
 		}
 	}

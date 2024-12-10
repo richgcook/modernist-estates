@@ -326,6 +326,7 @@ div.page-layout {
 		}
 		div.contact {
 			margin-top: var(--padding-base);
+			font-size: var(--font-size-md);
 			display: none;
 			@include media('phone') {
 				display: block;
