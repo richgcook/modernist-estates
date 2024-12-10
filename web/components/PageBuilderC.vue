@@ -12,7 +12,7 @@
 				<h3 v-if="block.title">{{ block.title }}</h3>
 				<ul class="list">
 					<li v-for="(item, itemIndex) in block.list" :key="itemIndex" :class="{ '--open': openAccordionItems.includes(`${index}${itemIndex}`) }">
-						<h4><button type="button" @click="toggleAccordionItem(`${index}${itemIndex}`)"><span>{{ item.title }}</span><SymbolPlus /></button></h4>
+						<h4><button type="button" @click="toggleAccordionItem(`${index}${itemIndex}`)">{{ item.title }}<span><SymbolPlus /></span></button></h4>
 						<div class="content" v-show="openAccordionItems.includes(`${index}${itemIndex}`)" v-cloak>
 							<RichText :blocks="item.text" />
 						</div>
@@ -100,18 +100,23 @@ div.blocks-layout {
 							all: unset;
 							box-sizing: border-box;
 							cursor: pointer;
-							display: inline-flex;
-							column-gap: 5px;
-							align-items: center;
-							svg {
-								flex-shrink: 0;
-								display: block;
+							span {
+								display: inline-flex;
+								position: relative;
 								height: 16px;
 								width: 16px;
-								transition: transform 0.3s;
+								padding-left: 5px;
 								@include media('phone') {
 									height: 14px;
 									width: 14px;
+								}
+								svg {
+									flex-shrink: 0;
+									display: block;
+									position: absolute;
+									height: 100%;
+									width: 100%;
+									transition: transform 0.3s;
 								}
 							}
 						}
