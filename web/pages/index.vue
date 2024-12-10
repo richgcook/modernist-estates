@@ -353,7 +353,8 @@ div.home-layout {
 	}
 	div.page-hero {
 		@include media('phone') {
-			display: none;
+			aspect-ratio: 4 / 3;
+			margin: 0 0 calc(var(--padding-base) * 2) 0;
 		}
 	}
 }
@@ -418,9 +419,6 @@ div.home-featured-blocks {
 				left: 50%;
 				transform: translate(-50%, -50%);
 				z-index: 2;
-				@include media('phone') {
-					font-size: 48px;
-				}
 			}
 		}
 	}
