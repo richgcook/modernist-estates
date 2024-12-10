@@ -9,7 +9,7 @@
 		<div class="filters" v-if="filters?.length" ref="filtersElem">
 			<button type="button" @click="filtersOpen = !filtersOpen" class="filters-trigger">Filter</button>
 			<div class="filters-panel" v-show="filtersOpen" v-cloak>
-				<PropertyFilter v-for="(filter, index) in filters" :key="index" :filter="filter" :isLast="index == filters.length - 1" />
+				<PropertyFilter v-for="(filter, index) in filtersWithItems" :key="index" :filter="filter" :isLast="index == filtersWithItems.length - 1" />
 			</div>
 		</div>
 	</nav>
@@ -52,6 +52,10 @@ const { data } = await useSanityQuery(query)
 const filtersOpen = ref(false)
 
 const filtersElem = ref(null)
+
+const filtersWithItems = computed(() => {
+	return props.filters.filter(filter => filter.items && filter.items.length > 0)
+})
 
 onClickOutside(filtersElem, () => {
 	if (filtersOpen) filtersOpen.value = false
