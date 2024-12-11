@@ -62,10 +62,8 @@ useHead({
 div.page-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
-	div.page-hero {
-		@include media('phone') {
-			display: none;
-		}
+	@include media('tablet-portrait') {
+		row-gap: var(--padding-base);
 	}
 	div.content {
 		display: grid;

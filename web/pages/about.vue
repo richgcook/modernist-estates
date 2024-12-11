@@ -102,10 +102,8 @@ useHead({
 div.page-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
-	div.page-hero {
-		@include media('phone') {
-			display: none;
-		}
+	@include media('tablet-portrait') {
+		row-gap: var(--padding-base);
 	}
 	div.content {
 		display: grid;
@@ -150,15 +148,8 @@ div.page-layout {
 		}
 		h3.section-title {
 			grid-column: 1 / -1;
-			font-family: var(--font-sans);
-			font-size: var(--font-size-sm);
-			text-transform: uppercase;
-			letter-spacing: 0.06em;
+			font-size: var(--font-size-lg);
 			text-align: center;
-			margin-bottom: calc(var(--padding-base) / 2);
-			@include media('tablet-portrait-and-phone') {
-				margin-bottom: 0;
-			}
 		}
 		div.service {
 			grid-column: span 4;

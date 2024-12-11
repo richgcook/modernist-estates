@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<PropertiesNav :filters="data.filters" />
+		<PropertiesNav />
 		<PropertiesLayout v-if="filterAndSearchStore.filterData(data.properties)?.length">
 			<PropertyCard v-for="property in filterAndSearchStore.filterData(data.properties)" :key="property._id" :property="property" />
 		</PropertiesLayout>
@@ -24,45 +24,6 @@ const query = groq`{
 			${$seoQuery}
 		},
 	}[0],
-
-	"filters": [
-		{
-			"title": "Location",
-			"_type": "propertyFilterLocation",
-			"items": *[_type == "propertyFilterLocation" && _id in *[_type == "property"].location._ref] | order(title asc) {
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			}
-		},
-		{
-			"title": "Price",
-			"_type": "propertyFilterPrice",
-			"items": *[_type == "propertyFilterPrice" && _id in *[_type == "property"].priceRange._ref] | order(title asc) {
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			}
-		},
-		{
-			"title": "Bedrooms",
-			"_type": "propertyFilterBedrooms",
-			"items": *[_type == "propertyFilterBedrooms" && _id in *[_type == "property"].bedroomCount._ref] | order(title asc) {
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			}
-		},
-		{
-			"title": "Status",
-			"_type": "propertyFilterStatus",
-			"items": *[_type == "propertyFilterStatus" && _id in *[_type == "property"].status._ref] | order(title asc) {
-				_id, _type, title, slug, seo {
-					${$seoQuery}
-				},
-			}
-		},
-	],
 	
 }`
 

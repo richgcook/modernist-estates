@@ -15,7 +15,7 @@
 		</div>
 		<div class="home-layout">
 
-			<PageHero :image="data.homePage.hero?.image" v-if="data.homePage.hero.image?.asset" />
+			<PageHero :image="data.homePage.hero?.image" :context="`home`" v-if="data.homePage.hero.image?.asset" />
 
 			<div class="home-featured-blocks" v-if="data.homePage.featuredLinks?.length">
 				<div v-for="block in data.homePage.featuredLinks" :key="block._id" class="block">
@@ -366,14 +366,8 @@ div.landing {
 div.home-layout {
 	display: grid;
 	row-gap: calc(var(--padding-base) * 2);
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		row-gap: 0;
-	}
-	div.page-hero {
-		@include media('phone') {
-			aspect-ratio: 4 / 3;
-			margin: 0 0 calc(var(--padding-base) * 2) 0;
-		}
 	}
 }
 div.home-featured-blocks {
@@ -401,7 +395,7 @@ div.home-featured-blocks {
 				inset: 0;
 				height: 100%;
 				width: 100%;
-				background-color: rgba(0, 0, 0, 0.3);
+				background-color: rgba(0, 0, 0, 0.2);
 				z-index: 1;
 				@include media('tablet-portrait-and-phone') {
 					content: '';

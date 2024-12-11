@@ -33,6 +33,7 @@ div.text {
 		line-height: 1.33;
 	}
 	:deep(strong) {
+		display: block;
 		font-family: var(--font-sans);
 		font-size: var(--font-size-sm);
 		font-weight: normal;

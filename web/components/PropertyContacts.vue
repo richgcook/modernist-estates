@@ -37,7 +37,7 @@ div.contacts {
 	div.details {
 		@include media('tablet-portrait-and-phone') {
 			display: none;
-		}n
+		}
 		h3 {
 			font-family: var(--font-sans);
 			font-size: var(--font-size-xs);

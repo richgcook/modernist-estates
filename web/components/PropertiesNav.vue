@@ -115,8 +115,11 @@ nav.properties-groups {
 			text-transform: uppercase;
 			a {
 				color: black;
+				&:hover,
 				&.router-link-active {
-					text-decoration: 1px solid underline;
+					text-decoration-thickness: 1px;
+					text-decoration-style: solid;
+					text-decoration-line: underline;
 					text-underline-offset: 5px;
 				}
 			}

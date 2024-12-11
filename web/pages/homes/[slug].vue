@@ -275,7 +275,7 @@ div.page-layout {
 			display: flex;
 		}
 		> div {
-			padding: 15px;
+			padding: 15px var(--padding-base);
 		}
 		div.actions {
 			&.--has-sep {
