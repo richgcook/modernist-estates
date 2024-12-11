@@ -38,12 +38,15 @@
 :root {
 	--font-size-base: 24px;
 
-	--font-size-title-lg: 53px;
 
 	--font-size-lg: 36px;
 	--font-size-md: 28px;
-	--font-size-title-sm: 27px;
-	--font-size-title-xs: 20px;
+
+	--font-size-sm: 20px;
+
+	--font-size-xs: 15px;
+
+	--font-size-xxs: 12px;
 
 	--padding-base: 50px;
 
@@ -71,6 +74,16 @@
 	--font-primary: var(--font-serif);
 
 }
+@include media('laptop') {
+	:root { 
+		--font-size-base: 22px;
+
+		--font-size-lg: 32px;
+		--font-size-md: 25px;
+
+		--font-size-sm: 18px;
+	}
+}
 @include media('tablet-landscape') {
 	:root { 
 		
@@ -87,6 +100,8 @@
 
 		--font-size-lg: 26px;
 		--font-size-md: 20px;
+		--font-size-sm: 15px;
+		--font-size-xs: 12px;
 
 		--padding-base: 25px;
 
@@ -94,33 +109,6 @@
 		--logo-height: 12px;
 	}
 }
-
-.fs-lg {
-	font-size: var(--font-size-title-lg);
-	letter-spacing: 0.02em;
-}
-.fs-md {
-	font-size: var(--font-size-title-md);
-	letter-spacing: 0.02em;
-}
-.fs-sm {
-	font-size: var(--font-size-title-sm);
-	font-weight: 700;
-	letter-spacing: 0.06em;
-}
-.fs-sm {
-	font-size: var(--font-size-title-sm);
-	letter-spacing: 0.06em;
-}
-.fs-xs {
-	font-size: var(--font-size-title-xs);
-	letter-spacing: 0.1em;
-}
-.fs-xs {
-	font-size: var(--font-size-title-xs);
-	letter-spacing: 0.06em;
-}
-
 * {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

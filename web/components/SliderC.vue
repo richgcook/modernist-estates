@@ -159,7 +159,7 @@ div.slider-container {
 		right: var(--padding-base);
 		flex-shrink: 0;
 		font-family: var(--font-sans);
-		font-size: 20px;
+		font-size: var(--font-size-sm);
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
 		span {

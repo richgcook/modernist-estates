@@ -57,15 +57,16 @@ div.blocks-layout {
 		grid-column: 1 / -1;
 		&[data-type="text"] {
 			grid-column: 4 / span 6;
+			@include media('laptop') {
+				grid-column: 3 / span 8;
+				padding: 0 5%;
+			}
 			h3 {
 				font-family: var(--font-sans);
-				font-size: 20px;
+				font-size: var(--font-size-sm);
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				margin-bottom: calc(var(--padding-base) / 4);
-				@include media('phone') {
-					font-size: 15px;
-				}
 			}
 			div.text {
 				@include media('phone') {
@@ -75,15 +76,16 @@ div.blocks-layout {
 		}
 		&[data-type="accordion-list"] {
 			grid-column: 4 / span 6;
+			@include media('laptop') {
+				grid-column: 3 / span 8;
+				padding: 0 5%;
+			}
 			h3 {
 				font-family: var(--font-sans);
-				font-size: 20px;
+				font-size: var(--font-size-sm);
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				margin-bottom: calc(var(--padding-base) / 4);
-				@include media('phone') {
-					font-size: 15px;
-				}
 			}
 			ul.list {
 				li {

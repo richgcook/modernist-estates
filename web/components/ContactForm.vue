@@ -109,13 +109,10 @@ div.form {
 		}
 		h3 {
 			font-family: var(--font-sans);
-			font-size: 20px;
+			font-size: var(--font-size-sm);
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			text-align: center;
-			@include media('phone') {
-				font-size: 15px;
-			}
 		}
 	}
 }
@@ -171,8 +168,11 @@ form {
 		text-transform: uppercase;
 		border: 1px solid black;
 		padding: 15px 40px;
+		@include media('laptop') {
+			font-size: 14px;
+		}
 		@include media('phone') {
-			font-size: 12px;
+			font-size: var(--font-size-xs);
 			padding: 10px var(--padding-base);
 		}
 		&:hover {

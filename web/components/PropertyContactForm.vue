@@ -200,11 +200,8 @@ form {
 			user-select: none;
 			cursor: pointer;
 			font-family: var(--font-sans);
-			font-size: 14px;
+			font-size: var(--font-size-xs);
 			text-transform: uppercase;
-			@include media('phone') {
-				font-size: 12px;
-			}
 		}
 	}
 	div.actions {
@@ -224,8 +221,11 @@ form {
 		color: white;
 		border: 1px solid black;
 		padding: 15px 40px;
+		@include media('laptop') {
+			font-size: 14px;
+		}
 		@include media('phone') {
-			font-size: 12px;
+			font-size: var(--font-size-xs);
 			padding: 10px var(--padding-base);
 		}
 		&:hover {

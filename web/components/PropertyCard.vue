@@ -85,14 +85,11 @@ div.property {
 	}
 	h5.status {
 		font-family: var(--font-sans);
-		font-size: 15px;
+		font-size: var(--font-size-xs);
 		font-weight: 900;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		margin-bottom: 5px;
-		@include media('phone') {
-			font-size: 12px;
-		}
 		&.--unavailable {
 			color: var(--color-highlight);
 		}

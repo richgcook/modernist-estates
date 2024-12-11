@@ -192,12 +192,12 @@ div.slider-container {
 		}
 		h3 {
 			font-family: var(--font-sans);
-			font-size: 20px;
+			font-size: var(--font-size-sm);
 			font-weight: 900;
 			text-transform: uppercase;
 			letter-spacing: 0.1em;
 			@include media('phone') {
-				font-size: 12px;
+				font-size: var(--font-size-xs);
 			}
 		}
 		h2 {

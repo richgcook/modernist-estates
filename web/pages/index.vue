@@ -328,6 +328,9 @@ div.landing {
 			fill: currentColor;
 			margin: 0 auto;
 			opacity: 0;
+			@include media('laptop') {
+				height: 25px;
+			}
 			@include media('phone') {
 				height: 16px;
 			}
@@ -338,6 +341,9 @@ div.landing {
 			font-weight: 900;
 			letter-spacing: 0.02em;
 			opacity: 0;
+			@include media('laptop') {
+				font-size: 31px;
+			}
 			@include media('phone') {
 				font-size: 24px;
 				white-space: normal;
@@ -454,8 +460,11 @@ div.properties-sections {
 			border: 1px solid black;
 			margin: var(--padding-base) auto 0 auto;
 			padding: 15px 40px;
+			@include media('laptop') {
+				font-size: 14px;
+			}
 			@include media('phone') {
-				font-size: 12px;
+				font-size: var(--font-size-xs);
 				padding: 10px var(--padding-base);
 			}
 			&:hover {
@@ -565,7 +574,7 @@ div.home-journal-layout {
 				}
 				h3 {
 				    font-family: var(--font-sans);
-					font-size: 20px;
+					font-size: var(--font-size-md);
 					font-weight: 900;
 					text-transform: uppercase;
 					letter-spacing: 0.1em;
@@ -590,7 +599,7 @@ div.home-journal-layout {
 			}
 			h5 {
 				font-family: var(--font-sans);
-				font-size: 15px;
+				font-size: var(--font-size-sm);
 				font-weight: 900;
 				text-transform: uppercase;
 				letter-spacing: 0.1em;

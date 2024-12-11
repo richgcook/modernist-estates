@@ -1,15 +1,18 @@
 <template>
-	<nav class="properties-groups">
+	<nav class="properties-groups" :data-context="route.name">
 		<ul>
 			<li><NuxtLink to="/homes">All</NuxtLink></li>
-			<li v-if="data.propertiesForSalePage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForSalePage)">{{ data.propertiesForSalePage.title }}</NuxtLink></li>
-			<li v-if="data.propertiesForHolidayPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForHolidayPage)">{{ data.propertiesForHolidayPage.title }}</NuxtLink></li>
-			<li v-if="data.propertiesForRentPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForRentPage)">{{ data.propertiesForRentPage.title }}</NuxtLink></li>
+			<li v-if="data.propertiesForSalePage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForSalePage)" :class="{ 'router-link-active': isActivePropertyGroup(data.propertiesForSalePage._id) }">{{ data.propertiesForSalePage.title }}</NuxtLink></li>
+			<li v-if="data.propertiesForHolidayPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForHolidayPage)" :class="{ 'router-link-active': isActivePropertyGroup(data.propertiesForHolidayPage._id) }">{{ data.propertiesForHolidayPage.title }}</NuxtLink></li>
+			<li v-if="data.propertiesForRentPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForRentPage)" :class="{ 'router-link-active': isActivePropertyGroup(data.propertiesForRentPage._id) }">{{ data.propertiesForRentPage.title }}</NuxtLink></li>
 		</ul>
 		<div class="filters" v-if="filters?.length" ref="filtersElem">
 			<button type="button" @click="filtersOpen = !filtersOpen" class="filters-trigger">Filter</button>
 			<div class="filters-panel" v-show="filtersOpen" v-cloak>
 				<PropertyFilter v-for="(filter, index) in filtersWithItems" :key="index" :filter="filter" :isLast="index == filtersWithItems.length - 1" />
+				<div v-show="Object.keys(filterAndSearchStore.getActiveFilters).length" class="clear-filters">
+					<button class="clear" @click="filterAndSearchStore.clearFilters">Clear</button>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -17,10 +20,12 @@
 
 <script setup>
 
+import { useFilterAndSearchStore } from '~/store/filterAndSearch'
 import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
 	filters: Array,
+	activePropertyGroup: String
 })
 
 const { $seoQuery } = useNuxtApp()
@@ -61,6 +66,14 @@ onClickOutside(filtersElem, () => {
 	if (filtersOpen) filtersOpen.value = false
 })
 
+const isActivePropertyGroup = (id) => {
+	return props.activePropertyGroup?._id === id
+}
+
+const route = useRoute()
+
+const filterAndSearchStore = useFilterAndSearchStore()
+
 </script>
 
 <style lang="scss" scoped>
@@ -81,6 +94,11 @@ nav.properties-groups {
 		row-gap: var(--padding-base);
 		margin-bottom: 0;
 	}
+	&[data-context="homes-slug"] {
+		@include media('phone') {
+			padding-bottom: 15px;
+		}
+	}
 	ul {
 		grid-column: 2;
 		display: flex;
@@ -92,18 +110,11 @@ nav.properties-groups {
 		}
 		li {
 			font-family: var(--font-sans);
-			font-size: 15px;
+			font-size: var(--font-size-xs);
 			letter-spacing: 0.06em;
 			text-transform: uppercase;
-			@include media('phone') {
-				font-size: 12px;
-			}
 			a {
-				color: var(--color-grey);
-				&.router-link-active,
-				&:hover {
-					color: black;
-				}
+				color: black;
 				&.router-link-active {
 					text-decoration: 1px solid underline;
 					text-underline-offset: 5px;
@@ -120,27 +131,43 @@ nav.properties-groups {
 			box-sizing: border-box;
 			cursor: pointer;
 			font-family: var(--font-sans);
-			font-size: 15px;
+			font-size: var(--font-size-xs);
 			font-weight: 900;
 			text-transform: uppercase;
 			letter-spacing: 0.1em;
-			@include media('phone') {
-				font-size: 12px;
-			}
 		}
 		div.filters-panel {
 			position: absolute;
 			top: calc(var(--padding-base) / 2);
-			right: calc(-1 * var(--padding-base) / 2);
+			//right: calc(-1 * var(--padding-base) / 2);
+			right: 0;
 			background-color: white;
-			width: 340px;
+			width: 280px;
 			padding: 3px 10px;
 			z-index: 5;
 			@include media('phone') {
 				right: auto;
 				top: calc(var(--padding-base) / 1);
-				left: calc(-1 * var(--padding-base) / 2);
-				width: 300px;
+				//left: calc(-1 * var(--padding-base) / 2);
+				left: 0;
+				width: 240px;
+			}
+			div.clear-filters {
+				button.clear {
+					all: unset;
+					box-sizing: border-box;
+					cursor: pointer;
+					display: block;
+					width: 100%;
+					text-align: center;
+					font-family: var(--font-sans);
+					font-size: 13px;
+					font-weight: 700;
+					text-transform: uppercase;
+					letter-spacing: 0.1em;
+					padding: 7px 0;
+					border-top: 1px solid black;
+				}
 			}
 		}
 	}

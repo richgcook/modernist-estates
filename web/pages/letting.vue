@@ -78,6 +78,10 @@ div.page-layout {
 		}
 		div.introduction {
 			grid-column: 4 / span 6;
+			@include media('laptop') {
+				grid-column: 3 / span 8;
+				padding: 0 5%;
+			}
 			@include media('phone') {
 				grid-column: 1 / -1;
 			}

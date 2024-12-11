@@ -118,6 +118,10 @@ div.page-layout {
 		}
 		div.introduction {
 			grid-column: 4 / span 6;
+			@include media('laptop') {
+				grid-column: 3 / span 8;
+				padding: 0 5%;
+			}
 			@include media('phone') {
 				grid-column: 1 / -1;
 			}
@@ -144,13 +148,12 @@ div.page-layout {
 		h3.section-title {
 			grid-column: 1 / -1;
 			font-family: var(--font-sans);
-			font-size: 20px;
+			font-size: var(--font-size-sm);
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			text-align: center;
 			margin-bottom: calc(var(--padding-base) / 2);
 			@include media('phone') {
-				font-size: 15px;
 				margin-bottom: 0;
 			}
 		}
@@ -161,13 +164,12 @@ div.page-layout {
 			}
 			h4 {
 				font-family: var(--font-sans);
-				font-size: 20px;
+				font-size: var(--font-size-sm);
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				text-align: center;
 				margin: calc(var(--padding-base) / 2) 0 calc(var(--padding-base) / 4) 0;
 				@include media('phone') {
-					font-size: 15px;
 					margin: var(--padding-base) 0 calc(var(--padding-base) / 2) 0;
 				}
 			}

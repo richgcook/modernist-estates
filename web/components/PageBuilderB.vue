@@ -49,6 +49,10 @@ div.blocks-layout {
 		grid-column: 1 / -1;
 		&[data-type="text"] {
 			grid-column: 4 / span 6;
+			@include media('laptop') {
+				grid-column: 3 / span 8;
+				padding: 0 5%;
+			}
 			@include media('phone') {
 				grid-column: 1 / -1;
 			}
@@ -64,6 +68,10 @@ div.blocks-layout {
 			}
 			> div {
 				grid-column: 3 / span 8;
+				@include media('laptop') {
+					grid-column: 2 / span 10;
+					padding: 0 5%;
+				}
 				@include media('phone') {
 					grid-column: 1 / -1;
 				}
@@ -73,10 +81,13 @@ div.blocks-layout {
 			}
 			div.caption {
 				font-family: var(--font-sans);
-				font-size: 18px;
+				font-size: 16px;
 				margin-top: 10px;
+				@include media('laptop') {
+					font-size: 14px;
+				}
 				@include media('phone') {
-					font-size: 12px;
+					font-size: var(--font-size-xs);
 					margin-left: var(--padding-base);
 				}
 			}

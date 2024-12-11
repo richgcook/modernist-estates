@@ -121,8 +121,11 @@ div.newsletter-signup {
 				font-size: 16px;
 				user-select: none;
 				cursor: pointer;
+				@include media('laptop') {
+					font-size: 14px;
+				}
 				@include media('phone') {
-					font-size: 12px;
+					font-size: var(--font-size-xs);
 				}
 			}
 		}

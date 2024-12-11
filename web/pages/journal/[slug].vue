@@ -91,7 +91,7 @@ div.page-layout {
 				&.--prev,
 				&.--next {
 					font-family: var(--font-sans);
-					font-size: 12px;
+					font-size: var(--font-size-xxs);
 					text-transform: uppercase;
 					letter-spacing: 0.06em;
 				}
@@ -112,6 +112,10 @@ div.page-layout {
 	div.title {
 		text-align: center;
 		grid-column: 4 / span 6;
+		@include media('laptop') {
+			grid-column: 3 / span 8;
+			padding: 0 5%;
+		}
 		@include media('phone') {
 			grid-column: 1 / -1;
 		}

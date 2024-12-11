@@ -34,13 +34,10 @@ div.text {
 	}
 	:deep(strong) {
 		font-family: var(--font-sans);
-		font-size: 20px;
+		font-size: var(--font-size-sm);
 		font-weight: normal;
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
-		@include media('phone') {
-			font-size: 15px;
-		}
 	}
 	:deep(ul) {
 		li {

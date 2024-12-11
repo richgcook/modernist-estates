@@ -1,5 +1,6 @@
 <template>
 	<div class="page-layout">
+		<h2 class="page-title">{{ data.journalPage.title }}</h2>
 		<div class="journal-layout">
 			<JournalArticleCard v-for="article in data.articles" :key="article._id" :article="article" />
 		</div>
@@ -52,7 +53,16 @@ div.page-layout {
 	@include media('phone') {
 		grid-template-columns: 1fr;
 		padding: 0;
-		row-gap: calc(var(--padding-base) * 2);
+		row-gap: var(--padding-base);
+	}
+	h2.page-title {
+		grid-column: 1 / -1;
+		font-size: var(--font-size-lg);
+		text-align: center;
+		display: none;
+		@include media('phone') {
+			display: block;
+		}
 	}
 	div.journal-layout {
 		grid-column: 2 / span 10;

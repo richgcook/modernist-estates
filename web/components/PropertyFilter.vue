@@ -37,7 +37,7 @@ const isFilterActive = (filterType, item) => {
 div.filter {
 	display: flex;
     flex-flow: column nowrap;
-	border-bottom: 1px solid var(--color-bg);
+	border-bottom: 1px solid black;
 	&.--last {
 		border-bottom: none;
 	}
@@ -55,14 +55,11 @@ div.filter {
 		align-items: baseline;
 		justify-content: space-between;
 		font-family: var(--font-sans);
-		font-size: 15px;
-		font-weight: 900;
+		font-size: 13px;
+		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		padding: 7px 0;
-		@include media('phone') {
-			font-size: 12px;
-		}
 		svg {
 			flex-shrink: 0;
 			display: block;
@@ -78,14 +75,11 @@ div.filter {
 		margin-top: -2px;
 		li {
 			font-family: var(--font-sans);
-			font-size: 15px;
-			letter-spacing: 0.06em;
+			font-size: 13px;
+			letter-spacing: 0.04em;
 			text-transform: uppercase;
 			display: flex;
 			flex-flow: row nowrap;
-			@include media('phone') {
-				font-size: 12px;
-			}
 			&.--active {
 				button {
 					span.radio {

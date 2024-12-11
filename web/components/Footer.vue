@@ -86,12 +86,9 @@ footer {
 			row-gap: 3px;
 			li {
 				font-family: var(--font-sans);
-				font-size: 20px;
+				font-size: var(--font-size-sm);
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
-				@include media('phone') {
-					font-size: 15px;
-				}
 				a {
 					&:hover,
 					&.router-link-active {
@@ -108,13 +105,10 @@ footer {
 			}
 			h5 {
 				font-family: var(--font-sans);
-				font-size: 15px;
+				font-size: var(--font-size-xs);
 				font-weight: 900;
 				text-transform: uppercase;
 				letter-spacing: 0.1em;
-				@include media('phone') {
-					font-size: 12px;
-				}
 			}
 		}
 	}

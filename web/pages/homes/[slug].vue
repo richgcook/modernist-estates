@@ -1,5 +1,7 @@
 <template>
 	<div>
+		<PropertiesNav :activePropertyGroup="data.property.propertyGroup" />
+
 		<div class="page-layout">
 
 			<div class="featured-image-xs" v-if="data.property.featuredImages.imagePrimary?.asset" @click="data.property.images?.length ? mediaOverlayOpen = true : null">
@@ -14,8 +16,8 @@
 			</div>
 
 			<div class="actions-bar">
-				<PropertyActions :property="data.property" @openMap="mapOpen = true" @openMedia="mediaOverlayOpen = true" />
-				<PropertyContacts :property="data.property" @openContactForm="contactFormOpen = true" />
+				<PropertyActions :property="data.property" @openMap="mapOpen = true" @openMedia="mediaOverlayOpen = true" :class="{ '--has-sep': hasContactDetails }" v-if="hasActions" />
+				<PropertyContacts :property="data.property" @openContactForm="contactFormOpen = true" v-if="hasContactDetails" />
 			</div>
 
 			<div class="details">
@@ -198,6 +200,23 @@ onKeyStroke('Escape', (e) => {
 	}
 })
 
+const hasActions = computed(() => {
+	return !!(
+		data?.value.property.links?.length ||
+		data?.value.property.locationMap ||
+		data?.value.property.images?.length
+	)
+})
+
+const hasContactDetails = computed(() => {
+    return !!(
+        data?.value.property.contact?.title ||
+        data?.value.property.contact?.details?.length ||
+        data?.value.property.contact?.showEnquiryButton ||
+        data?.value.property.contact?.showAlternativeContactButton
+    )
+})
+
 const contactFormPopupElem = ref(null)
 const contactFormOpen = ref(false)
 
@@ -239,14 +258,10 @@ div.page-layout {
 	}
 	div.actions-bar {
 		position: sticky;
-		top: calc(var(--header-height) - 1px);
-		flex-flow: row nowrap;
+		top: calc(var(--header-height) + 32px);
+		flex-flow: column nowrap;
 		column-gap: 10px;
-		align-items: center;
-		justify-content: space-between;
 		background-color: var(--color-bg);
-		height: 48px;
-		padding: 0 var(--padding-base);
 		border-bottom: 1px solid black;
 		overflow-y: auto;
 		-ms-overflow-style: none;
@@ -258,6 +273,14 @@ div.page-layout {
 		display: none;
 		@include media('phone') {
 			display: flex;
+		}
+		> div {
+			padding: 15px;
+		}
+		div.actions {
+			&.--has-sep {
+				border-bottom: 1px solid black;
+			}
 		}
 	}
 	div.details {
@@ -286,14 +309,11 @@ div.page-layout {
 		}
 		h5.status {
 			font-family: var(--font-sans);
-			font-size: 15px;
+			font-size: var(--font-size-xs);
 			font-weight: 900;
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			margin-bottom: 5px;
-			@include media('phone') {
-				font-size: 12px;
-			}
 			&.--unavailable {
 				color: var(--color-highlight);
 			}
@@ -310,13 +330,10 @@ div.page-layout {
 			div.item {
 				h3 {
 					font-family: var(--font-sans);
-					font-size: 15px;
+					font-size: var(--font-size-xs);
 					text-transform: uppercase;
 					letter-spacing: 0.06em;
 					margin-bottom: 5px;
-					@include media('phone') {
-						font-size: 12px;
-					}
 				}
 				p {
 					font-size: var(--font-size-md);
@@ -333,7 +350,7 @@ div.page-layout {
 			}
 			h3 {
 				font-family: var(--font-sans);
-				font-size: 14px;
+				font-size: var(--font-size-sm);
 				font-weight: normal;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
@@ -356,7 +373,7 @@ div.page-layout {
 			align-items: center;
 			column-gap: 1ch;
 			font-family: var(--font-sans);
-			font-size: 20px;
+			font-size: var(--font-size-sm);
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			span {
@@ -379,9 +396,9 @@ div.page-layout {
 			position: relative;
 			width: 100%;
 			cursor: pointer;
-			height: calc(100vh - var(--header-height) - var(--padding-base));
+			height: calc(100vh - (var(--header-height) + var(--padding-base) + 21px + var(--padding-base)));
 			@supports (height: 100svh) {
-				height: calc(100svh - var(--header-height) - var(--padding-base));
+				height: calc(100svh - (var(--header-height) + var(--padding-base) + 21px + var(--padding-base)));
 			}
 			img {
 				position: absolute;
@@ -421,12 +438,12 @@ div.page-navigation {
 		}
 		li {
 			font-family: var(--font-sans);
-			font-size: 20px;
+			font-size: var(--font-size-sm);
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			text-align: center;
 			@include media('phone') {
-				font-size: 12px;
+				font-size: var(--font-size-xs);
 			}
 			&.--prev {
 				@include media('phone') {
@@ -472,14 +489,11 @@ div.contact-form-popup {
 			margin-bottom: var(--padding-base);
 			h4.subtitle {
 				font-family: var(--font-sans);
-				font-size: 15px;
+				font-size: var(--font-size-xs);
 				font-weight: 900;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				margin-bottom: 5px;
-				@include media('phone') {
-					font-size: 12px;
-				}
 			}
 			h3.title {
 				font-size: var(--font-size-md);
@@ -488,13 +502,10 @@ div.contact-form-popup {
 			}
 			div.disclaimer {
 				font-family: var(--font-sans);
-				font-size: 14px;
+				font-size: var(--font-size-xs);
 				text-transform: uppercase;
 				margin-top: 10px;
 				white-space: pre-wrap;
-				@include media('phone') {
-					font-size: 12px;
-				}
 			}
 		}
 	}

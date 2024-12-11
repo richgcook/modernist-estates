@@ -47,14 +47,11 @@ div.article {
 	}
 	h5.subtitle {
 		font-family: var(--font-sans);
-		font-size: 15px;
+		font-size: var(--font-size-xs);
 		font-weight: 900;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		margin-bottom: 5px;
-		@include media('phone') {
-			font-size: 12px;
-		}
 	}
 	h3.title {
 		font-size: var(--font-size-md);
