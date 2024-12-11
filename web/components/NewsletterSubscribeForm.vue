@@ -99,6 +99,9 @@ div.newsletter-signup {
 				border: 1px solid currentColor;
 				height: 20px;
 				width: 20px;
+				@include media('tablet') {
+					font-size: 18px;
+				}
 				@include media('phone') {
 					height: 16px;
 					width: 16px;
@@ -123,6 +126,9 @@ div.newsletter-signup {
 				cursor: pointer;
 				@include media('laptop') {
 					font-size: 14px;
+				}
+				@include media('tablet') {
+					font-size: 13px;
 				}
 				@include media('phone') {
 					font-size: var(--font-size-xs);

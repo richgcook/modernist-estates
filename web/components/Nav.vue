@@ -96,7 +96,7 @@ nav.main {
 	border-top: 1px solid black;
 	z-index: 15;
 	display: none;
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		display: block;
 	}
 	&.fade-enter-active,

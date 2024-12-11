@@ -112,7 +112,7 @@ div.page-layout {
 		grid-template-columns: repeat(12, 1fr);
 		grid-gap: 0 calc(var(--padding-base) / 2);
 		padding: 0 var(--padding-base);
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			grid-template-columns: 1fr;
 			row-gap: var(--padding-base);
 		}
@@ -122,7 +122,10 @@ div.page-layout {
 				grid-column: 3 / span 8;
 				padding: 0 5%;
 			}
-			@include media('phone') {
+			@include media('tablet-landscape') {
+				grid-column: 3 / span 8;
+			}
+			@include media('tablet-portrait-and-phone') {
 				grid-column: 1 / -1;
 			}
 			h2 {
@@ -141,7 +144,7 @@ div.page-layout {
 		grid-template-columns: repeat(12, 1fr);
 		grid-gap: var(--padding-base) calc(var(--padding-base) / 2);
 		padding: 0 var(--padding-base);
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			grid-template-columns: 1fr;
 			padding: 0;
 		}
@@ -153,13 +156,13 @@ div.page-layout {
 			letter-spacing: 0.06em;
 			text-align: center;
 			margin-bottom: calc(var(--padding-base) / 2);
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				margin-bottom: 0;
 			}
 		}
 		div.service {
 			grid-column: span 4;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				grid-column: 1 / -1;
 			}
 			h4 {
@@ -169,13 +172,13 @@ div.page-layout {
 				letter-spacing: 0.06em;
 				text-align: center;
 				margin: calc(var(--padding-base) / 2) 0 calc(var(--padding-base) / 4) 0;
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					margin: var(--padding-base) 0 calc(var(--padding-base) / 2) 0;
 				}
 			}
 			div.text-container {
 				max-width: 90%;
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					max-width: none;
 					font-size: var(--font-size-md);
 					padding: 0 var(--padding-base);

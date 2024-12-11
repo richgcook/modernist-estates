@@ -36,7 +36,7 @@ const openMedia = () => {
 
 div.actions {
 	ul {
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			display: flex;
 			flex-flow: row nowrap;
 			column-gap: 10px;
@@ -46,11 +46,11 @@ div.actions {
 			font-size: var(--font-size-sm);
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				font-size: var(--font-size-xs);
 			}
 			&.media {
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					display: none;
 				}
 			}

@@ -59,18 +59,18 @@ footer {
 		grid-template-columns: 1fr 1fr 1fr;
 		gap: var(--padding-base);
 		align-items: flex-end;
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			grid-template-columns: 1fr;
 			row-gap: calc(var(--padding-base) * 2);
 		}
 		div.logo {
 			grid-column: 1 / -1;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				display: none;
 			}
 			a.logo {
 				display: inline-flex;
-				height: 18px;
+				height: var(--logo-height);
 				svg {
 					height: auto;
 					max-height: 100%;
@@ -100,7 +100,7 @@ footer {
 		div.contact {
 			font-size: var(--font-size-md);
 			letter-spacing: 0.02em;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				grid-row: 3;
 			}
 			h5 {

@@ -80,7 +80,7 @@ const filterAndSearchStore = useFilterAndSearchStore()
 
 nav.properties-groups {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 2fr 1fr;
 	justify-content: center;
 	padding: 0 var(--padding-base) calc(var(--padding-base) / 2) var(--padding-base);
 	margin-bottom: calc(var(--padding-base) / 2);
@@ -88,14 +88,14 @@ nav.properties-groups {
 	top: var(--header-height);
 	background-color: var(--color-bg);
 	z-index: 10;
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		display: flex;
 		flex-flow: column nowrap;
 		row-gap: var(--padding-base);
 		margin-bottom: 0;
 	}
 	&[data-context="homes-slug"] {
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			padding-bottom: 15px;
 		}
 	}
@@ -105,7 +105,7 @@ nav.properties-groups {
 		flex-flow: row nowrap;
 		justify-content: center;
 		column-gap: var(--padding-base);
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			justify-content: center;
 		}
 		li {
@@ -145,7 +145,7 @@ nav.properties-groups {
 			width: 280px;
 			padding: 3px 10px;
 			z-index: 5;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				right: auto;
 				top: calc(var(--padding-base) / 1);
 				//left: calc(-1 * var(--padding-base) / 2);

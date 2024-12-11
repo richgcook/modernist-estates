@@ -41,11 +41,8 @@
 
 	--font-size-lg: 36px;
 	--font-size-md: 28px;
-
 	--font-size-sm: 20px;
-
 	--font-size-xs: 15px;
-
 	--font-size-xxs: 12px;
 
 	--padding-base: 50px;
@@ -80,18 +77,41 @@
 
 		--font-size-lg: 32px;
 		--font-size-md: 25px;
-
 		--font-size-sm: 18px;
+
+		--logo-height: 16px;
 	}
 }
 @include media('tablet-landscape') {
 	:root { 
-		
+		--font-size-base: 20px;
+
+		--font-size-lg: 29px;
+		--font-size-md: 23px;
+		--font-size-sm: 16px;
+		--font-size-xs: 14px;
+
+		--padding-base: 40px;
+
+		--header-height: 100px;
+
+		--logo-height: 16px;
 	}
 }
 @include media('tablet-portrait') {
 	:root { 
-		
+		--font-size-base: 20px;
+
+		--font-size-lg: 29px;
+		--font-size-md: 23px;
+		--font-size-sm: 16px;
+		--font-size-xs: 14px;
+
+		--padding-base: 40px;
+
+		--header-height: 90px;
+
+		--logo-height: 16px;
 	}
 }
 @include media('phone') {

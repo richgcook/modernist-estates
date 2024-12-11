@@ -117,7 +117,7 @@ div.slider-container {
 	width: 100vw;
 	margin: 0 calc(50% - 50vw);
 	display: none;
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		display: flex;
 	}
 	div.viewport {

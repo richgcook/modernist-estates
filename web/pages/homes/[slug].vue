@@ -245,14 +245,14 @@ div.page-layout {
 	grid-template-columns: repeat(12, 1fr);
 	grid-gap: calc(var(--padding-base) * 2) calc(var(--padding-base) / 2);
 	padding: 0 var(--padding-base);
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		grid-template-columns: 1fr;
 		grid-gap: 0;
 		padding: 0;
 	}
 	div.featured-image-xs {
 		display: none;
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			display: block;
 		}
 	}
@@ -271,7 +271,7 @@ div.page-layout {
 		}
 		z-index: 10;
 		display: none;
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			display: flex;
 		}
 		> div {
@@ -285,7 +285,10 @@ div.page-layout {
 	}
 	div.details {
 		grid-column: 1 / span 3;
-		@include media('phone') {
+		@include media('tablet-landscape') {
+			grid-column: 1 / span 4;
+		}
+		@include media('tablet-portrait-and-phone') {
 			grid-column: 1 / -1;
 			padding: 0 var(--padding-base);
 			margin-top: var(--padding-base);
@@ -302,7 +305,7 @@ div.page-layout {
 				min-height: calc(100svh - var(--header-height) - var(--padding-base));
 			}
 			div.bottom {
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					display: none;
 				}
 			}
@@ -345,7 +348,7 @@ div.page-layout {
 			margin-top: var(--padding-base);
 			font-size: var(--font-size-md);
 			display: none;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				display: block;
 			}
 			h3 {
@@ -360,7 +363,7 @@ div.page-layout {
 			font-size: var(--font-size-md);
 			margin-top: var(--padding-base);
 			display: none;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				display: block;
 			}
 		}
@@ -389,7 +392,10 @@ div.page-layout {
 		grid-column: 4 / span 9;
 		display: grid;
 		row-gap: var(--padding-base);
-		@include media('phone') {
+		@include media('tablet-landscape') {
+			grid-column: 5 / span 8;
+		}
+		@include media('tablet-portrait-and-phone') {
 			display: none;
 		}
 		div.featured-image {
@@ -399,6 +405,10 @@ div.page-layout {
 			height: calc(100vh - (var(--header-height) + var(--padding-base) + 21px + var(--padding-base)));
 			@supports (height: 100svh) {
 				height: calc(100svh - (var(--header-height) + var(--padding-base) + 21px + var(--padding-base)));
+			}
+			@include media('tablet-landscape') {
+				height: auto;
+				aspect-ratio: 4.75 / 3;
 			}
 			img {
 				position: absolute;
@@ -411,6 +421,12 @@ div.page-layout {
 		}
 		div.text {
 			max-width: 66%;
+			@include media('tablet-portrait-and-phone') {
+				max-width: 80%;
+			}
+			@include media('tablet-landscape') {
+				max-width: none;
+			}
 		}
 	}
 	div.actions-container {
@@ -418,14 +434,14 @@ div.page-layout {
 		display: flex;
 		flex-flow: column nowrap;
 		row-gap: var(--padding-base);
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			display: none;
 		}
 	}
 }
 div.page-navigation {
 	margin: calc(var(--padding-base) * 4) 0 calc(var(--padding-base) * 2) 0;
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		margin: calc(var(--padding-base) * 2) 0 var(--padding-base) 0;
 	}
 	ul {
@@ -433,7 +449,7 @@ div.page-navigation {
 		grid-template-columns: 1fr 1fr 1fr;
 		gap: 0 var(--padding-base);
 		padding: 0 var(--padding-base);
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			gap: 0;
 		}
 		li {
@@ -442,11 +458,11 @@ div.page-navigation {
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			text-align: center;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				font-size: var(--font-size-xs);
 			}
 			&.--prev {
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					text-align: left;
 				}
 			}
@@ -454,12 +470,12 @@ div.page-navigation {
 				grid-column: 2 / span 1;
 			}
 			&.--next {
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					text-align: right;
 				}
 			}
 			span {
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					display: none;
 				}
 			}
@@ -567,13 +583,13 @@ div.media-overlay {
 		top: calc(var(--padding-base) - 5px);
 		right: var(--padding-base);
 		z-index: 1;
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			top: var(--padding-base);
 		}
 		svg {
 			height: 22px;
 			width: 22px;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				height: 14px;
 				width: 14px;
 			}

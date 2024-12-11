@@ -57,7 +57,7 @@ div.page-layout {
 		grid-template-columns: repeat(12, 1fr);
 		grid-gap: var(--padding-base) calc(var(--padding-base) / 2);
 		padding: 0 var(--padding-base);
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			grid-template-columns: 1fr;
 			row-gap: var(--padding-base);
 		}

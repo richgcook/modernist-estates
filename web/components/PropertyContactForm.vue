@@ -121,7 +121,7 @@ form {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: calc(var(--padding-base) / 2);
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			grid-template-columns: 1fr;
 		}
 		div.field {
@@ -178,7 +178,7 @@ form {
 			border: 1px solid currentColor;
 			height: 20px;
 			width: 20px;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				height: 16px;
 				width: 16px;
 			}
@@ -224,7 +224,7 @@ form {
 		@include media('laptop') {
 			font-size: 14px;
 		}
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			font-size: var(--font-size-xs);
 			padding: 10px var(--padding-base);
 		}

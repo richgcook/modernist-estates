@@ -123,6 +123,10 @@ div.slider-container {
     align-items: center;
 	aspect-ratio: 4 / 2;
 	margin: 0 var(--padding-base);
+	@include media('tablet-portrait') {
+		aspect-ratio: 4.75 / 3;
+		margin: 0;
+	}
 	@include media('phone') {
 		aspect-ratio: 4 / 3;
 		margin: 0;

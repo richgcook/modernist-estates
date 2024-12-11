@@ -97,14 +97,21 @@ div.form {
 	margin-bottom: calc(-1 * (var(--padding-base) * 2));
 	padding: calc(var(--padding-base) * 2) var(--padding-base);
 	background-color: var(--color-holidays);
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		grid-template-columns: 1fr;
 	}
 	div.inner {
 		grid-column: 4 / span 6;
 		display: grid;
 		row-gap: var(--padding-base);
-		@include media('phone') {
+		@include media('laptop') {
+			grid-column: 3 / span 8;
+			padding: 0 5%;
+		}
+		@include media('tablet-landscape') {
+			grid-column: 3 / span 8;
+		}
+		@include media('tablet-portrait-and-phone') {
 			grid-column: 1 / -1;
 		}
 		h3 {
@@ -124,7 +131,7 @@ form {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 10px calc(var(--padding-base) / 2);
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			grid-template-columns: 1fr;
 		}
 	}
@@ -148,7 +155,7 @@ form {
 		}
 		&[name="message"] {
 			grid-column: 1 / span 2;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				grid-column: 1 / -1;
 			}
 		}
@@ -171,7 +178,7 @@ form {
 		@include media('laptop') {
 			font-size: 14px;
 		}
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			font-size: var(--font-size-xs);
 			padding: 10px var(--padding-base);
 		}

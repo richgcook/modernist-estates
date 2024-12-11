@@ -50,7 +50,7 @@ div.blocks-layout {
 	display: grid;
 	grid-template-columns: subgrid;
 	row-gap: var(--padding-base);
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		grid-template-columns: auto;
 	}
 	> div.block {
@@ -61,6 +61,12 @@ div.blocks-layout {
 				grid-column: 3 / span 8;
 				padding: 0 5%;
 			}
+			@include media('tablet-landscape') {
+				grid-column: 3 / span 8;
+			}
+			@include media('tablet-portrait-and-phone') {
+				grid-column: 1 / -1;
+			}
 			h3 {
 				font-family: var(--font-sans);
 				font-size: var(--font-size-sm);
@@ -69,7 +75,7 @@ div.blocks-layout {
 				margin-bottom: calc(var(--padding-base) / 4);
 			}
 			div.text {
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					font-size: var(--font-size-md);
 				}
 			}
@@ -80,6 +86,12 @@ div.blocks-layout {
 				grid-column: 3 / span 8;
 				padding: 0 5%;
 			}
+			@include media('tablet-landscape') {
+				grid-column: 3 / span 8;
+			}
+			@include media('tablet-portrait-and-phone') {
+				grid-column: 1 / -1;
+			}
 			h3 {
 				font-family: var(--font-sans);
 				font-size: var(--font-size-sm);
@@ -89,7 +101,7 @@ div.blocks-layout {
 			}
 			ul.list {
 				li {
-					@include media('phone') {
+					@include media('tablet-portrait-and-phone') {
 						font-size: var(--font-size-md);
 					}
 					&.--open {
@@ -108,7 +120,7 @@ div.blocks-layout {
 								height: 16px;
 								width: 16px;
 								padding-left: 5px;
-								@include media('phone') {
+								@include media('tablet-portrait-and-phone') {
 									height: 14px;
 									width: 14px;
 								}
@@ -125,7 +137,7 @@ div.blocks-layout {
 					}
 					div.content {
 						padding: 10px 0 10px calc(var(--padding-base) / 2);
-						@include media('phone') {
+						@include media('tablet-portrait-and-phone') {
 							padding-left: var(--padding-base);
 						}
 					}

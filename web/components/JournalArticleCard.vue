@@ -33,14 +33,14 @@ div.article {
 	display: grid;
 	row-gap: calc(var(--padding-base) / 2);
 	align-content: flex-start;
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		row-gap: 0;
 	}
 	a.featured-image {
 		display: block;
 	}
 	div.details {
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			padding: 0 var(--padding-base);
 			margin-top: var(--padding-base);
 		}
@@ -61,7 +61,7 @@ div.article {
 	a.view-more {
 		display: inline-flex;
 		margin-top: 10px;
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			font-size: var(--font-size-md);
 		}
 	}

@@ -31,13 +31,13 @@ div.contacts {
 	display: flex;
 	flex-flow: column nowrap;
 	row-gap: calc(var(--padding-base) / 2);
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		row-gap: 0;
 	}
 	div.details {
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			display: none;
-		}
+		}n
 		h3 {
 			font-family: var(--font-sans);
 			font-size: var(--font-size-xs);
@@ -50,7 +50,7 @@ div.contacts {
 		display: flex;
 		flex-flow: column nowrap;
 		row-gap: 15px;
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			flex-flow: row nowrap;
 			column-gap: 10px;
 		}

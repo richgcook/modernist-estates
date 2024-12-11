@@ -100,7 +100,7 @@ div.filter {
 				align-items: baseline;
 				position: relative;
 				padding: 2px 0;
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					align-items: baseline;
 				}
 				span.radio {

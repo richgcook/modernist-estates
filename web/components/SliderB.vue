@@ -195,7 +195,7 @@ div.slider-container {
 					max-width: none;
 					object-fit: contain;
 					object-position: center;
-					@include media('phone') {
+					@include media('tablet-portrait-and-phone') {
 						height: calc(100% - ((var(--padding-base) * 4) + 20px));
 					}
 				}

@@ -94,7 +94,7 @@ header {
 		width: 40px;
 		position: relative;
 		display: none;
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			display: flex;
 		}
 		svg {
@@ -128,7 +128,7 @@ header {
 		display: flex;
 		flex-flow: row nowrap;
 		column-gap: 30px;
-		@include media('phone') {
+		@include media('tablet-portrait-and-phone') {
 			display: none;
 		}
 		li {

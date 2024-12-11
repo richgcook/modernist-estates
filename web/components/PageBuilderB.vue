@@ -42,7 +42,7 @@ div.blocks-layout {
 	display: grid;
 	grid-template-columns: subgrid;
 	row-gap: var(--padding-base);
-	@include media('phone') {
+	@include media('tablet-portrait-and-phone') {
 		grid-template-columns: auto;
 	}
 	> div.block {
@@ -53,7 +53,10 @@ div.blocks-layout {
 				grid-column: 3 / span 8;
 				padding: 0 5%;
 			}
-			@include media('phone') {
+			@include media('tablet-landscape') {
+				grid-column: 3 / span 8;
+			}
+			@include media('tablet-portrait-and-phone') {
 				grid-column: 1 / -1;
 			}
 		}
@@ -61,7 +64,7 @@ div.blocks-layout {
 			grid-column: 1 / -1;
 			display: grid;
 			grid-template-columns: subgrid;
-			@include media('phone') {
+			@include media('tablet-portrait-and-phone') {
 				grid-template-columns: auto;
 				width: 100vw;
 				margin: 0 calc(50% - 50vw);
@@ -72,7 +75,10 @@ div.blocks-layout {
 					grid-column: 2 / span 10;
 					padding: 0 5%;
 				}
-				@include media('phone') {
+				@include media('tablet-landscape') {
+					grid-column: 2 / span 10;
+				}
+				@include media('tablet-portrait-and-phone') {
 					grid-column: 1 / -1;
 				}
 				&[data-image-size="full"] {
@@ -86,7 +92,7 @@ div.blocks-layout {
 				@include media('laptop') {
 					font-size: 14px;
 				}
-				@include media('phone') {
+				@include media('tablet-portrait-and-phone') {
 					font-size: var(--font-size-xs);
 					margin-left: var(--padding-base);
 				}
