@@ -16,6 +16,7 @@ export default {
 					//component: Normal 
 				},
 				{ title: 'H3', value: 'h3' },
+				{ title: 'H4', value: 'h4' }
 			],
 			lists: [
 				{ title: 'Bullet', value: 'bullet' }

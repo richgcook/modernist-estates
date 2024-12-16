@@ -32,6 +32,15 @@ div.text {
 		font-size: var(--font-size-md);
 		line-height: 1.33;
 	}
+	:deep(h4) {
+		font-family: var(--font-sans);
+		font-size: var(--font-size-sm);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		& + p {
+			margin-top: -1.2rem;
+		}
+	}
 	:deep(strong) {
 		display: block;
 		font-family: var(--font-sans);
