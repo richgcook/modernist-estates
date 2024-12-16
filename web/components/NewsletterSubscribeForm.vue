@@ -5,7 +5,7 @@
 			<input type="email" v-model="email" placeholder="Email" required />
 			<div class="consent">
 				<input type="checkbox" :id="`consent-${context}`" name="consent" v-model="consent" required />
-				<label :for="`consent-${context}`">I accept the Privacy Policy and Terms and Conditions*</label>
+				<label :for="`consent-${context}`">I accept the <NuxtLink to="/privacy-policy">Privacy Policy</NuxtLink> and <NuxtLink to="/terms-and-conditions">Terms and Conditions</NuxtLink>*</label>
 			</div>
 			<button type="submit" :disabled="isSubscribing">Subscribe</button>
 		</form>
@@ -123,7 +123,6 @@ div.newsletter-signup {
 			label {
 				font-size: 16px;
 				user-select: none;
-				cursor: pointer;
 				@include media('laptop') {
 					font-size: 14px;
 				}
@@ -132,6 +131,14 @@ div.newsletter-signup {
 				}
 				@include media('phone') {
 					font-size: var(--font-size-xs);
+				}
+				a {
+					&:hover {
+						text-decoration-thickness: 1px;
+						text-decoration-style: solid;
+						text-decoration-line: underline;
+						text-underline-offset: 5px;
+					}
 				}
 			}
 		}

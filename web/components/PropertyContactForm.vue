@@ -34,7 +34,7 @@
 				<div class="consent">
 					<div>
 						<input type="checkbox" id="consent" name="consent" required />
-						<label for="consent">I have read and accept the Privacy Policy and Terms and Conditions*</label>
+						<label for="consent">I have read and accept the <NuxtLink to="/privacy-policy">Privacy Policy</NuxtLink> and <NuxtLink to="/terms-and-conditions">Terms and Conditions</NuxtLink>*</label>
 					</div>
 					<div>
 						<input type="checkbox" id="newsletter-subscribe" name="newsletter-subscribe" />
@@ -198,10 +198,17 @@ form {
 		}
 		label {
 			user-select: none;
-			cursor: pointer;
 			font-family: var(--font-sans);
 			font-size: var(--font-size-xs);
 			text-transform: uppercase;
+			a {
+				&:hover {
+					text-decoration-thickness: 1px;
+					text-decoration-style: solid;
+					text-decoration-line: underline;
+					text-underline-offset: 5px;
+				}
+			}
 		}
 	}
 	div.actions {
