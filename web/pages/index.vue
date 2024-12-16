@@ -579,8 +579,8 @@ div.home-journal-layout {
 					}
 				}
 				h3 {
-				    font-family: var(--font-sans);
-					font-size: var(--font-size-md);
+					font-family: var(--font-sans);
+					font-size: var(--font-size-sm);
 					font-weight: 900;
 					text-transform: uppercase;
 					letter-spacing: 0.1em;
