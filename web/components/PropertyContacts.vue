@@ -68,7 +68,8 @@ div.contacts {
 				border: 1px solid currentColor;
 				padding: 5px 15px 5px 15px;
 				@include media('phone') {
-					padding: 3px 12px 2px 12px
+					font-size: var(--font-size-xs);
+					padding: 3px 12px 2px 12px;
 				}
 			}
 		}
