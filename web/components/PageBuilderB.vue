@@ -98,6 +98,29 @@ div.blocks-layout {
 				}
 			}
 		}
+		&[data-type="images"] {
+			grid-column: 1 / -1;
+			display: grid;
+			grid-template-columns: subgrid;
+			@include media('tablet-portrait-and-phone') {
+				grid-template-columns: auto;
+				width: 100vw;
+				margin: 0 calc(50% - 50vw);
+			}
+			> div {
+				grid-column: 3 / span 8;
+				@include media('laptop') {
+					grid-column: 2 / span 10;
+					padding: 0 5%;
+				}
+				@include media('tablet-landscape') {
+					grid-column: 2 / span 10;
+				}
+				@include media('tablet-portrait-and-phone') {
+					grid-column: 1 / -1;
+				}
+			}
+		}
 	}
 }
 

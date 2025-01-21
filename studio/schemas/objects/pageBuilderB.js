@@ -105,7 +105,7 @@ export default defineType({
 					type: 'array',
 					name: 'images',
 					title: 'Images',
-					validation: Rule => Rule.required().max(2),
+					validation: Rule => Rule.required(),
 					of: [
 						defineArrayMember({
 							type: 'object',
@@ -132,12 +132,14 @@ export default defineType({
 							],
 							preview: {
 								select: {
-									media: 'image'
+									media: 'image',
+									caption: 'caption',
 								},
 								prepare(selection) {
-									const { media } = selection
+									const { media, caption } = selection
 									return {
 										title: 'Image',
+										subtitle: caption ? caption[0].children[0].text.substring(0, 50) + '...' : '',
 										media: media
 									}
 								},

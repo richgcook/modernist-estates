@@ -2,18 +2,22 @@
 	<div class="slider-container" ref="container">
 		<div class="viewport" ref="viewport" @mousemove="pointerMove()" @pointerenter="pointerEnter" @pointerleave="pointerLeave">
 			<div class="slider" ref="slider">
-				<div v-for="(image, index) in images" :key="index" class="slide" @click="onSlideClick">
-					<Img 
-						:src="image?.asset?.url" 
-						:alt="image?.alt" 
-						:lazy="index === 0 ? 'eager' : 'lazy'"
-						:priority="index === 0 ? 'high' : 'auto'"
-						v-if="image"
-					/>
-				</div>
+				<template v-for="(slide, index) in slides" :key="index">
+					<div class="slide" @click="onSlideClick">
+						<Img 
+							:src="slide.image?.asset?.url"
+							:alt="slide.image?.alt"
+							:loading="index == 0 ? `eager` : `lazy`"
+							:priority="index == 0 ? `high` : `auto`"
+						/>
+					</div>
+				</template>
 			</div>
 		</div>
-		<div class="counter"><span>{{ selectedScrollSnapWithPadding }}</span> | {{ totalImages }}</div>
+		<div class="caption-counter" v-if="slides.length > 1">
+			<div class="caption"><RichText :blocks="slides[selectedScrollSnap].caption" /></div>
+			<div class="counter"><span>{{ selectedScrollSnapWithPadding }}</span> | {{ totalImages }}</div>
+		</div>
 	</div>
 </template>
 
@@ -22,7 +26,7 @@
 import emblaCarouselVue from 'embla-carousel-vue'
 
 const props = defineProps({
-	images: Array,
+	slides: Array,
 })
 
 const [viewport, embla] = emblaCarouselVue({
@@ -41,7 +45,7 @@ const selectedScrollSnapWithPadding = computed(() => {
 })
 
 const totalImages = computed(() => {
-	let length = props.images.length
+	let length = props.slides.length
 	return length.toString().padStart(2, '0')
 })
 
@@ -91,6 +95,13 @@ const onSelect = () => {
 	}
 }
 
+const firstImageAspectRatio = () => {
+	console.log(props.slides)
+	const firstImage = props.slides[0].image
+	if (!firstImage) return `4/3`
+	return firstImage.asset.ratio
+}
+
 watchEffect(() => {
 	if (!embla.value) return
 	setTimeout(() => {
@@ -113,13 +124,7 @@ div.slider-container {
 	position: relative;
     flex-flow: column nowrap;
     align-items: center;
-	aspect-ratio: 4 / 3;
-	width: 100vw;
-	margin: 0 calc(50% - 50vw);
-	display: none;
-	@include media('tablet-portrait-and-phone') {
-		display: flex;
-	}
+	aspect-ratio: v-bind('firstImageAspectRatio()');
 	div.viewport {
 		position: relative;
 		height: 100%;
@@ -153,17 +158,25 @@ div.slider-container {
 			}
 		}
 	}
-	div.counter {
-		position: absolute;
-		bottom: calc(var(--padding-base) - 5px);
-		right: var(--padding-base);
-		flex-shrink: 0;
+	div.caption-counter {
+		display: grid;
+		grid-template-columns: 1fr 150px;
+		grid-column-gap: var(--padding-base);
 		font-family: var(--font-sans);
-		font-size: var(--font-size-sm);
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		span {
-			color: var(--color-highlight);
+		font-size: 16px;
+		margin-top: 10px;
+		@include media('laptop') {
+			font-size: 14px;
+		}
+		@include media('tablet-portrait-and-phone') {
+			font-size: var(--font-size-xs);
+			margin: 10px var(--padding-base) 0 var(--padding-base);
+		}
+		div.counter {
+			text-align: right;
+			span {
+				color: var(--color-highlight);
+			}
 		}
 	}
 }
