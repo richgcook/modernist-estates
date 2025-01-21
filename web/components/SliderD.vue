@@ -95,6 +95,21 @@ const onSelect = () => {
 	}
 }
 
+const onSlideClick = () => {
+	const target = viewport.value
+	const targetBounds = target.getBoundingClientRect()
+    const xRelativeToTarget = event.clientX - targetBounds.left
+	slideToFromClick(xRelativeToTarget, target.offsetWidth)
+}
+
+const slideToFromClick = (xRelativeToTarget, targetWidth) => {
+	if (xRelativeToTarget < targetWidth/2) {
+		embla.value.scrollPrev()
+	} else {
+		embla.value.scrollNext()
+	}
+}
+
 const firstImageAspectRatio = () => {
 	console.log(props.slides)
 	const firstImage = props.slides[0].image
