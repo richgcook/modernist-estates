@@ -19,7 +19,7 @@ const query = groq`{
 		_id, _type, title, slug, seo {
 			${$seoQuery}
 		},
-		"properties": *[_type == "property" && references(^._id)] | order(orderRank) {
+		"properties": *[_type == "property" && references(^._id) && hideFromListings != true] | order(orderRank) {
 			${$propertyQuery},
 		},
 		"filters": [

@@ -35,6 +35,11 @@ export default defineType({
 			validation: Rule => Rule.required()
 		}),
 		defineField({
+			type: 'boolean',
+			title: 'Hide from listings',
+			name: 'hideFromListings',
+		}),
+		defineField({
 			type: 'object',
 			title: 'Featured image(s)',
 			name: 'featuredImages',
