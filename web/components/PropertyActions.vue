@@ -2,7 +2,7 @@
 	<div class="actions">
 		<ul>
 			<li v-for="(link, index) in property.links" :key="index">
-				<NuxtLink :to="useLinkLink(link)">{{ link.label }}</NuxtLink>
+				<NuxtLink :to="useLinkLink(link)" :target="useLinkLinkTarget(link._type)">{{ link.label }}</NuxtLink>
 			</li>
 			<li v-if="property.locationMap">
 				<button type="button" @click="openMap">Map</button>
