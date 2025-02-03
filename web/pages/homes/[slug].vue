@@ -295,7 +295,7 @@ div.page-layout {
 		}
 		div.inner {
 			position: sticky;
-			top: var(--header-height);
+			top: calc(var(--header-height) + var(--padding-base) + 21px);
 			display: flex;
 			flex-flow: column nowrap;
 			row-gap: calc(var(--padding-base) / 2);
