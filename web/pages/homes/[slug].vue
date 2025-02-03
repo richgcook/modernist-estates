@@ -300,9 +300,9 @@ div.page-layout {
 			flex-flow: column nowrap;
 			row-gap: calc(var(--padding-base) / 2);
 			justify-content: space-between;
-			min-height: calc(100vh - var(--header-height) - var(--padding-base));
+			min-height: calc(100vh - (var(--header-height) + var(--padding-base) + 21px + var(--padding-base)));
 			@supports (height: 100svh) {
-				min-height: calc(100svh - var(--header-height) - var(--padding-base));
+				min-height: calc(100svh - (var(--header-height) + var(--padding-base) + 21px + var(--padding-base)));
 			}
 			div.bottom {
 				@include media('tablet-portrait-and-phone') {
