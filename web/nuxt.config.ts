@@ -44,7 +44,7 @@ export default defineNuxtConfig({
 	modules: [
 		'@nuxtjs/sanity', 
 		'@pinia/nuxt',
-		'@nuxtjs/seo',
+		'@nuxtjs/sitemap',
 	],
 
 	build: {
@@ -78,6 +78,13 @@ export default defineNuxtConfig({
 		// Disable pre-rendering for all API routes
 		'/api/**': { prerender: false },
 
+	},
+
+	sitemap: {
+		sources: [
+			'/api/sitemap/urls',
+		],
+		xsl: false,
 	},
 
 })
