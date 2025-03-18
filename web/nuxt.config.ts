@@ -43,7 +43,8 @@ export default defineNuxtConfig({
 
 	modules: [
 		'@nuxtjs/sanity', 
-		'@pinia/nuxt'
+		'@pinia/nuxt',
+		'@nuxtjs/seo',
 	],
 
 	build: {

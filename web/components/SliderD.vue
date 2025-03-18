@@ -111,7 +111,6 @@ const slideToFromClick = (xRelativeToTarget, targetWidth) => {
 }
 
 const firstImageAspectRatio = () => {
-	console.log(props.slides)
 	const firstImage = props.slides[0].image
 	if (!firstImage) return `4/3`
 	return firstImage.asset.ratio
