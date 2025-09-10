@@ -7,6 +7,7 @@ import homesPage from './documents/homesPage'
 import propertiesForSalePage from './documents/propertiesForSalePage'
 import propertiesForRentPage from './documents/propertiesForRentPage'
 import propertiesForHolidayPage from './documents/propertiesForHolidayPage'
+import propertiesForLocationHirePage from './documents/propertiesForLocationHirePage'
 import property from './documents/property'
 
 import propertyFilterLocation from './documents/propertyFilterLocation'
@@ -43,6 +44,7 @@ export const schemaTypes = [
 	propertiesForSalePage,
 	propertiesForRentPage,
 	propertiesForHolidayPage,
+	propertiesForLocationHirePage,
 	property,
 	
 	propertyFilterLocation,

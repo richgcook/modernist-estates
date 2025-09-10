@@ -47,14 +47,25 @@ S.listItem()
 				),
 
 				S.listItem()
-				.title('For Holiday')
+				.title('Holiday')
 				.icon(House)
 				.child(
 					S.document()
-					.title('For Holiday')
+					.title('Holiday')
 					.id('propertiesForHolidayPage')
 					.documentId('propertiesForHolidayPage')
 					.schemaType('propertiesForHolidayPage')
+				),
+
+				S.listItem()
+				.title('Location Hire')
+				.icon(House)
+				.child(
+					S.document()
+					.title('Location Hire')
+					.id('propertiesForLocationHirePage')
+					.documentId('propertiesForLocationHirePage')
+					.schemaType('propertiesForLocationHirePage')
 				),
 
 				S.divider(),

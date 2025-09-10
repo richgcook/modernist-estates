@@ -90,6 +90,7 @@ export default defineType({
 				{ type: 'propertiesForSalePage' },
 				{ type: 'propertiesForRentPage' },
 				{ type: 'propertiesForHolidayPage' },
+				{ type: 'propertiesForLocationHirePage' },
 			],
 			validation: Rule => Rule.required(),
 		}),

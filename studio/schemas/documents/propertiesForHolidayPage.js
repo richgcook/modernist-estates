@@ -2,7 +2,7 @@ import { defineType, defineField } from 'sanity'
 
 export default defineType({
 	type: "document",
-	title: "For Holiday",
+	title: "Holiday",
 	name: "propertiesForHolidayPage",
 	fields: [
 		defineField({
@@ -18,7 +18,8 @@ export default defineType({
 			options: {
 				source: 'title'
 			},
-			validation: Rule => Rule.required()
+			validation: Rule => Rule.required(),
+			readOnly: true,
 		}),
 		defineField({
 			type: 'enquiryFormSettings',
