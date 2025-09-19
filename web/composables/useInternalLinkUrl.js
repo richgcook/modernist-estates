@@ -4,6 +4,7 @@ export const useInternalLinkUrl = (page) => {
 	if (_type === 'propertiesForSalePage') return `/homes/${slug.current}`
 	if (_type === 'propertiesForHolidayPage') return `/homes/${slug.current}`
 	if (_type === 'propertiesForRentPage') return `/homes/${slug.current}`
+	if (_type === 'propertiesForLocationHirePage') return `/homes/${slug.current}`
 	if (_type === 'journalArticle') return `/journal/${slug.current}`
 	return `/${slug.current}`
 }

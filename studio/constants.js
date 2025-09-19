@@ -10,6 +10,7 @@ export const PAGE_REFERENCES = [
 	{ type: 'propertiesForHolidayPage' },
 	{ type: 'propertiesForRentPage' },
 	{ type: 'propertiesForSalePage' },
+	{ type: 'propertiesForLocationHirePage' },
 	{ type: 'property' },
 	{ type: 'sellingPage' },
 ]
