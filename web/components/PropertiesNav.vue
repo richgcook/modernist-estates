@@ -5,6 +5,7 @@
 			<li v-if="data.propertiesForSalePage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForSalePage)" :class="{ 'router-link-active': isActivePropertyGroup(data.propertiesForSalePage._id) }">{{ data.propertiesForSalePage.title }}</NuxtLink></li>
 			<li v-if="data.propertiesForHolidayPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForHolidayPage)" :class="{ 'router-link-active': isActivePropertyGroup(data.propertiesForHolidayPage._id) }">{{ data.propertiesForHolidayPage.title }}</NuxtLink></li>
 			<li v-if="data.propertiesForRentPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForRentPage)" :class="{ 'router-link-active': isActivePropertyGroup(data.propertiesForRentPage._id) }">{{ data.propertiesForRentPage.title }}</NuxtLink></li>
+			<li v-if="data.propertiesForLocationHirePage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForLocationHirePage)" :class="{ 'router-link-active': isActivePropertyGroup(data.propertiesForLocationHirePage._id) }">{{ data.propertiesForLocationHirePage.title }}</NuxtLink></li>
 		</ul>
 		<div class="filters" v-if="filters?.length" ref="filtersElem">
 			<button type="button" @click="filtersOpen = !filtersOpen" class="filters-trigger">Filter</button>
@@ -45,6 +46,12 @@ const query = groq`{
 	}[0],
 
 	"propertiesForRentPage": *[_type == "propertiesForRentPage"] {
+		_id, _type, title, slug, seo {
+			${$seoQuery}
+		},
+	}[0],
+
+	"propertiesForLocationHirePage": *[_type == "propertiesForLocationHirePage"] {
 		_id, _type, title, slug, seo {
 			${$seoQuery}
 		},
