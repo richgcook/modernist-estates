@@ -19,6 +19,8 @@ const hiddenDocTypes = listItem =>
 		'propertyFilterPrice',
 		'propertyFilterBedrooms',
 		'propertyFilterStatus',
+		'propertyFilterType',
+		'propertyFilterPeriod',
 		'lettingPage',
 		'sellingPage',
 		'journalPage',

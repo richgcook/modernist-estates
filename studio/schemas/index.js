@@ -14,6 +14,8 @@ import propertyFilterLocation from './documents/propertyFilterLocation'
 import propertyFilterPrice from './documents/propertyFilterPrice'
 import propertyFilterBedrooms from './documents/propertyFilterBedrooms'
 import propertyFilterStatus from './documents/propertyFilterStatus'
+import propertyFilterType from './documents/propertyFilterType'
+import propertyFilterPeriod from './documents/propertyFilterPeriod'
 
 import lettingPage from './documents/lettingPage'
 import sellingPage from './documents/sellingPage'
@@ -51,6 +53,8 @@ export const schemaTypes = [
 	propertyFilterPrice,
 	propertyFilterBedrooms,
 	propertyFilterStatus,
+	propertyFilterType,
+	propertyFilterPeriod,
 
 	lettingPage,
 	sellingPage,

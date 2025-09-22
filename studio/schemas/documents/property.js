@@ -123,6 +123,20 @@ export default defineType({
 			to: [{ type: 'propertyFilterBedrooms' }],
 			fieldset: 'filters',
 		}),
+		defineField({
+			type: 'reference',
+			title: 'Type',
+			name: 'type',
+			to: [{ type: 'propertyFilterType' }],
+			fieldset: 'filters',
+		}),
+		defineField({
+			type: 'reference',
+			title: 'Period',
+			name: 'period',
+			to: [{ type: 'propertyFilterPeriod' }],
+			fieldset: 'filters',
+		}),
 		// End filter fields
 		defineField({
 			type: 'string',

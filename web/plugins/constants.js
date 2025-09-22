@@ -199,6 +199,12 @@ const propertyQuery = `
 		"propertyFilterBedrooms": [bedroomCount->{
 			_id, title
 		}][defined(@)],
+		"propertyFilterType": [type->{
+			_id, title
+		}][defined(@)],
+		"propertyFilterPeriod": [period->{
+			_id, title
+		}][defined(@)],
 		"propertyFilterStatus": [status->{
 			_id, title
 		}][defined(@)],
@@ -231,6 +237,20 @@ const propertyGroupFiltersQuery = `
 		"title": "Status",
 		"_type": "propertyFilterStatus",
 		"items": *[_type == "propertyFilterStatus" && _id in *[_type == "property" && references(^.^._id) && hideFromListings != true].status._ref] | order(title asc) {
+			_id, _type, title, slug,
+		}
+	},
+	{
+		"title": "Type",
+		"_type": "propertyFilterType",
+		"items": *[_type == "propertyFilterType" && _id in *[_type == "property" && references(^.^._id) && hideFromListings != true].type._ref] | order(title asc) {
+			_id, _type, title, slug,
+		}
+	},
+	{
+		"title": "Period",
+		"_type": "propertyFilterPeriod",
+		"items": *[_type == "propertyFilterPeriod" && _id in *[_type == "property" && references(^.^._id) && hideFromListings != true].period._ref] | order(title asc) {
 			_id, _type, title, slug,
 		}
 	}
