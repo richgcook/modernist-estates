@@ -8,7 +8,7 @@
 						<li v-if="data.propertiesForSalePage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForSalePage)">For Sale</NuxtLink></li>
 						<li v-if="data.propertiesForHolidayPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForHolidayPage)">Holiday</NuxtLink></li>
 						<li v-if="data.propertiesForRentPage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForRentPage)">Rent</NuxtLink></li>
-						<li v-if="data.propertiesForLocationHirePage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForLocationHirePage)" :class="{ 'router-link-active': isActivePropertyGroup(data.propertiesForLocationHirePage._id) }">{{ data.propertiesForLocationHirePage.title }}</NuxtLink></li>
+						<li v-if="data.propertiesForLocationHirePage"><NuxtLink :to="useInternalLinkUrl(data.propertiesForLocationHirePage)">{{ data.propertiesForLocationHirePage.title }}</NuxtLink></li>
 					</ul>
 				</li>
 				<li><NuxtLink to="/about">About</NuxtLink></li>
